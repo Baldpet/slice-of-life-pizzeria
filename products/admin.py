@@ -24,6 +24,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PriceAdmin(admin.ModelAdmin):
     list_display = (
         'category',
+        'size',
         'is_premium',
         'price',
     )

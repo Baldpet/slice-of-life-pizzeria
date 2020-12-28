@@ -4,8 +4,17 @@ from django.db import models
 
 
 class Price(models.Model):
+    size_choices = [
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('XL', 'Extra-Large')
+    ]
+
     category = models.ForeignKey('Category', null=True,
                                  blank=True, on_delete=models.SET_NULL)
+    size = models.CharField(max_length=254, choices=size_choices,
+                            null=True, blank=True)
     is_premium = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
