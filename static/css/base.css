@@ -37,6 +37,7 @@ body {
 .sales {
     background-color: greenyellow;
     margin-top: 164px;
+    z-index: 999;
 }
 
 /*      Order Button on main page         */
@@ -77,13 +78,39 @@ footer {
 
 /*      Media Queries        */
 @media (max-width:991px) {
+    body {
+        background: url('/media/hero.jpg') no-repeat center center fixed;
+        background-size: cover;
+        height: calc(100vh - 116px);
+    }
+
+    .overlay {
+        background: white;
+        background-size: cover;
+        height: calc(100vh - 116px);
+    }
+    .sales {
+        margin-top: 116px;
+        
+    }
+    .desktop-only {
+        display: none !important;
+    }
+    .header-height-164 {
+        height: 116px;
+        max-height: 116px;
+    }
+    .header-height-82 {
+        height: 116px;
+        max-height: 116px;
+    }
     .order-positioning {
         margin-right: 0;
         margin-top: 0;
     }
     #order-div {
         position: relative !important;
-        margin-top: 18rem;
+        margin-top: 50vh;
         width: 100%;
     }
     #order-div h2,
