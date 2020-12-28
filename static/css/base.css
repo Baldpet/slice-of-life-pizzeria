@@ -1,7 +1,93 @@
-.content-container {
-    margin-top: 270px;
+/*      Throughout site        */
+
+body {
+    background: url('/media/hero.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: calc(100vh - 164px);
 }
+
+.overlay {
+    background: white;
+    background-size: cover;
+    height: calc(100vh - 164px);
+}
+
+.content-container {
+    margin-top: 164px;
+}
+
+/*      Header        */
+
+.header-height-164 {
+    height: 164px;
+    max-height: 164px;
+}
+
+.header-height-82 {
+    height: 82px;
+    max-height: 82px;
+}
+
+.nav-link {
+    font-size: 1.25rem;
+}
+
+/*      Index Page        */
 
 .sales {
     background-color: greenyellow;
+    margin-top: 164px;
+}
+
+/*      Order Button on main page         */
+
+.order-positioning {
+    margin-right: 7rem;
+    margin-top: 14rem;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.background-opacity-order {
+    opacity: .85;
+    background-color: black; 
+    border-radius: 25px;
+}
+
+#order-div h2 {
+    color: white;
+}
+
+/*      Footer        */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/*      Media Queries        */
+@media (max-width:991px) {
+    .order-positioning {
+        margin-right: 0;
+        margin-top: 0;
+    }
+    #order-div {
+        position: relative !important;
+        margin-top: 18rem;
+        width: 100%;
+    }
+    #order-div h2,
+    .background-opacity-order {
+        display: none;
+    }
 }

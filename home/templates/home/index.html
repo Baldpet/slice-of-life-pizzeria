@@ -2,7 +2,31 @@
 {% load static %}
 
 {% block content %}
+<main class="container-fluid content-container h-100">
+    <div class="row sales fixed-top text-center">
+        <div class="col py-2">
+            Flash News - Sales!
+        </div>
+    </div>
+    <div class="row h-100 justify-content-end">
+       <div class="col-12 col-lg-3 position-relative order-positioning">
+            <div id="order-div-overlay" class="position-absolute background-opacity-order">
+            </div>
+            <div id="order-div" class="text-center position-absolute p-0">
+                <h2>Our delicious freshly made pizzas are ready to order.</h2>
+                <button class="btn btn-primary btn-lg p">Order Now!</button>
+            </div>
+       </div>
+    </div>
+</main>
+{% endblock %}
 
+{% block postloadjs %}
+    <script type="text/javascript">
+        let height = $("#order-div").css("height");
+        let width = $("#order-div").css("width");
+        $("#order-div-overlay").css("height", height);
+        $("#order-div-overlay").css("width", width);
 
-
+    </script>
 {% endblock %}
