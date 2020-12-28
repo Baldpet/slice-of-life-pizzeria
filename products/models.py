@@ -10,13 +10,15 @@ class Price(models.Model):
         ('L', 'Large'),
         ('XL', 'Extra-Large')
     ]
-
     category = models.ForeignKey('Category', null=True,
                                  blank=True, on_delete=models.SET_NULL)
     size = models.CharField(max_length=254, choices=size_choices,
                             null=True, blank=True)
     is_premium = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.category} / {self.size}'
 
 
 class Category(models.Model):

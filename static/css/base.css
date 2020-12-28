@@ -7,9 +7,13 @@ body {
 }
 
 .overlay {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
     background: white;
-    background-size: cover;
-    height: calc(100vh - 164px);
+    z-index: -1;
 }
 
 .content-container {
