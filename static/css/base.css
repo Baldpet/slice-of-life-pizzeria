@@ -17,7 +17,7 @@ body {
 }
 
 .content-container {
-    margin-top: 164px;
+    margin-top: 204px;
 }
 
 /*      Header        */
@@ -87,15 +87,11 @@ footer {
         background-size: cover;
         height: calc(100vh - 116px);
     }
-
-    .overlay {
-        background: white;
-        background-size: cover;
-        height: calc(100vh - 116px);
-    }
     .sales {
         margin-top: 116px;
-        
+    }
+    .content-container {
+        margin-top: 156px;
     }
     .desktop-only {
         display: none !important;

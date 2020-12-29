@@ -5,7 +5,7 @@ from .models import Product, Price
 
 
 def pizza(request):
-    products = Product.objects.all()
+    products = Product.objects.all().filter(category__name='Pizza')
     price = Price.objects.all()
     template = 'products/pizza.html'
     context = {
