@@ -22,18 +22,22 @@ body {
 
 /*      Header        */
 
-.header-height-164 {
+.header-height-full {
     height: 164px;
     max-height: 164px;
 }
 
-.header-height-82 {
+.header-height-half {
     height: 82px;
     max-height: 82px;
 }
 
 .nav-link {
     font-size: 1.25rem;
+}
+
+.nav-index {
+    z-index: 1000;
 }
 
 /*      Index Page        */
@@ -95,11 +99,11 @@ footer {
     .desktop-only {
         display: none !important;
     }
-    .header-height-164 {
+    .header-height-full {
         height: 116px;
         max-height: 116px;
     }
-    .header-height-82 {
+    .header-height-half {
         height: 116px;
         max-height: 116px;
     }
