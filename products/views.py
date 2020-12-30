@@ -22,14 +22,22 @@ def pizza(request):
 
 
 def sides_drinks(request):
-    products = Product.objects.all().exclude(category__name='Pizza')
-    price = Price.objects.filter(is_premium=False).exclude(category__name='Pizza')
-    price_premium = Price.objects.filter(is_premium=True).exclude(
-                                         category__name='Pizza')
+    sides = Product.objects.filter(category__name='Side')
+    drinks = Product.objects.filter(category__name='Drink')
+    price = Price.objects.filter(is_premium=False, category__name='Side')
+    price_premium = Price.objects.filter(is_premium=True,
+                                         category__name='Side')
+    price_drink = Price.objects.filter(is_premium=False,
+                                       category__name='Drink')
+    price_premium_drink = Price.objects.filter(is_premium=True,
+                                               category__name='Drink')
     template = 'products/sides.html'
     context = {
-        'products': products,
+        'sides': sides,
+        'drinks': drinks,
         'price': price,
         'price_premium': price_premium,
+        'price_drink': price_drink,
+        'price_premium_drink': price_premium_drink,
     }
     return render(request, template, context)

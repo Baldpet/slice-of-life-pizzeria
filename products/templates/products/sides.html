@@ -14,33 +14,87 @@
             </div>
         </div>
         <div class="row align-items-center">
-            {% for product in products %}
+            <h2>Sides</h2>
+            {% for product in sides %}
                 {% if forloop.counter0|divisibleby:2 %}
                     <div class="row pizza-row">
                 {% elif forloop.counter0 == 0 %}
                     <div class="row pizza-row">
                 {% endif%}
-                    <div class="col-12 col-lg-6 mb-3">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
                         <div class="card pizza-card">
                             <div class="row g-0">
-                                <div class="col-6 offset-3 col-md-4 offset-md-0">
+                                <div class="col-4">
                                     {% if product.image %}
                                         <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
                                     {% else %}
                                         <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
                                     {% endif %}
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-8">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ product.name }}</h5>
                                         <p class="card-text">{{ product.description }}</p>
                                         {% if product.is_premium %}
                                             {% for price in price_premium %}
-                                            <p>£{{ price.price }}</p>
+                                                <p>£{{ price.price }}</p>
                                             {% endfor %}
-                                        {% else %}
+                                        {% elif not product.is_premium %}
                                             {% for price in price %}
-                                            <p>£{{ price.price }}</p>
+                                                <p>£{{ price.price }}</p>
+                                            {% endfor %}
+                                        {% endif %} 
+                                        <form action="" method="POST" class="m-2">
+                                            {% csrf_token %}
+                                            <div class="form-row">
+                                                <div class="col-8 m-2 display-inline">
+                                                </div>
+                                                <div class="col-12 mt-3 text-center">
+                                                    <button type="submit" class="btn btn-primary">Add to Order</button>
+                                                </div>
+                                            </div>
+                                        </form>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                {% if forloop.counter|divisibleby:2 %}
+                </div>
+                {% elif forloop.counter0 == 1 %}
+                </div>
+                {% endif%}           
+            {% endfor %}
+        </div>
+        <div class="row align-items-center">
+            <h2>Drinks</h2>
+            {% for product in drinks %}
+                {% if forloop.counter0|divisibleby:2 %}
+                    <div class="row pizza-row">
+                {% elif forloop.counter0 == 0 %}
+                    <div class="row pizza-row">
+                {% endif%}
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card pizza-card">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    {% if product.image %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                    {% endif %}
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                        {% if product.is_premium %}
+                                            {% for price in price_premium_drink %}
+                                                <p>£{{ price.price }}</p>
+                                            {% endfor %}
+                                        {% elif not product.is_premium %}
+                                            {% for price in price_drink %}
+                                                <p>£{{ price.price }}</p>
                                             {% endfor %}
                                         {% endif %} 
                                         <form action="" method="POST" class="m-2">
