@@ -12,7 +12,7 @@ class Price(models.Model):
     ]
     category = models.ForeignKey('Category', null=True,
                                  blank=True, on_delete=models.SET_NULL)
-    size = models.CharField(max_length=254, choices=size_choices,
+    size = models.CharField(max_length=2, choices=size_choices,
                             null=True, blank=True)
     is_premium = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -36,9 +36,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     dough_choices = [
-        ('classic', 'classic'),
-        ('thin', 'thin'),
-        ('stuffed', 'stuffed'),
+        ('classic', 'Classic'),
+        ('thin', 'Thin'),
+        ('stuffed', 'Stuffed'),
     ]
     sauce_choices = [
         ('tomato', 'tomato'),

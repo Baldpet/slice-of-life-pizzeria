@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/products.css'%}">
+{% endblock %}
+
 {% block content %}
     <div class="overlay"></div>
     <main class="container-fluid content-container">
@@ -9,12 +13,17 @@
                 <h1>Our Pizzas</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row align-items-center">
             {% for product in products %}
-                    <div class="col-6">
-                        <div class="card mb-3">
+                {% if forloop.counter0|divisibleby:2 %}
+                    <div class="row pizza-row">
+                {% elif forloop.counter0 == 0 %}
+                    <div class="row pizza-row">
+                {% endif%}
+                    <div class="col-12 col-lg-6 mb-3">
+                        <div class="card pizza-card">
                             <div class="row g-0">
-                                <div class="col-md-4">
+                                <div class="col-6 offset-3 col-md-4 offset-md-0">
                                     {% if product.image %}
                                         <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
                                     {% else %}
@@ -27,18 +36,50 @@
                                         <p class="card-text">{{ product.description }}</p>
                                         <p class="card-text"><small class="text-muted">Ingredients   </small>
                                             <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
-                                            data-bs-content="{{ product.dough| capfirst }}, {{ product.cheese| capfirst }}, {{ product.sauce| capfirst }}{% if product.chicken %}, Chicken{% endif %}{% if product.pepperoni %}, Pepperoni{% endif %}{% if product.bacon %}, Bacon{% endif %}{% if product.sausage %}, Sausage{% endif %}{% if product.ham %}, Ham{% endif %}{% if product.meatball %}, Meatball{% endif %}{% if product.chorizo %}, Chorizo{% endif %}{% if product.mushroom %}, Mushroom{% endif %}{% if product.pepper %}, Pepper{% endif %}{% if product.onion %}, Onion{% endif %}{% if product.chilli %}, Chilli{% endif %}{% if product.pineapple %}, Pineapple{% endif %}{% if product.key_lime %}, Key Lime{% endif %}.">
+                                            data-bs-content="{{ product.cheese| capfirst }}, {{ product.sauce| capfirst }}{% if product.chicken %}, Chicken{% endif %}{% if product.pepperoni %}, Pepperoni{% endif %}{% if product.bacon %}, Bacon{% endif %}{% if product.sausage %}, Sausage{% endif %}{% if product.ham %}, Ham{% endif %}{% if product.meatball %}, Meatball{% endif %}{% if product.chorizo %}, Chorizo{% endif %}{% if product.mushroom %}, Mushroom{% endif %}{% if product.pepper %}, Pepper{% endif %}{% if product.onion %}, Onion{% endif %}{% if product.chilli %}, Chilli{% endif %}{% if product.pineapple %}, Pineapple{% endif %}{% if product.key_lime %}, Key Lime{% endif %}.">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
                                         </p>
-                                        
-                                        <a href="#" class="btn btn-primary">Customise</a>
-                                        <a href="#" class="btn btn-primary">Add to Order</a>
+                                        <form action="" method="POST" class="m-2">
+                                            {% csrf_token %}
+                                            <div class="form-row">
+                                                <div class="col-12 m-2">
+                                                    <p class=""><strong>Dough:</strong></p>
+                                                </div>
+                                                <div class="col-8 m-2">
+                                                    {{ form }}
+                                                </div>
+                                                <div class="col-12 m-2 display-inline">
+                                                    <p class=""><strong>Size:</strong></p>
+                                                </div>
+                                                <div class="col-8 m-2 display-inline">
+                                                    <select class="form-control pizza-mini-form" name="product_size" id="id_product_size">
+                                                        {% if product.is_premium %}
+                                                            {% for price in price_premium %}
+                                                            <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            {% for price in price %}
+                                                            <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
+                                                            {% endfor %}
+                                                        {% endif %} 
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 mt-3 text-center">
+                                                    <button type="submit" class="btn btn-primary">Add to Order</button>
+                                                </div>
+                                            </div>
+                                        </form>                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>            
+                    </div> 
+                {% if forloop.counter|divisibleby:2 %}
+                </div>
+                {% elif forloop.counter0 == 1 %}
+                </div>
+                {% endif%}           
             {% endfor %}
         </div>
     </main>
