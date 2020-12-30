@@ -3,38 +3,52 @@
 
 {% block content %}
     <div class="overlay"></div>
-    <div class="row m-3">
-        <div class="col text-center">
-            <h1>Our Pizzas</h1>
+    <main class="container-fluid content-container">
+        <div class="row m-3">
+            <div class="col text-center">
+                <h1>Our Pizzas</h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        {% for product in products %}
-                <div class="col-6">
-                    <div class="card mb-3" style="">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ product.name }}</h5>
-                                    <p class="card-text">{{ product.description }}</p>
-                                    <p class="card-text"><small class="text-muted">Ingredients</small></p>
-                                    <a href="#" class="btn btn-primary">Customise</a>
-                                    <a href="#" class="btn btn-primary">Add to Order</a>
+        <div class="row">
+            {% for product in products %}
+                    <div class="col-6">
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    {% if product.image %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                        <p class="card-text"><small class="text-muted">Ingredients   </small>
+                                            <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
+                                            data-bs-content="{{ product.dough| capfirst }}, {{ product.cheese| capfirst }}, {{ product.sauce| capfirst }}{% if product.chicken %}, Chicken{% endif %}{% if product.pepperoni %}, Pepperoni{% endif %}{% if product.bacon %}, Bacon{% endif %}{% if product.sausage %}, Sausage{% endif %}{% if product.ham %}, Ham{% endif %}{% if product.meatball %}, Meatball{% endif %}{% if product.chorizo %}, Chorizo{% endif %}{% if product.mushroom %}, Mushroom{% endif %}{% if product.pepper %}, Pepper{% endif %}{% if product.onion %}, Onion{% endif %}{% if product.chilli %}, Chilli{% endif %}{% if product.pineapple %}, Pineapple{% endif %}{% if product.key_lime %}, Key Lime{% endif %}.">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </p>
+                                        
+                                        <a href="#" class="btn btn-primary">Customise</a>
+                                        <a href="#" class="btn btn-primary">Add to Order</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>            
-        {% endfor %}
-        <div class="col">
-            {{ products }}
-            {{ price }}
+                    </div>            
+            {% endfor %}
         </div>
-    </div>
+    </main>
 {% endblock %}
 
 {% block postloadjs %}
+    <script type="text/javascript">
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
 {% endblock %}
