@@ -19,3 +19,17 @@ def pizza(request):
         'form': form,
     }
     return render(request, template, context)
+
+
+def sides_drinks(request):
+    products = Product.objects.all().exclude(category__name='Pizza')
+    price = Price.objects.filter(is_premium=False).exclude(category__name='Pizza')
+    price_premium = Price.objects.filter(is_premium=True).exclude(
+                                         category__name='Pizza')
+    template = 'products/sides.html'
+    context = {
+        'products': products,
+        'price': price,
+        'price_premium': price_premium,
+    }
+    return render(request, template, context)

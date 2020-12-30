@@ -87,6 +87,7 @@ footer {
     }
     .sales {
         margin-top: 116px;
+        z-index: 999;
     }
     .content-container {
         margin-top: 156px;
