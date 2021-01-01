@@ -7,29 +7,37 @@ body {
 }
 
 .overlay {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
     background: white;
-    background-size: cover;
-    height: calc(100vh - 164px);
+    z-index: -1;
 }
 
 .content-container {
-    margin-top: 164px;
+    margin-top: 204px;
 }
 
 /*      Header        */
 
-.header-height-164 {
+.header-height-full {
     height: 164px;
     max-height: 164px;
 }
 
-.header-height-82 {
+.header-height-half {
     height: 82px;
     max-height: 82px;
 }
 
 .nav-link {
     font-size: 1.25rem;
+}
+
+.nav-index {
+    z-index: 1000;
 }
 
 /*      Index Page        */
@@ -70,8 +78,6 @@ body {
 /*      Footer        */
 
 footer {
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 
@@ -83,24 +89,21 @@ footer {
         background-size: cover;
         height: calc(100vh - 116px);
     }
-
-    .overlay {
-        background: white;
-        background-size: cover;
-        height: calc(100vh - 116px);
-    }
     .sales {
         margin-top: 116px;
-        
+        z-index: 999;
+    }
+    .content-container {
+        margin-top: 156px;
     }
     .desktop-only {
         display: none !important;
     }
-    .header-height-164 {
+    .header-height-full {
         height: 116px;
         max-height: 116px;
     }
-    .header-height-82 {
+    .header-height-half {
         height: 116px;
         max-height: 116px;
     }
