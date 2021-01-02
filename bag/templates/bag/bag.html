@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'bag/css/bag.css'%}">
@@ -15,16 +16,16 @@
     </div>
     <div class="row">
         {% if bag_items %}
-            <div class="col">
+            <div class="col-12 col-lg-10 offset-lg-1">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Item</th>
                                 <th scope="col"></th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Subtotal</th>
+                                <th scope="col" class="text-end">Price</th>
+                                <th scope="col" class="text-end">Quantity</th>
+                                <th scope="col" class="text-end">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,14 +60,14 @@
                                                 Key Lime{% endif %}.</p>
                                         {% endif %}
                                     </td>
-                                    <td>
+                                    <td class="text-end mt-5">
                                         <p><strong>£{{ item.price }}</strong></p>
                                     </td>
-                                    <td>
+                                    <td class="text-end mt-5">
                                         <p><strong>{{ item.quantity }}</strong></p>
                                     </td>
-                                    <td>
-                                        <p><strong>£</strong></p>
+                                    <td class="text-end mt-5">
+                                        <p><strong>£{{ item.price | calc_subtotal:item.quantity }}</strong></p>
                                     </td>
                                 </tr>
                             {% endfor %}
