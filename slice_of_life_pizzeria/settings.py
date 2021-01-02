@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 # All Auth required
                 'django.template.context_processors.request',
+                'bag.context.bag_contents',
             ],
         },
     },
