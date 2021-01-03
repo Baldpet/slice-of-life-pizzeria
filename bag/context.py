@@ -11,7 +11,6 @@ def bag_contents(request):
     product_count = 0
     bag = request.session.get('bag', {})
 
-
     for item_id, item_data in bag.items():
         if isinstance(item_data, int):
             side = get_object_or_404(Category, name='Side')
@@ -38,7 +37,7 @@ def bag_contents(request):
                 'quantity': item_data,
                 'product': product,
                 'price': price,
-            }) 
+            })
         else:
             product = get_object_or_404(Product, pk=item_id)
             pizza = get_object_or_404(Category, name='Pizza')
@@ -60,9 +59,8 @@ def bag_contents(request):
                             'product': product,
                             'size': size,
                             'price': price,
+                            'dough': dough[0],
                         })
-                    else:
-                        print('none')
 
     delivery = 0
 
@@ -77,4 +75,3 @@ def bag_contents(request):
     }
 
     return context
-

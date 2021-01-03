@@ -42,7 +42,7 @@
                                         <h4>{{ item.product.name }}</h4>
                                         {% if item.size %}
                                             <p><strong>Size: </strong> {{ item.size }}</p>
-                                            <p><strong>Base: </strong> {{ item.product.dough| capfirst }}</p>
+                                            <p><strong>Dough: </strong> {{ item.dough| capfirst }}</p>
                                             <p><strong>Sauce: </strong>{{ item.product.sauce| capfirst }}</p>
                                             <p><strong>Toppings: </strong>{{ item.product.cheese| capfirst }}{% if item.product.chicken %},
                                                 Chicken{% endif %}{% if item.product.pepperoni %},
@@ -78,8 +78,11 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form>
+                                                        <form action="{% url 'amend_bag' item.product.id %}" method="POST" class="update-form">
+                                                            {% csrf_token %}
                                                             {% if item.size %}
+                                                                <input type="hidden" name="dough" id="id_dough" value="{{ item.dough }}">
+                                                                <input type="hidden" name="original_size" id="id_original_size" value="{{ item.size }}">
                                                                 <div>
                                                                     <p class="text-start"><strong>Size: </strong></p>
                                                                     <div class="w-50">
@@ -103,11 +106,12 @@
                                                                     <input type="number" class="form-control qty-input" value="1" min="1" max="99" name="quantity" data-item-id="{{ product.id }}" id="id_qty_{{ product.id }}">
                                                                 </div>        
                                                             </div>
+                                                            <button type="submit" class="btn btn-primary update-link">Save changes</button>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,6 +128,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="5" class="p-3 text-end">
+                                        <a href="{% url 'clear_bag' %}" class="btn btn-secondary">Clear Bag</a>
                                         <a href="#" class="btn btn-primary">Secure Checkout</a>
                                     </td>
                                 </tr>
@@ -150,6 +155,7 @@
         {% endif %}
     
     </div>
+    {{bag_items}}
 </main>
 {% endblock %}
 
@@ -161,5 +167,12 @@
     myModal.addEventListener('shown.bs.modal', function () {
     myInput.focus()
     })
+
+    // Update quantity on click
+    $('.update-link').click(function(e){
+        var form = $(this).prev('.update-form');
+        form.submit();
+    })
+
 </script>
 {% endblock %}
