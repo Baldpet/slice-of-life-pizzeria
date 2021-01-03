@@ -39,9 +39,9 @@ def amend_bag(request, item_id):
                 bag[item_id][dough][original_size] = 0
                 bag[item_id][dough][size] += quantity
             if original_size == size:
-                messages.success(request, f'Amended your order of ({product.name} - {dough.capitalize} - {size}) to a quantity of {quantity}.')
+                messages.success(request, f'Amended your order of ({product.name} - {dough.capitalize()} - {size}) to a quantity of {quantity}.')
             else:
-                messages.success(request, f'Amended your order to ({product.name} - {dough.capitalize} - {size}) and a quantity of {quantity}.')
+                messages.success(request, f'Amended your order to ({product.name} - {dough.capitalize()} - {size}) and a quantity of {quantity}.')
         else:
             messages.success(request, f'Amended your order of {product.name} to a quantity of {quantity}.')
             bag[item_id] = quantity
@@ -68,7 +68,7 @@ def remove_item_from_bag(request, item_id):
         bag = request.session.get('bag', {})
 
         if size:
-            messages.success(request, f'Removed ({product.name} - {dough.capitalize} - {size}) from your order.')
+            messages.success(request, f'Removed ({product.name} - {dough.capitalize()} - {size}) from your order.')
             bag[item_id][dough][size] = 0
         else:
             messages.success(request, f'Removed {product.name} from your order.')
@@ -101,7 +101,7 @@ def add_pizza_to_bag(request, item_id):
 
     try:
         if item_id in list(bag.keys()):
-            messages.success(request, f'Added ({product.name} - {dough_base.capitalize} - {size}) to your order.')
+            messages.success(request, f'Added ({product.name} - {dough_base.capitalize()} - {size}) to your order.')
             bag[item_id][dough_base][size] += quantity
         else:
             bag[item_id] = {'classic': {'S': 0,
@@ -120,7 +120,7 @@ def add_pizza_to_bag(request, item_id):
                                         'XL': 0,
                                         },
                             }
-            messages.success(request, f'Added {product.name} - {dough_base.capitalize} - {size} to your order.')
+            messages.success(request, f'Added ({product.name} - {dough_base.capitalize()} - {size}) to your order.')
             bag[item_id][dough_base][size] = quantity
 
         request.session['bag'] = bag
