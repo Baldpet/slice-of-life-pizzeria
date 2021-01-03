@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#" id="offers-link">
+            <a class="nav-link" href="{% url 'offers' %}" id="offers-link">
                 Offers
             </a>
         </li>
@@ -20,10 +20,19 @@
                 Account
             </a>
             <ul class="dropdown-menu" aria-labelledby="account-link">
-                <li><a href="#" class="dropdown-item">Your Account</a></li>
-                <li><a href="#" class="dropdown-item ">Order Tracker</a></li>
-                <li><a href="#" class="dropdown-item ">Product Management</a></li>
-                <li><a href="#" class="dropdown-item">Sign In</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}" class="dropdown-item">Your Account</a></li>
+                    {% if request.user.is_staff %}
+                    <li><a href="#" class="dropdown-item ">Order Tracker</a></li>
+                    {% endif %}
+                    {% if request.user.is_superuser %}
+                    <li><a href="#" class="dropdown-item ">Product Management</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'account_logout' %}" class="dropdown-item">Sign Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'account_signup' %}" class="dropdown-item">Register</a></li>
+                    <li><a href="{% url 'account_login' %}" class="dropdown-item">Sign In</a></li>
+                {% endif %}
             </ul>
         </li>
        
