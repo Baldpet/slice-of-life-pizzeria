@@ -1,14 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from products.models import Product
+from products.models import Product, Price
 
 # Create your views here.
 
 
 def view_bag(request):
     """ View the current bag contents """
-    bag = request.session.get('bag', {})
-    print(bag)
-    return render(request, 'bag/bag.html')
+    price = Price.objects.filter(is_premium=False, category__name='Pizza')
+    price_premium = Price.objects.filter(is_premium=True,
+                                         category__name='Pizza')
+    context = {
+        'price': price,
+        'price_premium': price_premium
+    }
+    return render(request, 'bag/bag.html', context)
 
 
 def clear_bag(request):

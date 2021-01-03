@@ -57,7 +57,7 @@
                                                 Onion{% endif %}{% if item.product.chilli %},                 
                                                 Chilli{% endif %}{% if item.product.pineapple %},
                                                 Pineapple{% endif %}{% if item.product.key_lime %},
-                                                Key Lime{% endif %}.</p>
+                                                Key Lime{% endif %}</p>
                                         {% endif %}
                                     </td>
                                     <td class="text-end mt-5">
@@ -68,6 +68,50 @@
                                     </td>
                                     <td class="text-end mt-5">
                                         <p><strong>£{{ item.price | calc_subtotal:item.quantity }}</strong></p>
+                                        <a class="btn btn-danger">Delete</a>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_{{ item.product.id }}{{ item.size }}">Amend</button>
+                                        <div class="modal fade" tabindex="-1" id="modal_{{ item.product.id }}{{ item.size }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">{{ item.product.name }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            {% if item.size %}
+                                                                <div>
+                                                                    <p class="text-start"><strong>Size: </strong></p>
+                                                                    <div class="w-50">
+                                                                        <select class="form-control" name="product_size" id="id_product_size">
+                                                                            {% if item.product.is_premium %}
+                                                                                {% for price in price_premium %}
+                                                                                <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
+                                                                                {% endfor %}
+                                                                            {% else %}
+                                                                                {% for price in price %}
+                                                                                <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
+                                                                                {% endfor %}
+                                                                            {% endif %} 
+                                                                        </select>
+                                                                    </div> 
+                                                                </div>   
+                                                            {% endif %}
+                                                            <div>
+                                                                <p class="text-start"><strong>Quantity: </strong></p>
+                                                                <div class="w-50">
+                                                                    <input type="number" class="form-control qty-input" value="1" min="1" max="99" name="quantity" data-item-id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                                                </div>        
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -107,4 +151,15 @@
     
     </div>
 </main>
+{% endblock %}
+
+{% block postloadjs %}
+<script type="text/javascript">
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+    })
+</script>
 {% endblock %}

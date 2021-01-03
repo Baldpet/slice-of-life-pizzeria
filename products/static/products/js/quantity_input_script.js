@@ -10,7 +10,7 @@ function handleEnableDisable(itemId) {
     $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
 }
 
-// Ensure the propert enabling and disabling of all inputs on page load
+// Ensure the proper enabling and disabling of all inputs on page load
 var allQtyInputs = $('.qty-input');
 for (var i=0; i < allQtyInputs.length; i++){
     var itemId = $(allQtyInputs[i]).data('item_id');
