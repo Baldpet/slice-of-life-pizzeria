@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'offers',
     'checkout',
 
+    # Django Countries
+    'django_countries',
+
     # All Auth
     'allauth',
     'allauth.account',
