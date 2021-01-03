@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'home',
     'products',
     'bag',
+    'profiles',
+    'offers',
+    'checkout',
 
     # All Auth
     'allauth',
