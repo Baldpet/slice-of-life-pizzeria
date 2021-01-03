@@ -122,6 +122,7 @@
 {% endblock %}
 
 {% block postloadjs %}
+{{ block.super }} 
     <script type="text/javascript" src="{% static 'products/js/quantity_input_script.js' %}"></script>
     <script type="text/javascript">
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

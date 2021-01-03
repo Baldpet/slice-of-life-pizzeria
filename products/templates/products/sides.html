@@ -176,5 +176,6 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script type="text/javascript" src="{% static 'products/js/quantity_input_script.js' %}"></script>
+{{ block.super }}
+    <script type="text/javascript" src="{% static 'products/js/quantity_input_script.js' %}"></script>
 {% endblock %}

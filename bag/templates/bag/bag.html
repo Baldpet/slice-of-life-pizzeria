@@ -160,19 +160,20 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script type="text/javascript">
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
+{{ block.super }}
+    <script type="text/javascript">
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
 
-    myModal.addEventListener('shown.bs.modal', function () {
-    myInput.focus()
-    })
+        myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+        })
 
-    // Update quantity on click
-    $('.update-link').click(function(e){
-        var form = $(this).prev('.update-form');
-        form.submit();
-    })
+        // Update quantity on click
+        $('.update-link').click(function(e){
+            var form = $(this).prev('.update-form');
+            form.submit();
+        })
 
-</script>
+    </script>
 {% endblock %}
