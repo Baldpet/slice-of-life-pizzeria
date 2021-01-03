@@ -36,23 +36,48 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ product.name }}</h5>
                                         <p class="card-text">{{ product.description }}</p>
-                                        {% if product.is_premium %}
-                                            {% for price in price_premium %}
-                                                <p>£{{ price.price }}</p>
-                                            {% endfor %}
-                                        {% elif not product.is_premium %}
-                                            {% for price in price %}
-                                                <p>£{{ price.price }}</p>
-                                            {% endfor %}
-                                        {% endif %} 
-                                        <form action="" method="POST" class="m-2">
+                                        <form action="{% url 'add_side_to_bag' product.id %}" method="POST" class="m-2">
                                             {% csrf_token %}
+                                            {% if product.is_premium %}
+                                                {% for price in price_premium %}
+                                                    <p>£{{ price.price }}</p>
+                                                    <input type="hidden" name="price" value="{{ price.id }}" >
+                                                {% endfor %}
+                                            {% elif not product.is_premium %}
+                                                {% for price in price %}
+                                                    <p>£{{ price.price }}</p>
+                                                    <input type="hidden" name="price" value="{{ price.id }}" >
+                                                {% endfor %}
+                                            {% endif %} 
                                             <div class="form-row">
-                                                <div class="col-8 m-2 display-inline">
+                                                <p><strong>Quantity:</strong></p>
+                                                <div class="form-group w-75">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <button class="decrement-qty btn"
+                                                                data-item_id="{{ product.id }}"
+                                                                id="decrement-qty_{{ product.id }}">
+                                                                <span class="icon">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                        <input type="number" class="form-control qty-input" value="1" min="1" max="99" name="quantity" data-item-id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                                        <div class="input-group-append">
+                                                            <button class="increment-qty btn"
+                                                                data-item_id="{{ product.id }}"
+                                                                id="increment-qty_{{ product.id }}">
+                                                                <span class="icon">
+                                                                    <i class="fas fa-plus"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-12 mt-3 text-center">
                                                     <button type="submit" class="btn btn-primary">Add to Order</button>
                                                 </div>
+                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                             </div>
                                         </form>                                       
                                     </div>
@@ -71,7 +96,7 @@
         <div class="row align-items-center">
             <h2 class="text-center mb-3">Drinks</h2>
             {% for product in drinks %}
-                {% if forloop.counter0|divisibleby:2 %}
+                {% if forloop.counter0|divisibleby:6 %}
                     <div class="row pizza-row">
                 {% elif forloop.counter0 == 0 %}
                     <div class="row pizza-row">
@@ -90,23 +115,49 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ product.name }}</h5>
                                         <p class="card-text">{{ product.description }}</p>
-                                        {% if product.is_premium %}
-                                            {% for price in price_premium_drink %}
-                                                <p>£{{ price.price }}</p>
-                                            {% endfor %}
-                                        {% elif not product.is_premium %}
-                                            {% for price in price_drink %}
-                                                <p>£{{ price.price }}</p>
-                                            {% endfor %}
-                                        {% endif %} 
+                                        
                                         <form action="" method="POST" class="m-2">
                                             {% csrf_token %}
+                                            {% if product.is_premium %}
+                                                {% for price in price_premium_drink %}
+                                                    <p>£{{ price.price }}</p>
+                                                    <input type="hidden" name="price" value="{{ price.id }}" >
+                                                {% endfor %}
+                                            {% elif not product.is_premium %}
+                                                {% for price in price_drink %}
+                                                    <p>£{{ price.price }}</p>
+                                                    <input type="hidden" name="price" value="{{ price.id }}" >
+                                                {% endfor %}
+                                            {% endif %} 
                                             <div class="form-row">
-                                                <div class="col-8 m-2 display-inline">
+                                                <p><strong>Quantity:</strong></p>
+                                                <div class="form-group w-75">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <button class="decrement-qty btn"
+                                                                data-item_id="{{ product.id }}"
+                                                                id="decrement-qty_{{ product.id }}">
+                                                                <span class="icon">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                        <input type="number" class="form-control qty-input" value="1" min="1" max="99" name="quantity" data-item-id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                                        <div class="input-group-append">
+                                                            <button class="increment-qty btn"
+                                                                data-item_id="{{ product.id }}"
+                                                                id="increment-qty_{{ product.id }}">
+                                                                <span class="icon">
+                                                                    <i class="fas fa-plus"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-12 mt-3 text-center">
                                                     <button type="submit" class="btn btn-primary">Add to Order</button>
                                                 </div>
+                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                             </div>
                                         </form>                                       
                                     </div>
@@ -114,9 +165,9 @@
                             </div>
                         </div>
                     </div> 
-                {% if forloop.counter|divisibleby:2 %}
+                {% if forloop.counter|divisibleby:6 %}
                 </div>
-                {% elif forloop.counter0 == 1 %}
+                {% elif forloop.counter0 == 5 %}
                 </div>
                 {% endif%}           
             {% endfor %}
@@ -125,4 +176,6 @@
 {% endblock %}
 
 {% block postloadjs %}
+{{ block.super }}
+    <script type="text/javascript" src="{% static 'products/js/quantity_input_script.js' %}"></script>
 {% endblock %}

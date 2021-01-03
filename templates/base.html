@@ -64,9 +64,10 @@
                     </div>
                 </div>
                 <div class="col-3 order-3 header-height-full d-flex align-items-center justify-content-center">
-                    <span class="btn btn-primary btn-lg">
+                    <a href="{% url 'view_bag' %}" class="btn btn-primary btn-lg">
                         Checkout
-                    </span>
+                        <span>({{ product_count }}) - £{{ total }}</span>
+                    </a>
                 </div>
             </div>
             <div class="row sales fixed-top text-center">
@@ -75,6 +76,24 @@
                 </div>
             </div>
         </header>
+
+        {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}
+                            {% include 'includes/toasts/toast_error.html' %}
+                        {% elif level == 30 %}
+                            {% include 'includes/toasts/toast_warning.html' %}
+                        {% elif level == 25 %}
+                            {% include 'includes/toasts/toast_success.html' %}
+                        {% else %}
+                            {% include 'includes/toasts/toast_info.html' %}
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        {% endif %}
         
             {% block content %}
             {% endblock %}
@@ -88,6 +107,7 @@
             </div>
         </footer>
         {% block postloadjs %}
+        <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
         {% endblock %}
     </body>
 </html>
