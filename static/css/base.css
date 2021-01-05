@@ -90,6 +90,9 @@ footer {
     width: 100%;
 }
 
+.allauth-container h1 {
+    text-align: center;
+}
 
 /*      Media Queries        */
 @media (max-width:991px) {
