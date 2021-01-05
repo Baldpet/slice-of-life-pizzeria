@@ -3,7 +3,7 @@
 body {
     background: url('/media/hero.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: calc(100vh - 204px);
 }
 
 .overlay {
