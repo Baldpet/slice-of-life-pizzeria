@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <main class="container content-container ">
+        <div class="overlay"></div>
+        <div class="row allauth-container">
+            <div class="col col-md-6 offset-md-3">
+                {% block inner_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+

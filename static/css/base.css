@@ -3,7 +3,7 @@
 body {
     background: url('/media/hero.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    min-height: calc(100vh - 204px);
 }
 
 .overlay {
@@ -90,6 +90,16 @@ footer {
     width: 100%;
 }
 
+/*      All Auth        */
+
+.allauth-container {
+    min-height: calc(100vh - 306px);
+    margin-bottom: 30px;
+}
+
+.allauth-container h1 {
+    text-align: center;
+}
 
 /*      Media Queries        */
 @media (max-width:991px) {

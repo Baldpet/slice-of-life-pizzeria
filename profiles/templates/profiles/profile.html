@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <main class="container-fluid content-container">
+        <div class="row m-3">
+            <div class="col text-center">
+                <h1>Profile</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class=" col-12 col-lg-6">
+                    <h3 class="text-center m-3">Default Delivery Info</h3>
+                    <form action="{% url 'profile' %}" method="POST" class="">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <label class="form-label mt-3" for="{{ field.auto_id }}"><strong>{{ field.label }}</strong></label>
+                            {{ field }}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
+                    </form>
+                </div>
+                <div class=" col-12 col-lg-6">
+                    <h3 class="text-center m-3">Loyalty Points Tracker</h3>
+                    <h4 class="text-center m-3">{{ profile.loyalty_points }}</h4>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
