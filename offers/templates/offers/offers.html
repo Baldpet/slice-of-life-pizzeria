@@ -33,7 +33,7 @@
                                 <p class="card-text">{{ offer.item3 }} - {{offer.item3_size}}</p>
                             {% endif %}
                             <p class="car-text"><strong>£{{ offer.deal_price }}</strong></p>
-                            <a class="btn btn-primary" href="">Select Deal</a>
+                            <a class="btn btn-primary" href="{% url 'offers_detail' offer.id %}">Select Deal</a>
                         </div>
                     </div>
                 </div>
