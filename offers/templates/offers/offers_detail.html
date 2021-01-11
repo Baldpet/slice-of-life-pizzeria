@@ -53,6 +53,122 @@
                 <a href="" class="btn btn-primary">Add to Order</a>
             </div>
         </div>
+        <hr class="mb-5 mt-5">
+        <div class="row m-3 align-items-center d-none">
+            {% for pizza in pizzas %}
+                {% if forloop.counter0|divisibleby:2 %}
+                    <div class="row pizza-row">
+                {% elif forloop.counter0 == 0 %}
+                    <div class="row pizza-row">
+                {% endif%}
+                    <div class="col-12 col-lg-6 mb-3">
+                        <div class="card pizza-card">
+                            <div class="row g-0">
+                                <div class="col-6 offset-3 col-md-4 offset-md-0">
+                                    {% if pizza.image %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ pizza.image }}" alt="{{ pizza.name }} photo">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ pizza.name }} photo">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ pizza.name }}</h5>
+                                        <p class="card-text">{{ pizza.description }}</p>
+                                        <p class="card-text"><small class="text-muted">Ingredients   </small>
+                                            <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
+                                            data-bs-content="{{ pizza.cheese| capfirst }}, {{ pizza.sauce| capfirst }}{% if pizza.chicken %}, Chicken{% endif %}{% if pizza.pepperoni %}, Pepperoni{% endif %}{% if pizza.bacon %}, Bacon{% endif %}{% if pizza.sausage %}, Sausage{% endif %}{% if pizza.ham %}, Ham{% endif %}{% if pizza.meatball %}, Meatball{% endif %}{% if pizza.chorizo %}, Chorizo{% endif %}{% if pizza.mushroom %}, Mushroom{% endif %}{% if pizza.pepper %}, Pepper{% endif %}{% if pizza.onion %}, Onion{% endif %}{% if pizza.chilli %}, Chilli{% endif %}{% if pizza.pineapple %}, Pineapple{% endif %}{% if pizza.key_lime %}, Key Lime{% endif %}.">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </p>
+                                                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                {% if forloop.last %}
+                </div>
+                {% elif forloop.counter0 == 1 %}
+                </div>
+                {% elif forloop.counter|divisibleby:2 %}
+                </div>
+                {% endif %}
+
+                          
+            {% endfor %}
+        </div>
+        <hr class="mb-5 mt-5">
+        <div class="row m-3 align-items-center">
+            {% for product in sides %}
+                {% if forloop.counter0|divisibleby:6 %}
+                    <div class="row pizza-row">
+                {% elif forloop.counter0 == 0 %}
+                    <div class="row pizza-row">
+                {% endif%}
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card pizza-card">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    {% if product.image %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                    {% endif %}
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                {% if forloop.counter|divisibleby:6 %}
+                </div>
+                {% elif forloop.counter0 == 5 %}
+                </div>
+                {% endif%}           
+            {% endfor %}
+        </div>
+        <hr class="mb-5 mt-5">
+        <div class="row m-3 align-items-center">
+            {% for product in drinks %}
+                {% if forloop.counter0|divisibleby:6 %}
+                    <div class="row pizza-row">
+                {% elif forloop.counter0 == 0 %}
+                    <div class="row pizza-row">
+                {% endif%}
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card pizza-card">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    {% if product.image %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                    {% endif %}
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                {% if forloop.counter|divisibleby:6 %}
+                </div>
+                {% elif forloop.counter0 == 5 %}
+                </div>
+                {% endif%}           
+            {% endfor %}
+        </div>
+
         
     </main>
 {% endblock %}
