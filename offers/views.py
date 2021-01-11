@@ -16,8 +16,14 @@ def offers(request):
 
 def offers_detail(request, offerId):
     offer = get_object_or_404(Offer, pk=offerId)
+    pizzas = Product.object.all().filter(category__name='Pizza')
+    sides = Product.object.all().filter(category__name='Side')
+    drinks = Product.object.all().filter(category__name='Drink')
     template = 'offers/offers_detail.html'
     context = {
-        'offer': offer
+        'offer': offer,
+        'pizzas': pizzas,
+        'sides': sides,
+        'drinks': drinks,
     }
     return render(request, template, context)
