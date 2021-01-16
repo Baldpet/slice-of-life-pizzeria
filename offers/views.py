@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.contrib import messages
 from .models import Offer
-from products.models import Product
+from products.models import Product, Price
+from decimal import Decimal
 
 # Create your views here.
 
@@ -57,25 +58,87 @@ def add_offer_to_bag(request, offerId):
         item3_size = request.POST.get('item3_size')
         item3_dough = request.POST.get('item3_dough')
     bag = request.session.get('bag', {})
+    discount = request.session.get('discount', {})
+    total_cost = 0
+    deal = offer.deal_price
     try:
         if product1.category.name == 'Pizza':
             add_offer_pizza(bag, item1_id, item1_dough, item1_size, item1_quantity)
+            if product1.is_premium:
+                price_object = get_object_or_404(Price, is_premium=True, size=item1_size)
+                price = price_object.price
+                total_cost += price
+            else:
+                price_object = get_object_or_404(Price, is_premium=False, size=item1_size)
+                price = price_object.price
+                total_cost += price
         else:
             add_offer_other(bag, item1_id, item1_quantity)
+            if product1.is_premium:
+                price_object = get_object_or_404(Price, category__name=product1.category.name, is_premium=True)
+                price = price_object.price
+                total_cost += price
+            else:
+                price_object = get_object_or_404(Price, category__name=product1.category.name, is_premium=False)
+                price = price_object.price
+                total_cost += price
         if product2.category.name == 'Pizza':
             add_offer_pizza(bag, item2_id, item2_dough, item2_size, item2_quantity)
+            if product2.is_premium:
+                price_object = get_object_or_404(Price, is_premium=True, size=item2_size)
+                price = price_object.price
+                total_cost += price
+            else:
+                price_object = get_object_or_404(Price, is_premium=False, size=item2_size)
+                price = price_object.price
+                total_cost += price
         else:
             add_offer_other(bag, item2_id, item2_quantity)
+            if product2.is_premium:
+                price_object = get_object_or_404(Price, category__name=product2.category.name, is_premium=True)
+                price = price_object.price
+                total_cost += price
+            else:
+                price_object = get_object_or_404(Price, category__name=product2.category.name, is_premium=False)
+                price = price_object.price
+                total_cost += price
         if product3.category.name == 'Pizza':
             add_offer_pizza(bag, item3_id, item3_dough, item3_size, item3_quantity)
+            if product3.is_premium:
+                price_object = get_object_or_404(Price, is_premium=True, size=item3_size)
+                price = price_object.price
+                total_cost += price
+            else:
+                price_object = get_object_or_404(Price, is_premium=False, size=item3_size)
+                price = price_object.price
+                total_cost += price
         else:
             add_offer_other(bag, item3_id, item3_quantity)
+            if product3.is_premium:
+                price_object = get_object_or_404(Price, category__name=product3.category.name, is_premium=True)
+                price = price_object.price
+                total_cost += price
+            else:
+                price_object = get_object_or_404(Price, category__name=product3.category.name, is_premium=False)
+                price = price_object.price
+                total_cost += price
         messages.success(request, f'Added {offer.name} to your order.')
     except Exception as e:
         messages.error(request, f'Error removing item: {e}.')
         return HttpResponse(status=500)
 
+    discount_amount = str(total_cost - deal)
+    discount[offerId] = {
+        'items': [item1_id, item2_id, item3_id],
+        'discount': discount_amount,
+    }
+
     request.session['bag'] = bag
+    request.session['discount'] = discount
+
+    print(total_cost)
+    print(deal)
+    print(discount)
 
     return redirect('view_bag')
 
