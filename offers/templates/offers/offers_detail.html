@@ -13,7 +13,8 @@
                 <h1>{{ offer.name }}</h1>
             </div>
         </div>
-        <form>
+        <form action="{% url 'add_offer_to_bag' offer.id %}" method="POST" >
+        {% csrf_token %}
             <div class="row m-3 text-center">
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card offer-card w-100 mx-auto" data-item-number="1">
