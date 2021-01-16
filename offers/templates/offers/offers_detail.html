@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'offers/css/offers.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -12,49 +13,110 @@
                 <h1>{{ offer.name }}</h1>
             </div>
         </div>
-        <div class="row m-3 text-center">
-            <div class="col-12 col-md-4">
-                <div class="card w-75 mx-auto">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ offer.item1 }}{% if offer.item1.has_sizes %}({{offer.item1_size}}){% endif %}</h5>
-                        <p class="card-text">You still need to select a {% if offer.item1.has_sizes %}{{ offer.get_item1_size_display|lower }} {% endif %}{{ offer.item1|lower }} to complete your offer.</p>
-                        <button class="btn btn-primary">Select</button>
-                    </div>
-                </div>
-            </div>
-            {% if offer.item2 is not None %}
-                <div class="col-12 col-md-4 ">
-                    <div class="card w-75 mx-auto">
+        <form>
+            <div class="row m-3 text-center">
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card offer-card w-100 mx-auto" data-item-number="1">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ offer.item1 }}{% if offer.item1.has_sizes %}({{offer.item1_size}}){% endif %}</h5>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ offer.item2 }}{% if offer.item2.has_sizes %}({{offer.item2_size}}){% endif %}</h5>
-                        <p class="card-text">You still need to select a {% if offer.item2.has_sizes %}{{ offer.get_item2_size_display|lower }} {% endif %}{{ offer.item2|lower }} to complete your offer.</p>
-                        <button class="btn btn-primary">Select</button>
+                            <img src="" alt="" class="card-img offers-img d-none">
+                            <p class="card-text">You still need to select a {% if offer.item1.has_sizes %}{{ offer.get_item1_size_display|lower }} {% endif %}{{ offer.item1|lower }} to complete your offer.</p>
+                            <input type="hidden" name="item1" id="item1" >
+                            <div class="text-start d-none mt-3">
+                                {% if offer.item1.has_sizes %}
+                                    <p><strong>Dough:</strong></p>
+                                    <select class="form-select" name="item1_dough">
+                                        {% for dough in dough_choices %}
+                                            <option value="{{ dough }}">{{ dough|capfirst }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    
+                                    <input type="hidden" name="item1_size" id="item1_size" value="{{ offer.item1_size }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-selector" id="select-btn-1" data-offer-item="{{ offer.item1 }}">Select</button>
+                            <button class="btn btn-primary btn-selector d-none" id="change-btn-1" data-offer-item="{{ offer.item1 }}">Change</button>
                         </div>
                     </div>
+                    
                 </div>
-            {% endif %}
-            {% if offer.item3 is not None %}
-                <div class="col-12 col-md-4">
-                    <div class="card w-75 mx-auto">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ offer.item3 }}{% if offer.item3.has_sizes %}({{offer.item3_size}}){% endif %}</h5>
-                        <p class="card-text">You still need to select a {% if offer.item3.has_sizes %}{{ offer.get_item3_size_display|lower }} {% endif %}{{ offer.item3|lower }} to complete your offer.</p>
-                        <button class="btn btn-primary">Select</button>
+                {% if offer.item2 is not None %}
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="card offer-card w-100 mx-auto" data-item-number="2">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ offer.item2 }}{% if offer.item2.has_sizes %}({{offer.item2_size}}){% endif %}</h5>
+                            </div>
+                            <div class="card-body">
+                                <img src="" alt="" class="card-img offers-img d-none">
+                                <p class="card-text">You still need to select a {% if offer.item2.has_sizes %}{{ offer.get_item2_size_display|lower }} {% endif %}{{ offer.item2|lower }} to complete your offer.</p>
+                                <input type="hidden" name="item2" id="item2" value="">
+                                <div class="text-start d-none mt-3">
+                                    {% if offer.item2.has_sizes %}
+                                        <p><strong>Dough:</strong></p>
+                                        <select class="form-select" name="item2_dough">
+                                            {% for dough in dough_choices %}
+                                                <option value="{{ dough }}">{{ dough|capfirst }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        
+                                        <input type="hidden" name="item2_size" id="item2_size" value="{{ offer.item2_size }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-selector" id="select-btn-2" data-offer-item="{{ offer.item2 }}">Select</button>
+                                <button class="btn btn-primary btn-selector d-none" id="change-btn-2" data-offer-item="{{ offer.item2 }}">Change</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endif %}
-        </div>
-        <div class="row m-3">
-            <div class="col text-center">
-                <p><strong>Original Price: </strong>{{ offer.original_price }}</p>
-                <p><strong>Current Saving: </strong>{{ offer.saving }}</p>
-                <p><strong>Deal Price: </strong>{{ offer.deal_price }}</p>
-                <a href="" class="btn btn-primary">Add to Order</a>
+                {% endif %}
+                {% if offer.item3 is not None %}
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="card offer-card w-100 mx-auto" data-item-number="3">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ offer.item3 }}{% if offer.item3.has_sizes %}({{offer.item3_size}}){% endif %}</h5>
+                            </div>
+                            <div class="card-body">
+                                <img src="" alt="" class="card-img offers-img d-none">
+                                <p class="card-text">You still need to select a {% if offer.item3.has_sizes %}{{ offer.get_item3_size_display|lower }} {% endif %}{{ offer.item3|lower }} to complete your offer.</p>
+                                <input type="hidden" name="item3" id="item3" value="">
+                                <div class="text-start d-none mt-3">
+                                    {% if offer.item3.has_sizes %}
+                                        <p><strong>Dough:</strong></p>
+                                        <select class="form-select" name="item3_dough">
+                                            {% for dough in dough_choices %}
+                                                <option value="{{ dough }}">{{ dough|capfirst }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        
+                                        <input type="hidden" name="item3_size" id="item3_size" value="{{ offer.item3_size }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-selector" id="select-btn-3" data-offer-item="{{ offer.item3 }}">Select</button>
+                                <button class="btn btn-primary btn-selector d-none" id="change-btn-3" data-offer-item="{{ offer.item3 }}">Change</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
-        </div>
+            <div class="row m-3">
+                <div class="col text-center">
+                    <p><strong>Original Price: </strong>{{ offer.original_price }}</p>
+                    <p><strong>Current Saving: </strong>{{ offer.saving }}</p>
+                    <p><strong>Deal Price: </strong>{{ offer.deal_price }}</p>
+                    <button type="submit" class="btn btn-primary">Add to Order</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="row m-3 align-items-center product-area d-none" id="pizza">
         <hr class="mb-5 mt-5">
-        <div class="row m-3 align-items-center d-none">
             {% for pizza in pizzas %}
                 {% if forloop.counter0|divisibleby:2 %}
                     <div class="row pizza-row">
@@ -63,17 +125,19 @@
                 {% endif%}
                     <div class="col-12 col-lg-6 mb-3">
                         <div class="card pizza-card">
-                            <div class="row g-0">
-                                <div class="col-6 offset-3 col-md-4 offset-md-0">
-                                    {% if pizza.image %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ pizza.image }}" alt="{{ pizza.name }} photo">
-                                    {% else %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ pizza.name }} photo">
-                                    {% endif %}
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ pizza.name }}</h5>
+                            <div class="card-header text-center">
+                                <h5 class="card-title">{{ pizza.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4  col-md-4 ">
+                                        {% if pizza.image %}
+                                            <img class="card-img" src="{{MEDIA_URL}}{{ pizza.image }}" alt="{{ pizza.name }} photo">
+                                        {% else %}
+                                            <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ pizza.name }} photo">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-8">
                                         <p class="card-text">{{ pizza.description }}</p>
                                         <p class="card-text"><small class="text-muted">Ingredients   </small>
                                             <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
@@ -81,15 +145,15 @@
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
                                         </p>
-                                                                               
-                                    </div>
-                                </div>
+                                    </div> 
+                                </div>                                 
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-primary item-selector" id="{{ pizza.id }}" data-item-name="{{ pizza.name }}" data-item-image="{% if pizza.image %}{{MEDIA_URL}}{{ pizza.image }}{% else %}{{MEDIA_URL}}/no-image.jpg{% endif %}">Add to Offer</button>
                             </div>
                         </div>
                     </div> 
                 {% if forloop.last %}
-                </div>
-                {% elif forloop.counter0 == 1 %}
                 </div>
                 {% elif forloop.counter|divisibleby:2 %}
                 </div>
@@ -98,8 +162,9 @@
                           
             {% endfor %}
         </div>
+        
+        <div class="row m-3 align-items-center product-area d-none" id="side">
         <hr class="mb-5 mt-5">
-        <div class="row m-3 align-items-center">
             {% for product in sides %}
                 {% if forloop.counter0|divisibleby:6 %}
                     <div class="row pizza-row">
@@ -108,33 +173,38 @@
                 {% endif%}
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
                         <div class="card pizza-card">
-                            <div class="row g-0">
-                                <div class="col-4">
-                                    {% if product.image %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
-                                    {% else %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
-                                    {% endif %}
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ product.name }}</h5>
-                                        <p class="card-text">{{ product.description }}</p>
-                                                                               
+                            <div class="card-header text-center">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        {% if product.image %}
+                                            <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                        {% else %}
+                                            <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="card-text">{{ product.description }}</p>                             
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-primary item-selector" id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-image="{% if product.image %}{{MEDIA_URL}}{{ product.image }}{% else %}{{MEDIA_URL}}/no-image.jpg{% endif %}">Add to Offer</button>
+                            </div>
                         </div>
                     </div> 
-                {% if forloop.counter|divisibleby:6 %}
+                {% if forloop.last %}
                 </div>
-                {% elif forloop.counter0 == 5 %}
+                {% elif forloop.counter|divisibleby:6 %}
                 </div>
-                {% endif%}           
+                {% endif %}           
             {% endfor %}
         </div>
+        
+        <div class="row m-3 align-items-center product-area d-none" id="drink">
         <hr class="mb-5 mt-5">
-        <div class="row m-3 align-items-center">
             {% for product in drinks %}
                 {% if forloop.counter0|divisibleby:6 %}
                     <div class="row pizza-row">
@@ -142,33 +212,42 @@
                     <div class="row pizza-row">
                 {% endif%}
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <div class="card pizza-card">
-                            <div class="row g-0">
-                                <div class="col-4">
-                                    {% if product.image %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
-                                    {% else %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
-                                    {% endif %}
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="card pizza-card"> 
+                            <div class="card-header text-center">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        {% if product.image %}
+                                            <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                        {% else %}
+                                            <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-8">
                                         <p class="card-text">{{ product.description }}</p>
-                                                                               
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-primary item-selector" id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-image="{% if product.image %}{{MEDIA_URL}}{{ product.image }}{% else %}{{MEDIA_URL}}/no-image.jpg{% endif %}">Add to Offer</button>
+                            </div>
                         </div>
                     </div> 
-                {% if forloop.counter|divisibleby:6 %}
+                {% if forloop.last %}
                 </div>
-                {% elif forloop.counter0 == 5 %}
+                {% elif forloop.counter|divisibleby:6 %}
                 </div>
-                {% endif%}           
+                {% endif %}           
             {% endfor %}
         </div>
 
         
+        
     </main>
+{% endblock %}
+
+{% block postloadjs %}
+    <script type="text/javascript" src="{% static 'offers/js/offers.js' %}"></script>
 {% endblock %}
