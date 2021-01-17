@@ -37,6 +37,14 @@ def offers_detail(request, offerId):
     return render(request, template, context)
 
 
+def add_offer(request):
+    template = 'offers/add_offer.html'
+    context = {
+
+    }
+    return render(request, template, context)
+
+
 def add_offer_to_bag(request, offerId):
     offer = get_object_or_404(Offer, pk=offerId)
     item1_id = request.POST.get('item1')
@@ -135,10 +143,6 @@ def add_offer_to_bag(request, offerId):
 
     request.session['bag'] = bag
     request.session['discount'] = discount
-
-    print(total_cost)
-    print(deal)
-    print(discount)
 
     return redirect('view_bag')
 
