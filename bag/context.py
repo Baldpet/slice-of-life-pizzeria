@@ -67,11 +67,7 @@ def bag_contents(request):
 
     for offer_id, offer_item in discount.items():
         discount_amount = Decimal(offer_item['discount'])
-        print(discount_amount)
         total_discount += discount_amount
-
-    print(discount)
-    print(total_discount)
 
     delivery = 0
 

@@ -17,6 +17,7 @@ class Offer(models.Model):
     ]
 
     name = models.CharField(max_length=254, null=True, blank=True)
+    description = models.TextField()
     item1 = models.ForeignKey(Category, related_name='Category_item1', null=True,
                               blank=True, on_delete=models.SET_NULL)
     item1_size = models.CharField(max_length=2, choices=size_choices,
