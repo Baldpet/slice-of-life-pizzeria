@@ -121,9 +121,10 @@
                             {% endfor %}
                                 <tr>
                                     <td colspan="5" class="p-3 text-end">
-                                        <p><strong>Total: </strong>£{{ total }}</p>
-                                        <p><strong>Delivery: </strong>£{{ delivery }}</p>
-                                        <p><strong>Grand Total: </strong>£{{ grand_total }}</p>
+                                        <p><strong>Order Total: </strong>£{{ total }}</p>
+                                        <p class="text-danger"><strong>Offer Discounts: </strong>£{{ discount }}</p>
+                                        <p class="text-danger"><strong>Loyalty Discounts: </strong>£0</p>
+                                        <h5><strong>Grand Total: </strong>£{{ grand_total }}</h5>
                                     </td>
                                 </tr>
                                 <tr>
