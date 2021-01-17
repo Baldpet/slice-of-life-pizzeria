@@ -8,3 +8,9 @@ class MiniForm(forms.Form):
 
     dough.widget.attrs['class'] = 'form-control pizza-mini-form'
     dough.label = False
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
