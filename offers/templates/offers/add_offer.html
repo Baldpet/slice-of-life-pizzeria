@@ -12,6 +12,15 @@
                 <h1>Add an Offer</h1>
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'add_offer' %}" method="POST" >
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn-primary" type="submit">Add Offer</button>
+                     
+                </form>
+            </div>
+        </div>
     </main>
 {% endblock %}

@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, reverse
 from django.contrib import messages
+
 from .models import Offer
+from .forms import OfferForm
 from products.models import Product, Price
+
 from decimal import Decimal
 
 # Create your views here.
@@ -38,9 +41,20 @@ def offers_detail(request, offerId):
 
 
 def add_offer(request):
+    if request.method == 'POST':
+        form = OfferForm(request.POST)
+        if form.is_valid():
+            offer = form.save()
+            messages.success(request, 'Successfully added the product')
+            return redirect(reverse('product_management'))
+        else:
+            messages.error(request, 'Failed to add the offer.')
+    else:
+        form = OfferForm
+
     template = 'offers/add_offer.html'
     context = {
-
+        'form': form,
     }
     return render(request, template, context)
 
