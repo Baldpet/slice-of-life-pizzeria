@@ -50,10 +50,14 @@ INSTALLED_APPS = [
     # Django Countries
     'django_countries',
 
+    # Crispy Forms
+    'crispy_forms',
+
     # All Auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
 ]
 
 MIDDLEWARE = [
@@ -67,6 +71,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'slice_of_life_pizzeria.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -87,6 +93,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'bag.context.bag_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
