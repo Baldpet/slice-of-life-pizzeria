@@ -16,10 +16,10 @@ class Offer(models.Model):
         ('XL', 'Extra-Large')
     ]
 
-    name = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=254, null=False, blank=False)
     description = models.TextField()
-    item1 = models.ForeignKey(Category, related_name='Category_item1', null=True,
-                              blank=True, on_delete=models.SET_NULL)
+    item1 = models.ForeignKey(Category, related_name='Category_item1', null=False,
+                              blank=False, on_delete=models.CASCADE)
     item1_size = models.CharField(max_length=2, choices=size_choices,
                                   null=True, blank=True, default='NA')
     item2 = models.ForeignKey(Category, related_name='Category_item2', null=True,
@@ -33,7 +33,6 @@ class Offer(models.Model):
     original_price = models.DecimalField(max_digits=6, decimal_places=2, default=Decimal(0))
     deal_price = models.DecimalField(max_digits=6, decimal_places=2)
     saving = models.DecimalField(max_digits=6, decimal_places=2, default=Decimal(0))
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
