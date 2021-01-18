@@ -41,14 +41,14 @@ class Product(models.Model):
         ('stuffed', 'Stuffed'),
     ]
     sauce_choices = [
-        ('tomato', 'tomato'),
-        ('bbq', 'bbq'),
-        ('garlic', 'garlic'),
+        ('tomato', 'Tomato'),
+        ('bbq', 'BBQ'),
+        ('garlic', 'Garlic'),
     ]
     cheese_choices = [
-        ('mozzarella', 'mozzarella'),
-        ('cheddar', 'cheddar'),
-        ('vegan', 'vegan'),
+        ('mozzarella', 'Mozzarella'),
+        ('cheddar', 'Cheddar'),
+        ('vegan', 'Vegan'),
     ]
     name = models.CharField(max_length=254, null=False, blank=False)
     category = models.ForeignKey('Category', null=False,
