@@ -50,9 +50,9 @@ class Product(models.Model):
         ('cheddar', 'cheddar'),
         ('vegan', 'vegan'),
     ]
-    name = models.CharField(max_length=254, null=True, blank=True)
-    category = models.ForeignKey('Category', null=True,
-                                 blank=True, on_delete=models.SET_NULL)
+    name = models.CharField(max_length=254, null=False, blank=False)
+    category = models.ForeignKey('Category', null=False,
+                                 blank=False, on_delete=models.CASCADE)
     dough = models.CharField(max_length=254, choices=dough_choices,
                              default='classic', null=True, blank=True)
     sauce = models.CharField(max_length=254, choices=sauce_choices,
@@ -76,7 +76,6 @@ class Product(models.Model):
     extra_cheese = models.BooleanField(default=False, null=True, blank=True)
     description = models.TextField()
     is_premium = models.BooleanField(default=True)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
