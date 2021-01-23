@@ -1,7 +1,7 @@
-
+// Removes the Pizza only options from form rendering.
 $('.pizza-only').addClass('d-none');
 
-
+// If Pizza is selected in the Category, Adds the Pizza only options to the form rendering.
 $('#id_category').change(function(){
     let category = $(this).val();
     if (category === '1') {
@@ -11,6 +11,8 @@ $('#id_category').change(function(){
     }
 })
 
+// Validates the form to make sure that a Base, Sauce and Cheese element is selected before submission.
+// This validation is only when Pizza is selected in the category.
 var form = $('#add_product_form');
 
 form.submit(function(e){
