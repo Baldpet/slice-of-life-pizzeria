@@ -20,7 +20,9 @@
                 {% crispy form %}
             </div>
         </div>
-       
     </main>
 {% endblock %}
 
+{% block postloadjs %}
+    <script type="text/javascript" src="{% static 'products/js/add_product_script.js' %}"></script>
+{% endblock %}
