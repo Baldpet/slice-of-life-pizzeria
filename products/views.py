@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 from .models import Product, Price
-from .forms import MiniForm
+from .forms import MiniForm, ProductForm
 
 # Create your views here.
 
@@ -40,4 +41,30 @@ def sides_drinks(request):
         'price_drink': price_drink,
         'price_premium_drink': price_premium_drink,
     }
+    return render(request, template, context)
+
+
+def add_product(request):
+    pizza_price = Price.objects.filter(category__name='Pizza')
+    side_price = Price.objects.filter(category__name='Side')
+    drink_price = Price.objects.filter(category__name='Drink')
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save()
+            messages.success(request, 'Successfully added the product')
+            return redirect(reverse('product_management'))
+        else:
+            messages.error(request, 'Failed to add the offer.')
+    else:
+        form = ProductForm
+
+    template = 'products/add_product.html'
+    context = {
+        'form': form,
+        'pizza_price': pizza_price,
+        'side_price': side_price,
+        'drink_price': drink_price,
+    }
+
     return render(request, template, context)

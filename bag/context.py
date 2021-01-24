@@ -62,9 +62,16 @@ def bag_contents(request):
                             'dough': dough[0],
                         })
 
+    discount = request.session.get('discount', {})
+    total_discount = 0
+
+    for offer_id, offer_item in discount.items():
+        discount_amount = Decimal(offer_item['discount'])
+        total_discount += discount_amount
+
     delivery = 0
 
-    grand_total = delivery + total
+    grand_total = delivery + total - total_discount
 
     context = {
         'bag_items': bag_items,
@@ -72,6 +79,7 @@ def bag_contents(request):
         'product_count': product_count,
         'delivery': delivery,
         'grand_total': grand_total,
-    }
+        'discount': total_discount,
+        }
 
     return context

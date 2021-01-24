@@ -25,3 +25,12 @@ def profile(request):
         'profile': profile,
     }
     return render(request, template, context)
+
+
+def product_management(request):
+    template = 'profiles/product_management.html'
+    context = {
+
+    }
+
+    return render(request, template, context)

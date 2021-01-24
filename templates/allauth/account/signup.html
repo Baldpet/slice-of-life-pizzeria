@@ -12,15 +12,7 @@
 <div class="row">
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
-        {% for field in form %}
-            {% if field.field.widget.input_type == 'checkbox' %}
-            <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" class="form-check-input  mt-3">
-            <label class="form-check-label mt-3" for="{{ field.auto_id }}"><strong>{{ field.label }}</strong></label>
-            {% else %}
-            <label class="form-label mt-3" for="{{ field.auto_id }}"><strong>{{ field.label }}</strong></label>
-            <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" class="form-control">
-            {% endif %}
-        {% endfor %}
+        {{ form|crispy }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}

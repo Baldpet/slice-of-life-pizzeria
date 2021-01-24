@@ -9,3 +9,7 @@
 .pizza-image {
     max-height: 100px;
 }
+
+table .beige {
+    background-color: beige;
+}

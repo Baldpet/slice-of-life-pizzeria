@@ -41,18 +41,18 @@ class Product(models.Model):
         ('stuffed', 'Stuffed'),
     ]
     sauce_choices = [
-        ('tomato', 'tomato'),
-        ('bbq', 'bbq'),
-        ('garlic', 'garlic'),
+        ('tomato', 'Tomato'),
+        ('bbq', 'BBQ'),
+        ('garlic', 'Garlic'),
     ]
     cheese_choices = [
-        ('mozzarella', 'mozzarella'),
-        ('cheddar', 'cheddar'),
-        ('vegan', 'vegan'),
+        ('mozzarella', 'Mozzarella'),
+        ('cheddar', 'Cheddar'),
+        ('vegan', 'Vegan'),
     ]
-    name = models.CharField(max_length=254, null=True, blank=True)
-    category = models.ForeignKey('Category', null=True,
-                                 blank=True, on_delete=models.SET_NULL)
+    name = models.CharField(max_length=254, null=False, blank=False)
+    category = models.ForeignKey('Category', null=False,
+                                 blank=False, on_delete=models.CASCADE)
     dough = models.CharField(max_length=254, choices=dough_choices,
                              default='classic', null=True, blank=True)
     sauce = models.CharField(max_length=254, choices=sauce_choices,
@@ -60,23 +60,22 @@ class Product(models.Model):
     cheese = models.CharField(max_length=254,
                               choices=cheese_choices,
                               default='mozzarella', null=True, blank=True)
-    chicken = models.BooleanField(default=False, null=True, blank=True)
-    pepperoni = models.BooleanField(default=False, null=True, blank=True)
-    bacon = models.BooleanField(default=False, null=True, blank=True)
-    sausage = models.BooleanField(default=False, null=True, blank=True)
-    ham = models.BooleanField(default=False, null=True, blank=True)
-    meatball = models.BooleanField(default=False, null=True, blank=True)
-    chorizo = models.BooleanField(default=False, null=True, blank=True)
-    mushroom = models.BooleanField(default=False, null=True, blank=True)
-    pepper = models.BooleanField(default=False, null=True, blank=True)
-    onion = models.BooleanField(default=False, null=True, blank=True)
-    chilli = models.BooleanField(default=False, null=True, blank=True)
-    pineapple = models.BooleanField(default=False, null=True, blank=True)
-    key_lime = models.BooleanField(default=False, null=True, blank=True)
-    extra_cheese = models.BooleanField(default=False, null=True, blank=True)
+    chicken = models.BooleanField(default=False)
+    pepperoni = models.BooleanField(default=False)
+    bacon = models.BooleanField(default=False)
+    sausage = models.BooleanField(default=False)
+    ham = models.BooleanField(default=False)
+    meatball = models.BooleanField(default=False)
+    chorizo = models.BooleanField(default=False)
+    mushroom = models.BooleanField(default=False)
+    pepper = models.BooleanField(default=False)
+    onion = models.BooleanField(default=False)
+    chilli = models.BooleanField(default=False)
+    pineapple = models.BooleanField(default=False)
+    key_lime = models.BooleanField(default=False)
+    extra_cheese = models.BooleanField(default=False)
     description = models.TextField()
     is_premium = models.BooleanField(default=True)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
