@@ -44,3 +44,21 @@ $('.item-selector').click(function(){
     $(`input[name="item${itemNumber}"]`).attr('value', itemID)
 })
 
+// Check on the form that something has been selected for each offer item.
+var form = $('#add_offer_to_bag')
+
+form.submit(function(ev){
+    $('.offer-error').html("")
+    let item1 = $('#item1').val()
+    let item2 = $('#item2').val()
+    let item3 = $('#item3').val()
+
+    if (item1 == "" | item2 == "" | item3 == "" ){
+        ev.preventDefault();
+        let errorDiv = $('.offer-error');
+        let html = `<p class="text-danger"><strong>You have not selected all items for your offer, please select all items to add to your order.</strong></p>`
+        $(errorDiv).html(html);
+        return
+    }
+})
+
