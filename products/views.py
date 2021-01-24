@@ -45,6 +45,9 @@ def sides_drinks(request):
 
 
 def add_product(request):
+    pizza_price = Price.objects.filter(category__name='Pizza')
+    side_price = Price.objects.filter(category__name='Side')
+    drink_price = Price.objects.filter(category__name='Drink')
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -59,6 +62,9 @@ def add_product(request):
     template = 'products/add_product.html'
     context = {
         'form': form,
+        'pizza_price': pizza_price,
+        'side_price': side_price,
+        'drink_price': drink_price,
     }
 
     return render(request, template, context)

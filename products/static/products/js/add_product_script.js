@@ -1,6 +1,12 @@
 // Removes the Pizza only options from form rendering.
 $('.pizza-only').addClass('d-none');
 
+//Removes the price tables from rendering
+$('.pizza_price').addClass('d-none');
+$('.side_price').addClass('d-none');
+$('.drink_price').addClass('d-none');
+$('.premium').addClass('beige');
+
 // If Pizza is selected in the Category, Adds the Pizza only options to the form rendering.
 $('#id_category').change(function(){
     let category = $(this).val();
@@ -54,5 +60,38 @@ form.submit(function(e){
             return
         }
     } 
+})
+
+// Adds the relevant price table when a certain category is selected
+$('#id_category').change(function(){
+    let category = $(this).val();
+    if (category === '1') {
+        $('.side_price').addClass('d-none');
+        $('.drink_price').addClass('d-none');
+        $('.pizza_price').removeClass('d-none');
+    } else if(category === '2') {
+        $('.pizza_price').addClass('d-none');
+        $('.drink_price').addClass('d-none');
+        $('.side_price').removeClass('d-none');
+    } else if(category === '3') {
+        $('.pizza_price').addClass('d-none');
+        $('.side_price').addClass('d-none');
+        $('.drink_price').removeClass('d-none');
+    } else {
+        $('.side_price').addClass('d-none');
+        $('.drink_price').addClass('d-none');
+        $('.pizza_price').addClass('d-none');
+    }
+})
+
+$('#id_is_premium').click(function(){
+    console.log(this.checked)
+    if(this.checked){
+        $('.non-premium').removeClass('beige')
+        $('.premium').addClass('beige')
+    } else {
+        $('.premium').removeClass('beige')
+        $('.non-premium').addClass('beige')
+    }
 })
     
