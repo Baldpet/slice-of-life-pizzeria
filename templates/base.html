@@ -64,9 +64,10 @@
                     </div>
                 </div>
                 <div class="col-3 order-3 header-height-full d-flex align-items-center justify-content-center">
-                    <a href="{% url 'view_bag' %}" class="btn btn-primary btn-lg">
-                        Checkout
-                        <span>({{ product_count }}) - £{{ total }}</span>
+                    <a href="{% url 'view_bag' %}" class="btn btn-primary checkout-btn">
+                        <span class="badge rounded-pill bg-danger checkout-badge">{{ product_count }}</span>
+                        <i class="fas fa-2x fa-shopping-basket"></i>
+                        <p class="checkout-text">£{{ total }}</p>
                     </a>
                 </div>
             </div>
