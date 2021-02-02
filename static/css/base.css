@@ -189,6 +189,35 @@ footer {
     text-align: center;
 }
 
+/*     Horizontal Rule     */
+.horizontal-rule-div{
+    position: relative;  
+    height: 1px; 
+}
+
+.horizontal-rule {
+    opacity: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+hr:not([size]){
+    height: 2px;
+}
+
+.fa-pizza-slice {
+    position: absolute;
+    top: -8px;
+    right: 50%;
+    opacity: 1;
+    background-color: #E8C8A0;
+    width: 20px;
+}
+
+.fa-pizza-slice::before{
+    margin-left: 2.5px;
+}
+
 /*      Media Queries        */
 @media (max-width:991px) {
     body {
