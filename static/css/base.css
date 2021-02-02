@@ -6,15 +6,24 @@ body {
     min-height: calc(100vh - 204px);
 }
 
-.overlay {
+.overlay-gold,
+.overlay-white {
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     position: fixed;
+    z-index: -1;
+}
+
+.overlay-white {
+    background: white;
+    opacity: .95;
+}
+
+.overlay-gold {
     background: #e8c8a0;
     opacity: .6;
-    z-index: -1;
 }
 
 .content-container {
