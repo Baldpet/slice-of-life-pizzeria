@@ -10,8 +10,9 @@
     <main class="container content-container">
         <div class="row m-3">
             <div class="col text-center">
-                <h1>{{ offer.name }}</h1>
+                <h1 class="mt-4">{{ offer.name }}</h1>
             </div>
+            {% include 'includes/horizontal-rule.html' %}
         </div>
         <form action="{% url 'add_offer_to_bag' offer.id %}" id="add_offer_to_bag" method="POST" >
         {% csrf_token %}

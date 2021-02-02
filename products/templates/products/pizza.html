@@ -9,10 +9,11 @@
     <div class="overlay-gold"></div>
     <main class="container content-container">
         <div class="row m-3">
-            <div class="col text-center">
+            <div class="col text-center mt-4">
                 <h1>Our Pizzas</h1>
             </div>
         </div>
+        {% include 'includes/horizontal-rule.html' %}
         <div class="row align-items-center">
             {% for product in products %}
                 {% if forloop.counter0|divisibleby:2 %}

@@ -214,6 +214,10 @@ hr:not([size]){
     width: 20px;
 }
 
+.fa-pizza-slice.pizza-background-white{
+    background-color: white;
+}
+
 .fa-pizza-slice::before{
     margin-left: 2.5px;
 }

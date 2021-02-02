@@ -9,13 +9,13 @@
     <div class="overlay-gold"></div>
     <main class="container-fluid content-container">
         <div class="row m-3">
-            <div class="col text-center">
+            <div class="col text-center mt-4">
                 <h1>Our Sides & Drinks</h1>
             </div>
         </div>
-        <hr class="col-8 offset-2 my-5">
         <div class="row align-items-center">
             <h2 class="text-center mb-3">Sides</h2>
+            {% include 'includes/horizontal-rule.html' %}
             {% for product in sides %}
                 {% if forloop.counter0|divisibleby:6 %}
                     <div class="row pizza-row">
@@ -92,9 +92,9 @@
                 {% endif%}           
             {% endfor %}
         </div>
-        <hr class="col-8 offset-2 my-5">
         <div class="row align-items-center">
-            <h2 class="text-center mb-3">Drinks</h2>
+            <h2 class="text-center mt-4 mb-4">Drinks</h2>
+            {% include 'includes/horizontal-rule.html' %}
             {% for product in drinks %}
                 {% if forloop.counter0|divisibleby:6 %}
                     <div class="row pizza-row">
