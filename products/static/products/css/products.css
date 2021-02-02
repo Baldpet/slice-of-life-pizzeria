@@ -1,7 +1,4 @@
-.pizza-mini-form {
-    
-}
-
+/*   Product cards    */
 .pizza-card {
     height: 100%;
 }
@@ -10,6 +7,29 @@
     max-height: 100px;
 }
 
+.decrement-qty,
+.increment-qty {
+    background-color: #086788;
+    color: white;
+}
+
+/* add product CSS */
+
 table .beige {
     background-color: beige;
+}
+
+/*   Media Queries    */
+@media (max-width:576px){
+   .form-group.w-75 {
+        width: 100% !important;
+    }
+    
+}
+
+@media (max-width:370px){
+   .form-control {
+        font-size: .9rem;
+    }
+    
 }
