@@ -12,7 +12,8 @@ body {
     top: 0;
     left: 0;
     position: fixed;
-    background: white;
+    background: #e8c8a0;
+    opacity: .6;
     z-index: -1;
 }
 
@@ -25,11 +26,13 @@ body {
 .header-height-full {
     height: 164px;
     max-height: 164px;
+    background-color: #e8c8a0;
 }
 
 .header-height-half {
     height: 82px;
     max-height: 82px;
+    background-color: #e8c8a0;
 }
 
 .nav-link {
@@ -38,6 +41,14 @@ body {
 
 .nav-index {
     z-index: 1000;
+}
+
+/*      Buttons         */
+
+.btn-primary {
+    background-color: #086788;
+    border-color: #086788;
+    color: white;
 }
 
 /*      Messages        */
@@ -52,9 +63,11 @@ body {
 /*      Index Page        */
 
 .sales {
-    background-color: greenyellow;
+    background-color: #3f292b;
+    color: white;
     margin-top: 164px;
     z-index: 999;
+    font-size: 1.5rem;
 }
 
 /*      Order Button on main page         */
@@ -76,7 +89,7 @@ body {
 
 .background-opacity-order {
     opacity: .85;
-    background-color: black; 
+    background-color: #3f292b; 
     border-radius: 25px;
 }
 
@@ -84,10 +97,40 @@ body {
     color: white;
 }
 
+/*      Card styling    */
+
+.card-header,
+.card-footer {
+    background-color: #3f292b;
+    color: white;
+}
+
+.card-footer-area {
+    height: 55px;
+}
+
+.card-footer-position {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+
 /*      Footer        */
 
 footer {
     width: 100%;
+}
+
+.footer-break {
+    height: 1rem;
+    background-color: #3f292b;
+}
+
+.footer-color {
+    background-color: #e8c8a0;
+    height: 5rem;
+    padding-top: 1rem;
 }
 
 /*      All Auth        */

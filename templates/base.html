@@ -33,7 +33,7 @@
 </head>
     <body>
         <header class="container-fluid fixed-top">
-            <div class="row header-height-full bg-white">
+            <div class="row header-height-full">
                 <div class="col-5 col-lg-3 order-2 order-lg-1 d-flex align-items-center">
                     <a href="{% url 'home' %}" class="mx-auto">
                         <img class="img-fluid header-height-full" src="{{ MEDIA_URL }}logo.png" alt="">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-4 col-lg-6 order-1 order-lg-2">
                     <div class="row header-height-half">
-                        <div class="col bg-white m-auto nav-index">
+                        <div class="col m-auto nav-index">
                         <!--  Nav bar  -->
                             <nav class="navbar navbar-expand-lg navbar-light w-100 my-auto">
                                 <button class="navbar-toggler m-auto" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,8 +99,9 @@
             {% endblock %}
         
         <footer class="container-fluid">
-            <div class="row bg-white">
-                <div class="col text-center">
+            <div class="row">
+                <div class="footer-break"></div>
+                <div class="col footer-color text-center">
                     <h5>Website by Peter Baldwin</h5>
                     <p class="text-muted">This website is for educational use only</p>
                 </div>
