@@ -108,6 +108,10 @@ body {
 
 /*      Card styling    */
 
+.card {
+    border: 0;
+}
+
 .card-header,
 .card-footer {
     background-color: #3f292b;
