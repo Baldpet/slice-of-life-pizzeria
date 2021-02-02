@@ -59,6 +59,11 @@ body {
 
 .nav-index {
     z-index: 1000;
+    background-color: #e8c8a0;
+}
+
+.dropdown-menu{
+    background-color: #e8c8a0;
 }
 
 .checkout-btn {
@@ -225,5 +230,22 @@ footer {
     #order-div h2,
     .background-opacity-order {
         display: none;
+    }
+    .checkout-text {
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+    font-size: 1rem;
+    }
+    .nav-link {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width:370px) {
+    .nav-link {
+        font-size: .9rem;
+    }
+    .navbar-toggler {
+        font-size: 1rem;
     }
 }
