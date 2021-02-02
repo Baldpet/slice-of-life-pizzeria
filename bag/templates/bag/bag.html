@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="overlay-white"></div>
-<main class="container-fluid content-container">
+<main class="container-fluid content-container allauth-container">
     <div class="row m-3">
         <div class="col text-center">
             <h1>Your Order</h1>
@@ -146,7 +146,7 @@
             <div class="col text-center">
                 <p class="lead m-5">Currently there are no items in your order.</p>
                 <p>Check out our Offers and Pizzas!</p>
-                <a href="#" class="btn btn-primary">
+                <a href="{% url 'offers' %}" class="btn btn-primary">
                     Offers
                 </a>
                 <a href="{% url 'pizza' %}" class="btn btn-primary">

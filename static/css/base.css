@@ -3,7 +3,7 @@
 body {
     background: url('/media/hero.jpg') no-repeat center center fixed;
     background-size: cover;
-    min-height: calc(100vh - 204px);
+    min-height: calc(100vh - 216px);
 }
 
 .overlay-gold,
@@ -27,7 +27,7 @@ body {
 }
 
 .content-container {
-    margin-top: 204px;
+    margin-top: 216px;
 }
 
 /*      Header        */
@@ -149,7 +149,7 @@ footer {
 /*      All Auth        */
 
 .allauth-container {
-    min-height: calc(100vh - 306px);
+    min-height: calc(100vh - 342px);
     margin-bottom: 30px;
 }
 
@@ -162,14 +162,18 @@ footer {
     body {
         background: url('/media/hero.jpg') no-repeat center center fixed;
         background-size: cover;
-        height: calc(100vh - 116px);
+        height: calc(100vh - 168px);
     }
     .sales {
         margin-top: 116px;
         z-index: 999;
     }
     .content-container {
-        margin-top: 156px;
+        margin-top: 168px;
+    }   
+    .allauth-container {
+        min-height: calc(100vh - 294px);
+        margin-bottom: 30px;
     }
     .desktop-only {
         display: none !important;
