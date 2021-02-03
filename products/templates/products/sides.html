@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="overlay-gold"></div>
-    <main class="container-fluid content-container">
+    <main class="container content-container allauth-container">
         <div class="row m-3">
             <div class="col text-center mt-4">
                 <h1>Our Sides & Drinks</h1>
@@ -24,33 +24,35 @@
                 {% endif%}
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
                         <div class="card pizza-card">
-                            <div class="row g-0">
-                                <div class="col-4">
-                                    {% if product.image %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
-                                    {% else %}
-                                        <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
-                                    {% endif %}
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ product.name }}</h5>
-                                        <p class="card-text">{{ product.description }}</p>
-                                        <form action="{% url 'add_side_to_bag' product.id %}" method="POST" class="m-2">
-                                            {% csrf_token %}
+                            <div class="card-header text-center">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                            </div>
+                            <form action="{% url 'add_side_to_bag' product.id %}" method="POST" class="m-0">
+                            {% csrf_token %}
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-4 ">
+                                            {% if product.image %}
+                                                <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                            {% else %}
+                                                <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-6 col-sm-8">
+                                            <p class="card-text">{{ product.description }}</p>
                                             {% if product.is_premium %}
                                                 {% for price in price_premium %}
-                                                    <p>£{{ price.price }}</p>
+                                                    <p><strong>£{{ price.price }}</strong></p>
                                                     <input type="hidden" name="price" value="{{ price.id }}" >
                                                 {% endfor %}
                                             {% elif not product.is_premium %}
                                                 {% for price in price %}
-                                                    <p>£{{ price.price }}</p>
+                                                    <p><strong>£{{ price.price }}</strong></p>
                                                     <input type="hidden" name="price" value="{{ price.id }}" >
                                                 {% endfor %}
                                             {% endif %} 
                                             <div class="form-row">
-                                                <p><strong>Quantity:</strong></p>
+                                                <label for="id_qty_{{ product.id }}" class="mb-2"><strong>Quantity:</strong></label>
                                                 <div class="form-group w-75">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -74,15 +76,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 mt-3 text-center">
-                                                    <button type="submit" class="btn btn-primary">Add to Order</button>
-                                                </div>
                                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                            </div>
-                                        </form>                                       
+                                            </div>                              
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="card-footer-area"></div>
+                                <div class="card-footer card-footer-position text-center">
+                                    <button type="submit" class="btn btn-primary">Add to Order</button>
+                                </div>
+                            </form>
                         </div>
                     </div> 
                 {% if forloop.counter|divisibleby:6 %}
