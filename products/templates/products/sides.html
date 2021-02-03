@@ -124,12 +124,12 @@
                                             <p class="card-text">{{ product.description }}</p>
                                             {% if product.is_premium %}
                                                 {% for price in price_premium_drink %}
-                                                    <p>£{{ price.price }}</p>
+                                                    <p><strong>£{{ price.price }}</strong></p>
                                                     <input type="hidden" name="price" value="{{ price.id }}" >
                                                 {% endfor %}
                                             {% elif not product.is_premium %}
                                                 {% for price in price_drink %}
-                                                    <p>£{{ price.price }}</p>
+                                                    <p><strong>£{{ price.price }}</strong></p>
                                                     <input type="hidden" name="price" value="{{ price.id }}" >
                                                 {% endfor %}
                                             {% endif %} 
