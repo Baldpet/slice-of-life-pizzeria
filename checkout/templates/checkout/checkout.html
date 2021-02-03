@@ -2,16 +2,61 @@
 {% load static %}
 
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css'%}">
 {% endblock %}
 
 {% block content %}
     <div class="overlay-white"></div>
     <main class="container-fluid content-container allauth-container">
         <div class="row m-3">
-            <div class="col text-center">
+            <div class="col text-center mt-4">
                 <h1>Checkout</h1>
             </div>
             {% include 'includes/horizontal-rule-white.html' %}
         </div>
+        <!--    Delivery Section    -->
+        <div class="row progress-row">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4 offset-1 offset-sm-2 offset-md-3 offset-xl-4">
+                <div class="progress" style="height: 50px;">
+                    <div class="progress-bar progress-background-transparent" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="row g-0">  
+                            <div class="col-4 progress-bar-border-right">
+                                <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
+                            </div>
+                            <div class="col-4 progress-bar-border-right">
+                                <a class="progress-link progress-active" href=""><h4>Delivery</h4></a>
+                            </div>
+                            <div class="col-4">
+                                <a class="progress-link" href=""><h4>Payment</h4></a>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="progress-bar progress-overlay" role="progressbar" style="width: 66.6666666666%;" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>  
+            </div>
+        </div>
+
+        <!--  Payment Section  -->
+        <div class="row progress-row d-none">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4 offset-1 offset-sm-2 offset-md-3 offset-xl-4">
+                <div class="progress" style="height: 50px;">
+                    <div class="progress-bar progress-background-transparent" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="row g-0">  
+                            <div class="col-4 progress-bar-border-right">
+                                <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
+                            </div>
+                            <div class="col-4 progress-bar-border-right">
+                                <a class="progress-link progress-active" href=""><h4>Delivery</h4></a>
+                            </div>
+                            <div class="col-4">
+                                <a class="progress-link progress-active" href=""><h4>Payment</h4></a>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="progress-bar progress-overlay" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>  
+            </div>
+        </div>
+           
     </main>
 {% endblock %}
