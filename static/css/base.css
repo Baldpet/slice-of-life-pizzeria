@@ -101,6 +101,16 @@ body {
     z-index: 99999999999;
 }
 
+.toast-header-success {
+    background-color: #009B72;
+    color: white;
+}
+
+.toast-header-error {
+    background-color: #D72638;
+    color: white;
+}
+
 /*      Index Page        */
 
 .sales {
