@@ -13,37 +13,43 @@
             </div>
             {% include 'includes/horizontal-rule.html' %}
         </div>
-        
+        <div class="row">
             {% for offer in offers %}
                 {% if forloop.counter0|divisibleby:3 %}
-                    <div class="row row-cols-1 row-cols-md-3 g-3 align-items-center mb-3">
+                    <div class="row row-cols-1 row-cols-md-3 g-3 align-items-center mb-3 card-group">
                 {% elif forloop.counter0 == 0 %}
-                    <div class="row row-cols-1 row-cols-md-3 g-3 align-items-center">
+                    <div class="row row-cols-1 row-cols-md-3 g-3 align-items-center card-group">
                 {% endif%}
-                <div class="col h-100">
-                    <div class="card h-100">
-                        <img src="{{ MEDIA_URL }}/offers.png" class="card-img-top" alt="offers image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ offer.name }}</h5>
-                            <p class="card-text">Look at this deal fantastic deal</p>
-                            <p class="card-text">{{ offer.item1 }} - {{offer.item1_size}}</p>
-                            {% if offer.item2 is not None %}
-                                <p class="card-text">{{ offer.item2 }} - {{offer.item2_size}}</p>
-                            {% endif %}
-                            {% if offer.item3 is not None %}
-                                <p class="card-text">{{ offer.item3 }} - {{offer.item3_size}}</p>
-                            {% endif %}
-                            <p class="car-text"><strong>£{{ offer.deal_price }}</strong></p>
-                            <a class="btn btn-primary" href="{% url 'offers_detail' offer.id %}">Select Deal</a>
+                    
+                        <div class="col h-100">
+                            <div class="card h-100">
+                                <div class="card-header text-center">
+                                    <h5 class="card-title">{{ offer.name }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <img src="{{ MEDIA_URL }}/offers.png" class="card-img-top" alt="offers image">
+                                    <p class="card-text">{{ offer.description }}</p>
+                                    <p class="card-text">{{ offer.item1 }} - {{offer.item1_size}}</p>
+                                    {% if offer.item2 is not None %}
+                                        <p class="card-text">{{ offer.item2 }} - {{offer.item2_size}}</p>
+                                    {% endif %}
+                                    {% if offer.item3 is not None %}
+                                        <p class="card-text">{{ offer.item3 }} - {{offer.item3_size}}</p>
+                                    {% endif %}
+                                    <p class="car-text"><strong>£{{ offer.deal_price }}</strong></p>
+                                </div>
+                                <div class="card-footer-area"></div>
+                                <div class="card-footer card-footer-position text-center">
+                                    <a class="btn btn-primary" href="{% url 'offers_detail' offer.id %}">Select Deal</a>
+                                </div>
+                            </div>
                         </div>
+                {% if forloop.counter|divisibleby:3 %}
                     </div>
-                </div>
-            {% if forloop.counter|divisibleby:3 %}
-                </div>
-            {% elif forloop.counter0 == 2 %}
-                </div>
-            {% endif%} 
+                {% elif forloop.counter0 == 2 %}
+                    </div>
+                {% endif%} 
             {% endfor %}
-        
+        </div>
     </main>
 {% endblock %}
