@@ -6,3 +6,7 @@
 .selected-offer {
     border: 5px solid yellow;
 }
+
+.offer-row {
+    height: 100px;
+}

@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'offers/css/offers.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="overlay-gold"></div>
-    <main class="container content-container">
+    <main class="container content-container allauth-container">
         <div class="row m-3">
             <div class="col text-center">
                 <h1 class="mt-4">Offers</h1>
@@ -16,27 +17,68 @@
         <div class="row">
             {% for offer in offers %}
                 {% if forloop.counter0|divisibleby:3 %}
-                    <div class="row row-cols-1 row-cols-md-3 g-3 align-items-center mb-3 card-group">
+                    <div class="row row-cols-1 row-cols-md-3 g-1 g-lg-3 align-items-center mb-3 card-group">
                 {% elif forloop.counter0 == 0 %}
-                    <div class="row row-cols-1 row-cols-md-3 g-3 align-items-center card-group">
+                    <div class="row row-cols-1 row-cols-md-3 g-1 g-lg-3 align-items-center card-group">
                 {% endif%}
                     
                         <div class="col h-100">
-                            <div class="card h-100">
+                            <div class="card">
                                 <div class="card-header text-center">
                                     <h5 class="card-title">{{ offer.name }}</h5>
                                 </div>
                                 <div class="card-body">
                                     <img src="{{ MEDIA_URL }}/offers.png" class="card-img-top" alt="offers image">
                                     <p class="card-text">{{ offer.description }}</p>
-                                    <p class="card-text">{{ offer.item1 }} - {{offer.item1_size}}</p>
-                                    {% if offer.item2 is not None %}
-                                        <p class="card-text">{{ offer.item2 }} - {{offer.item2_size}}</p>
-                                    {% endif %}
-                                    {% if offer.item3 is not None %}
-                                        <p class="card-text">{{ offer.item3 }} - {{offer.item3_size}}</p>
-                                    {% endif %}
-                                    <p class="car-text"><strong>£{{ offer.deal_price }}</strong></p>
+                                    <div class="row offer-row text-center">
+                                        <div class="col-4 g-1">
+                                            {% if offer.item1.name == 'Pizza' %}
+                                                <i class="fas fa-pizza-slice fa-2x"></i>
+                                                <p class="card-text m-0">Any {{ offer.item1 }}</p>
+                                                <p class="m-0">({{offer.get_item1_size_display}})</p>
+                                            {% elif offer.item1.name == 'Side' %}
+                                                <i class="fas fa-drumstick-bite fa-2x"></i>
+                                                <p class="card-text">Any {{ offer.item1 }}</p>
+                                            {% else %}
+                                                <i class="fas fa-wine-bottle fa-2x"></i>
+                                                <p class="card-text">Any {{ offer.item1 }}</p>
+                                            {% endif %}
+                                        </div>
+                                        {% if offer.item2 is not None %}
+                                            <div class="col-4 g-1">
+                                                {% if offer.item2.name == 'Pizza' %}
+                                                    <i class="fas fa-pizza-slice fa-2x"></i>
+                                                    <p class="card-text m-0">Any {{ offer.item2 }}</p>
+                                                    <p class="m-0">({{offer.get_item2_size_display}})</p>
+                                                {% elif offer.item2.name == 'Side' %}
+                                                    <i class="fas fa-drumstick-bite fa-2x"></i>
+                                                    <p class="card-text">Any {{ offer.item2 }}</p>
+                                                {% else %}
+                                                    <i class="fas fa-wine-bottle fa-2x"></i>
+                                                    <p class="card-text">Any {{ offer.item2 }}</p>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                        {% if offer.item3 is not None %}
+                                            <div class="col-4 g-1">
+                                                {% if offer.item3.name == 'Pizza' %}
+                                                    <i class="fas fa-pizza-slice fa-2x"></i>
+                                                    <p class="card-text m-0">Any {{ offer.item3 }}</p>
+                                                    <p class="m-0">({{offer.get_item3_size_display}})</p>
+                                                {% elif offer.item3.name == 'Side' %}
+                                                    <i class="fas fa-drumstick-bite fa-2x"></i>
+                                                    <p class="card-text">Any {{ offer.item3 }}</p>
+                                                {% else %}
+                                                    <i class="fas fa-wine-bottle fa-2x"></i>
+                                                    <p class="card-text">Any {{ offer.item3 }}</p>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <p class="card-text"><strong>£{{ offer.deal_price }}</strong></p>
+                                    </div>
+                                    
                                 </div>
                                 <div class="card-footer-area"></div>
                                 <div class="card-footer card-footer-position text-center">
