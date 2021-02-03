@@ -86,7 +86,8 @@ def clear_bag(request):
     """ Clear the bag of all items """
 
     del request.session['bag']
-    del request.session['discount']
+    if 'discount' in request.session:
+        del request.session['discount']
     messages.success(request, 'Removed all items from your order.')
     return render(request, 'bag/bag.html')
 
