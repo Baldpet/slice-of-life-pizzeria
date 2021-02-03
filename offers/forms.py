@@ -40,6 +40,7 @@ class OfferForm(forms.ModelForm):
                      ),
             ButtonHolder(
                 Submit('submit', 'Add Offer',
-                       css_class='btn btn-primary m-3')
+                       css_class='btn btn-primary m-3'),
+                css_class='text-center'
             ),
         )

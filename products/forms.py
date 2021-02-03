@@ -190,6 +190,7 @@ class ProductForm(forms.ModelForm):
             ),
             ButtonHolder(
                 Submit('submit', 'Add Product',
-                       css_class='btn btn-primary m-3')
+                       css_class='btn btn-primary m-3'),
+                css_class='text-center'
             )
         )

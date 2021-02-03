@@ -4,7 +4,10 @@
 }
 
 .selected-offer {
-    border: 5px solid yellow;
+    border: 3px solid;
+    border-color: #086788;
+    box-shadow: 0 0 0 0.25rem rgb(8 103 136 / 50%);
+    border-radius: 6px;
 }
 
 .offer-row {
