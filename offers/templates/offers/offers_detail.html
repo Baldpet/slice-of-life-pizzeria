@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="overlay-gold"></div>
-    <main class="container content-container">
+    <main class="container content-container allauth-container">
         <div class="row m-3">
             <div class="col text-center">
                 <h1 class="mt-4">{{ offer.name }}</h1>
@@ -16,14 +16,22 @@
         </div>
         <form action="{% url 'add_offer_to_bag' offer.id %}" id="add_offer_to_bag" method="POST" >
         {% csrf_token %}
+        
             <div class="row m-3 text-center">
                 <div class="col-12 col-md-4 mb-3">
-                    <div class="card offer-card w-100 mx-auto" data-item-number="1">
+                    <div class="card offer-card w-100 mx-auto" data-item-number="1" data-item-size="{% if offer.item1.has_sizes %}{{offer.item1_size}}{% else %}None{% endif %}">
                         <div class="card-header">
                             <h5 class="card-title">{{ offer.item1 }}{% if offer.item1.has_sizes %}({{offer.item1_size}}){% endif %}</h5>
                         </div>
                         <div class="card-body">
                             <img src="" alt="" class="card-img offers-img d-none">
+                            {% if offer.item1.name == 'Pizza' %}
+                                <i class="fas fa-pizza-slice fa-2x"></i>
+                            {% elif offer.item1.name == 'Side' %}
+                                <i class="fas fa-drumstick-bite fa-2x"></i>
+                            {% else %}
+                                <i class="fas fa-wine-bottle fa-2x"></i>
+                            {% endif %}
                             <p class="card-text">You still need to select a {% if offer.item1.has_sizes %}{{ offer.get_item1_size_display|lower }} {% endif %}{{ offer.item1|lower }} to complete your offer.</p>
                             <input type="hidden" name="item1" id="item1" >
                             <div class="text-start d-none mt-3">
@@ -48,12 +56,19 @@
                 </div>
                 {% if offer.item2 is not None %}
                     <div class="col-12 col-md-4 mb-3">
-                        <div class="card offer-card w-100 mx-auto" data-item-number="2">
+                        <div class="card offer-card w-100 mx-auto" data-item-number="2" data-item-size="{% if offer.item2.has_sizes %}{{offer.item2_size}}{% else %}None{% endif %}">
                             <div class="card-header">
                                 <h5 class="card-title">{{ offer.item2 }}{% if offer.item2.has_sizes %}({{offer.item2_size}}){% endif %}</h5>
                             </div>
                             <div class="card-body">
                                 <img src="" alt="" class="card-img offers-img d-none">
+                                {% if offer.item2.name == 'Pizza' %}
+                                    <i class="fas fa-pizza-slice fa-2x"></i>
+                                {% elif offer.item2.name == 'Side' %}
+                                    <i class="fas fa-drumstick-bite fa-2x"></i>
+                                {% else %}
+                                    <i class="fas fa-wine-bottle fa-2x"></i>
+                                {% endif %}
                                 <p class="card-text">You still need to select a {% if offer.item2.has_sizes %}{{ offer.get_item2_size_display|lower }} {% endif %}{{ offer.item2|lower }} to complete your offer.</p>
                                 <input type="hidden" name="item2" id="item2" value="">
                                 <div class="text-start d-none mt-3">
@@ -78,12 +93,19 @@
                 {% endif %}
                 {% if offer.item3 is not None %}
                     <div class="col-12 col-md-4 mb-3">
-                        <div class="card offer-card w-100 mx-auto" data-item-number="3">
+                        <div class="card offer-card w-100 mx-auto" data-item-number="3" data-item-size="{% if offer.item3.has_sizes %}{{offer.item3_size}}{% else %}None{% endif %}">
                             <div class="card-header">
                                 <h5 class="card-title">{{ offer.item3 }}{% if offer.item3.has_sizes %}({{offer.item3_size}}){% endif %}</h5>
                             </div>
                             <div class="card-body">
                                 <img src="" alt="" class="card-img offers-img d-none">
+                                {% if offer.item3.name == 'Pizza' %}
+                                    <i class="fas fa-pizza-slice fa-2x"></i>
+                                {% elif offer.item3.name == 'Side' %}
+                                    <i class="fas fa-drumstick-bite fa-2x"></i>
+                                {% else %}
+                                    <i class="fas fa-wine-bottle fa-2x"></i>
+                                {% endif %}
                                 <p class="card-text">You still need to select a {% if offer.item3.has_sizes %}{{ offer.get_item3_size_display|lower }} {% endif %}{{ offer.item3|lower }} to complete your offer.</p>
                                 <input type="hidden" name="item3" id="item3" value="">
                                 <div class="text-start d-none mt-3">
@@ -107,6 +129,7 @@
                     </div>
                 {% endif %}
             </div>
+        
             <div class="row">
                 <div class="col-12 col-md-6 offset-md-3 offer-error"></div>
             </div>

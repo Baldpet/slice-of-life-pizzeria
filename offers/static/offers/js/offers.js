@@ -33,7 +33,10 @@ $('.item-selector').click(function(){
     let itemSize = $('.selected-offer').data('item-size');
     let itemName = $(this).data("item-name");
     $('.selected-offer').find("img").attr("src", itemImage);
-    $('.selected-offer').find("h5").html(itemName);
+    if (itemSize !== 'None')
+        $('.selected-offer').find("h5").html(`${itemName} (${itemSize})`);
+    else
+        $('.selected-offer').find("h5").html(`${itemName}`);
     $('.selected-offer').find("img").removeClass("d-none");
     $('.selected-offer').find("img").siblings().addClass("d-none");
     $('.selected-offer').find("select").parent().removeClass("d-none");
