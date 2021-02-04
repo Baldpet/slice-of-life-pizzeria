@@ -46,3 +46,9 @@
     color: black;
 }
 
+/*   Submission Form    */
+
+fieldset legend {
+    float: none;
+    margin: auto;
+}
