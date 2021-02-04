@@ -21,7 +21,7 @@ class Order(models.Model):
     ]
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name='orders')
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -86,12 +86,13 @@ class OrderLineItem(models.Model):
             price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category, size=self.product_size).values('price')
             for e in price_object:
                 price = e['price']
+            self.lineitem_total = price * self.quantity
         else:
             price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category).values('price')
             for e in price_object:
                 price = e['price']
+            self.lineitem_total = price * self.quantity
 
-        self.lineitem_total = price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
