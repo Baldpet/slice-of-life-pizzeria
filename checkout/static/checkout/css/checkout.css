@@ -52,3 +52,165 @@ fieldset legend {
     float: none;
     margin: auto;
 }
+
+/*   Order Tracker    */
+
+.frame{
+	display: block;
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 0px; 
+	border: 3px solid transparent;
+	border-top-color: #00A385;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	z-index: 900;
+	-webkit-animation: spinning 5s linear infinite;
+	animation: spinning 5s linear infinite;
+	float:left;
+  }
+.clr{
+	display: block;
+	position: relative;
+	left: 22px;
+	top: 20px;
+	width: 150px;
+	height: 150px;
+	margin: 0px; 
+	border: 3px solid transparent;
+	border-top-color: #3498db;
+	z-index: 900;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	-webkit-animation: spinning 5s linear infinite;
+	animation: spinning 5s linear infinite;
+}
+.clr:before {
+	content: "";
+	position: absolute;
+	top: -15px;
+	left: -15px;
+	right: -15px;
+	bottom: -15px;
+	border: 3px solid transparent;
+	border-top-color: #e74c3c;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	-webkit-animation: spinning 5s linear infinite;
+	animation: spinning 5s linear infinite;
+}
+.clr:after {
+	content: "";
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	border: 3px solid transparent;
+	border-top-color: #f9c922;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	-webkit-animation: spinning 5s linear infinite;
+	animation: spinning 5s linear infinite;
+}
+@keyframes spinning {
+	0%{
+	-webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(0deg);  /* IE 9 */
+	transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	
+	50%{
+	-webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(360deg);  /* IE 9 */
+	transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	
+	100% {
+	-webkit-transform: rotate(720deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(720deg);  /* IE 9 */
+	transform: rotate(720deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+}
+	
+@-webkit-keyframes spinning {
+	0%   {
+	-webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(0deg);  /* IE 9 */
+	transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+		50%{
+	-webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(360deg);  /* IE 9 */
+	transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	100% {
+	-webkit-transform: rotate(720deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(720deg);  /* IE 9 */
+	transform: rotate(720deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+}
+
+
+@keyframes spinningChange {
+	0%{
+	-webkit-transform: rotate(720deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(720deg);  /* IE 9 */
+	transform: rotate(720deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	
+	50%{
+	-webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(360deg);  /* IE 9 */
+	transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	
+	100% {
+	-webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(0deg);  /* IE 9 */
+	transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+}
+	
+@-webkit-keyframes spinningChange {
+	0%   {
+	-webkit-transform: rotate(720deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(720deg);  /* IE 9 */
+	transform: rotate(720deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+		50%{
+	-webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(360deg);  /* IE 9 */
+	transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	100% {
+	-webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+	-ms-transform: rotate(0deg);  /* IE 9 */
+	transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+}
+
+.inside{
+    position: absolute;
+}
+
+.tracker-image{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    top: 50px;
+    left: 50px;
+}
+
+.tracker-div{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    margin: auto;
+}
