@@ -7,6 +7,8 @@ from django_countries.fields import CountryField
 from profiles.models import UserProfile
 from products.models import Product, Price
 
+from decimal import Decimal
+
 # Create your models here.
 
 
@@ -78,11 +80,18 @@ class OrderLineItem(models.Model):
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        product_category = product.category.name
-        product_premium = product.is_premium
-        price = Price.objects.filter(is_premium=product_premium, category__name=product_category)
+        product_category = self.product.category.name
+        product_premium = self.product.is_premium
+        if self.product.category.has_sizes:
+            price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category, size=self.product_size).values('price')
+            for e in price_object:
+                price = e['price']
+        else:
+            price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category).values('price')
+            for e in price_object:
+                price = e['price']
 
-        self.lineitem_total = price.price * self.quantity
+        self.lineitem_total = price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):

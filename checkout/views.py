@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from .forms import OrderForm
 from .models import Order, OrderLineItem
+from products.models import Product
 from profiles.models import UserProfile
 
 from bag.context import bag_contents
@@ -17,9 +18,11 @@ import json
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    current_bag = bag_contents(request)
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
+        deal_discount = request.session.get('discount', {})
 
         form_data = {
             'full_name': request.POST['full_name'],
@@ -39,13 +42,39 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
+            order.deal_discount = current_bag['discount']
             order.loyalty_points = 0
             order.save()
+            for item_id, item_data in bag.items():
+                try:
+                    product = Product.objects.get(id=item_id)
+                    if isinstance(item_data, int):
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            product=product,
+                            quantity=item_data
+                        )
+                        order_line_item.save()
+                    else:
+                        for dough in item_data.items():
+                            for size in dough[1]:
+                                if dough[1][size] > 0:
+                                    order_line_item = OrderLineItem(
+                                        order=order,
+                                        product=product,
+                                        quantity=dough[1][size],
+                                        product_size=size
+                                    )
+                                    order_line_item.save()
+                except Product.DoesNotExist:
+                    messages.error(request, "One of the products does not exist.")
+                    order.delete()
+                    return redirect(reverse('view_bag'))
+
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form.')
 
-    current_bag = bag_contents(request)
     total = current_bag['grand_total']
     stripe_total = round(total * 100)
     stripe.api_key = stripe_secret_key
