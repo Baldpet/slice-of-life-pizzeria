@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.conf import settings
+
 from .forms import OrderForm
+from profiles.models import UserProfile
 
 from bag.context import bag_contents
 
@@ -21,8 +23,24 @@ def checkout(request):
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
     )
-
-    form = OrderForm
+    if request.user.is_authenticated:
+        try:
+            profile = UserProfile.objects.get(user=request.user)
+            form = OrderForm(initial={
+                'full_name': profile.user.get_full_name(),
+                'email': profile.user.email,
+                'phone_number': profile.default_phone_number,
+                'country': profile.default_country,
+                'postcode': profile.default_postcode,
+                'town_or_city': profile.default_town_or_city,
+                'street_address1': profile.default_street_address1,
+                'street_address2': profile.default_street_address2,
+                'county': profile.default_county,
+            })
+        except UserProfile.DoesNotExist:
+            form = OrderForm()
+    else:
+        form = OrderForm()
     template = 'checkout/checkout.html'
     context = {
         'form': form,
