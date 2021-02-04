@@ -18,6 +18,7 @@ class Order(models.Model):
         ('PR', 'Preparing'),
         ('C', 'Cooking'),
         ('OD', 'Out for delivery'),
+        ('D', 'Delivered')
     ]
 
     order_number = models.CharField(max_length=32, null=False, editable=False)

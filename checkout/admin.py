@@ -23,7 +23,8 @@ class OrderAdmin(admin.ModelAdmin):
               'street_address1', 'street_address2',
               'county', 'order_total',
               'loyalty_discount', 'deal_discount',
-              'grand_total', 'loyalty_points', 'original_bag', 'stripe_pid',
+              'grand_total', 'order_status', 'loyalty_points',
+              'original_bag', 'stripe_pid',
               )
 
     list_display = ('order_number', 'date', 'full_name', 'order_total',
