@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css'%}">
+{% endblock %}
+
+{% block content %}
+    <div class="overlay-white"></div>
+    <main class="container content-container allauth-container">
+        <div class="row m-3">
+            <div class="col text-center mt-4">
+                <h1>Checkout Successful</h1>
+            </div>
+            {% include 'includes/horizontal-rule-white.html' %}
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Checkout Successful on Order {{ order.order_number }}</p>
+            </div>
+        </div>
+        
+    </main>
+{% endblock %}
+
