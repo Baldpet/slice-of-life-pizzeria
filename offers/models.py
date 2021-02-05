@@ -86,13 +86,3 @@ class Offer(models.Model):
             item3_price = 0
 
         self.original_price = item1_price + item2_price + item3_price
-
-
-@receiver(pre_save, sender=Offer)
-def update_pre_save(sender, instance, **kwargs):
-    """
-    Update the original cost of an offer
-    Update the potential savings from the offer
-    """
-    instance.original_price_calculation()
-    instance.calculate_saving() 
