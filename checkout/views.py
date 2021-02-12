@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse, Http404
 from django.conf import settings
 from django.contrib import messages
 
@@ -149,3 +149,13 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+
+
+def update_delivery_or_collection(request):
+    if request.method == 'POST':
+        delivery_or_collection = request.GET.get('delivery')
+        print(delivery_or_collection)
+        request.session['delivery'] = delivery_or_collection
+        return HttpResponse('ok')
+    else:
+        return HttpResponse('failed')

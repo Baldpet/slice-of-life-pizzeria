@@ -56,12 +56,24 @@
                     </div>
                     <div class="row d-flex align-items-center justify-content-center header-height-half desktop-only">
                         <div class="col text-center">
-                            <button class="btn btn-primary btn-lg">
-                                Collection
-                            </button>
-                            <button class="btn btn-primary btn-lg">
-                                Delivery
-                            </button>
+                            {% if not delivery_choice %}
+                                <button class="btn btn-primary btn-lg collection-select">
+                                    Collection
+                                </button>
+                            {% else %}
+                                <button class="btn btn-secondary btn-lg collection-select">
+                                    Collection
+                                </button>
+                            {% endif %}
+                            {% if delivery_choice %}
+                                <button class="btn btn-primary btn-lg delivery-select">
+                                    Delivery
+                                </button>
+                            {% else %}
+                                <button class="btn btn-secondary btn-lg delivery-select">
+                                    Delivery
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
