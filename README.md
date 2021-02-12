@@ -104,7 +104,7 @@ As Pizzerias are generally associated with the country that they originated I ha
 
 I used www.coolors.co to create my colour template which is shown below:
 
-![Colour Palettes](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/add-a-product.png)  
+![Colour Palettes](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/colors.png)  
 
 ## __Features__
 
