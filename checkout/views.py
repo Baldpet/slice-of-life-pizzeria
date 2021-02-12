@@ -151,6 +151,16 @@ def checkout_success(request, order_number):
     return render(request, template, context)
 
 
+def pizza_tracker(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
+    template = 'checkout/pizza_tracker.html'
+    context = {
+        'order': order
+    }
+
+    return render(request, template, context)
+
+
 def update_delivery_or_collection(request):
     if request.method == 'POST':
         delivery_or_collection = request.GET.get('delivery')

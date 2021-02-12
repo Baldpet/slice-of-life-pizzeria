@@ -15,49 +15,20 @@
             {% include 'includes/horizontal-rule-white.html' %}
         </div>
         <div class="row">
-            <div class="col">
-                <p>Checkout Successful on Order {{ order.order_number }}</p>
+            <div class="col text-center">
+                <p>Your order has been accepted and your delicious pizzas are on their way to you soon!</p>
+                <p>Your order number is {{ order.order_number}}.</p>   
+                <p>An email with confirmation will have been send to the email address provided.</p>  
+                <p>Use the button below to track your order.</p>  
             </div>
         </div>
-        {% if order.order_status == 'PR' or order.order_status == 'C' or order.order_status == 'OD' %}
-            <div class="row">
-                <div class="col-12 col-md-4 text-center" >
-                    <h2>Preparing</h2>
-                    <div class="tracker-div">
-                        <img class="tracker-image" src="{{MEDIA_URL}}/preparing-pizza.jpg" alt="preparing pizza">
-                        <div class="inside">
-                            <div class="frame" id="preparing-frame">
-                                <div class="clr"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 text-center" >
-                    <h2>Cooking</h2>
-                    <div class="tracker-div">
-                        <img class="tracker-image" src="{{MEDIA_URL}}/cooking-pizza.jpg" alt="preparing pizza">
-                        <div class="inside">
-                            <div class="frame d-none" id="cooking-frame">
-                                <div class="clr"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 text-center">
-                    <h2>Delivering</h2>
-                    <div class="tracker-div">
-                        <img class="tracker-image" src="{{MEDIA_URL}}/delivery-pizza.jpg" alt="preparing pizza">
-                        <div class="inside">
-                            <div class="frame d-none" id="delivering-frame">
-                                <div class="clr"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row mt-3">
+            <div class="col text-center">
+                <a class="btn btn-primary btn-lg" href="{% url 'pizza_tracker' order.order_number %}">Pizza Tracker</a>
             </div>
-        {% else %}
-            <p>Order Complete</p>
-        {% endif %}
+        </div>
+        
+        
         
     </main>
 {% endblock %}
