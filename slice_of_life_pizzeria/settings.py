@@ -91,7 +91,9 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 # All Auth required
                 'django.template.context_processors.request',
+                # Bespoke
                 'bag.context.bag_contents',
+                'checkout.context.delivery_choice',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
