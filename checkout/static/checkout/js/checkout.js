@@ -59,3 +59,8 @@ form.addEventListener('submit', function(ev) {
   });
 });
 
+$('.btn-payment').click(function(){
+    $('.personal-info').removeClass('d-none');
+    $('.delivery').addClass('d-none');
+})
+
