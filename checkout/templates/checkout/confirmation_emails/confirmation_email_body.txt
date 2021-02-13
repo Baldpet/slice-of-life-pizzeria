@@ -1,0 +1,21 @@
+Hi {{ order.full_name }}
+
+From everyone at the Slice of Life Pizzeria thank you!
+
+Your order info is below:
+
+Order Number: {{  order.order_number }}
+Order Date: {{ order.date }}
+
+Order Total: £{{ order.order_total }}
+Discount: £{{ order.deal_discount }}
+Loyalty Discount: £{{ order.loyalty_discount }}
+Grand Total: £{{ order.grand_total }}
+
+We've got you phone number {{ order.phone_number }}. If there are any problems we will let you know.
+
+If you have any questions, feel free to contact us.
+
+Sincerly,
+
+The family at the Slice of Life Pizzeria. 
