@@ -52,16 +52,39 @@
                     </div>
                 {% else %}
                     <h5 class="text-center">Delivery Info</h5>
-                    <div class="small">
-                        <p>{{ order.full_name }}</p>
-                        <p>{{ order.street_address1 }}</p>
-                        <p>{{ order.street_address2 }}</p>
-                        <p>{{ order.town_or_city }}</p>
-                        <p>{{ order.county }}</p>
-                        <p>{{ order.postcode }}</p>
-                    </div>
+                    <table class="table small">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Name: </td>
+                            <td>{{ order.full_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>{{ order.street_address1 }}</td>
+                        </tr>
+                        {% if order.street_address2 %}
+                            <tr>
+                                <td></td>
+                                <td>{{ order.street_address2 }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Town/City: </td>
+                            <td>{{ order.town_or_city }}</td>
+                        </tr>
+                        <tr>
+                            <td>County: </td>
+                            <td>{{ order.county }}</td>
+                        </tr>
+                        <tr>
+                            <td>Postcode: </td>
+                            <td>{{ order.postcode }}</td>
+                        </tr>
+                    </table>
                 {% endif %}
-                
             </div>
         </div>
         <div class="row mt-4">
@@ -72,7 +95,7 @@
                     <p>Your order has been accepted and your delicious pizzas are on their way to you soon!</p>
                 {% endif %}
                 <p>Your order number is {{ order.order_number}}.</p>   
-                <p>An email with confirmation will have been send to the email address provided.</p>  
+                <p>An email with confirmation will have been send to {{ order.email }}.</p>  
                 <p>Use the button below to track your order.</p>  
             </div>
         </div>
