@@ -20,12 +20,16 @@ import json
 @require_POST
 def cache_checkout_data(request):
     try:
+        current_bag = bag_contents(request)
+        discount = current_bag['discount']
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'username': request.user,
             'save_info': request.POST.get('save-info'),
             'bag': json.dumps(request.session.get('bag', {})),
+            'discount': discount,
+            'loyalty_points': 0,
         })
         return HttpResponse(status=200)
     except Exception as e:
