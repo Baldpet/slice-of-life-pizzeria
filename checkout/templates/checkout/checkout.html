@@ -85,7 +85,7 @@
                             </fieldset>
                         {% else %}
                             <fieldset class="rounded px-3 mt-3 mb-5" >
-                                <legend class="fieldset-label text-center text-black px-2 w-auto">Delivery</legend>
+                                <legend class="fieldset-label text-center text-black px-2 w-auto">Delivery</legend> 
                                 <input type="hidden" name="street_address1" value="collection">
                                 <input type="hidden" name="street_address2" value="collection">
                                 <input type="hidden" name="postcode" value="collection">
@@ -108,7 +108,7 @@
                         <div class="row m-3">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <h5>Order Summary</h5>
+                                    <h5 class="text-center">Order Summary</h5>
                                     <table class="table">
                                         <tr>
                                             <th>Item</th>
@@ -135,36 +135,36 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     {% if delivery_choice %}
-                                        <h5>Delivery Info</h5>
+                                        <h5 class="text-center">Delivery Info</h5>
                                         <table class="table">
                                             <tr>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
                                             <tr class="small">
-                                                <td>Address</td>
+                                                <td><strong>Address</strong></td>
                                                 <td class="street_address1"></td>
                                             </tr>
                                             <tr class="small">
-                                                <td>Address</td>
+                                                <td></td>
                                                 <td class="street_address2"></td>
                                             </tr>
                                             <tr class="small">
-                                                <td>Town/City</td>
+                                                <td><strong>Town/City</strong></td>
                                                 <td class="town_or_city"></td>
                                             </tr>
                                             <tr class="small">
-                                                <td>County</td>
+                                                <td><strong>County</strong></td>
                                                 <td class="county"></td>
                                             </tr>
                                             <tr class="small">
-                                                <td>Postcode</td>
+                                                <td><strong>Postcode</strong></td>
                                                 <td class="postcode"></td>
                                             </tr>
                                         </table>
                                     {% else %}
-                                        <h5>Collection</h5>
-                                        <p>Your order is currently selected for collection</p>
+                                        <h5 class="text-center">Collection</h5>
+                                        <p class="text-center">Your order is currently selected for collection</p>
                                     {% endif %}
                                 </div>
                             </div>

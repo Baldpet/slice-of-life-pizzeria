@@ -92,3 +92,28 @@ $('.delivery-select').click(function(){
     location.reload();
 })
 
+// Adjusting the address on the payment view of the checkout form
+
+// Update if the user is signed up and address automatically input
+$('.fieldset-delivery').find('select, input').each(function(){
+    updateAddress(this)
+})
+
+// update for anu changes
+$('.fieldset-delivery').find('select, input').change(function(){
+    updateAddress(this)
+})
+
+function updateAddress(item){
+    var name = $(item).attr('name')
+    var value = $(item).val()
+    $('.' + name).html(value)
+    if (name === 'street_address2' && value == ""){
+        $('.' + name).parent().addClass('d-none')
+    } else {
+        $('.' + name).parent().removeClass('d-none')
+    }
+
+}
+
+

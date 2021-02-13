@@ -58,11 +58,11 @@
                             <th></th>
                         </tr>
                         <tr>
-                            <td>Name: </td>
+                            <td><strong>Name: </strong></td>
                             <td>{{ order.full_name }}</td>
                         </tr>
                         <tr>
-                            <td>Address: </td>
+                            <td><strong>Address: </strong></td>
                             <td>{{ order.street_address1 }}</td>
                         </tr>
                         {% if order.street_address2 %}
@@ -72,15 +72,15 @@
                             </tr>
                         {% endif %}
                         <tr>
-                            <td>Town/City: </td>
+                            <td><strong>Town/City: </strong></td>
                             <td>{{ order.town_or_city }}</td>
                         </tr>
                         <tr>
-                            <td>County: </td>
+                            <td><strong>County: </strong></td>
                             <td>{{ order.county }}</td>
                         </tr>
                         <tr>
-                            <td>Postcode: </td>
+                            <td><strong>Postcode: </strong></td>
                             <td>{{ order.postcode }}</td>
                         </tr>
                     </table>
