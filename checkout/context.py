@@ -1,5 +1,5 @@
 def delivery_choice(request):
-    delivery = request.session['delivery']
+    delivery = request.session.get('delivery', {})
     if delivery == 'delivery':
         delivery = True
     else:

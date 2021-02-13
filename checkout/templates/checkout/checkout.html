@@ -63,7 +63,7 @@
                     {% csrf_token %}
                     <div class="delivery">
                         {% if delivery_choice %}
-                            <fieldset class="rounded px-3 mt-3 mb-5" >
+                            <fieldset class="rounded px-3 mt-3 mb-5 fieldset-delivery" >
                                 <legend class="fieldset-label text-center text-black px-2 w-auto">Delivery</legend>
                                 {{ form.street_address1 | as_crispy_field  }}
                                 {{ form.street_address2 | as_crispy_field  }}
@@ -93,14 +93,82 @@
                                 <input type="hidden" name="county" value="collection">
                                 <input type="hidden" name="country" value="GB">
                                 <p>You have currently selected Collection.</p>
-                                <button class="btn btn-secondary">Click here for delivery</button>
                             </fieldset>
                         {% endif %}
                         <div class="text-center">
+                            {% if delivery_choice %}
+                                <button class="btn btn-secondary collection-select">Switch to Collection</button>
+                            {% else %}
+                                <button class="btn btn-secondary delivery-select">Switch to Delivery</button>
+                            {% endif %}
                             <button class="btn btn-primary btn-payment">Continue to Payment</button>
                         </div>
                     </div>    
                     <div class="personal-info d-none">
+                        <div class="row m-3">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h5>Order Summary</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Size</th>
+                                            <th>Qty</th>
+                                        </tr>
+                                    {% for item in bag_items %}
+                                        <tr class="small">
+                                            <td>{{ item.product.name }}</td>
+                                            {% if item.size %}
+                                                <td>{{ item.size }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            <td>{{ item.quantity }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                        <tr>
+                                            <td class="float-end"><strong>Total:</strong></td>
+                                            <td></td>
+                                            <td>£{{ grand_total }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    {% if delivery_choice %}
+                                        <h5>Delivery Info</h5>
+                                        <table class="table">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            <tr class="small">
+                                                <td>Address</td>
+                                                <td class="street_address1"></td>
+                                            </tr>
+                                            <tr class="small">
+                                                <td>Address</td>
+                                                <td class="street_address2"></td>
+                                            </tr>
+                                            <tr class="small">
+                                                <td>Town/City</td>
+                                                <td class="town_or_city"></td>
+                                            </tr>
+                                            <tr class="small">
+                                                <td>County</td>
+                                                <td class="county"></td>
+                                            </tr>
+                                            <tr class="small">
+                                                <td>Postcode</td>
+                                                <td class="postcode"></td>
+                                            </tr>
+                                        </table>
+                                    {% else %}
+                                        <h5>Collection</h5>
+                                        <p>Your order is currently selected for collection</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                         <fieldset class="rounded px-3 mt-3 mb-5">
                             <legend class="fieldset-label align-center text-black px-2 w-auto">Order Information</legend>
                             {{ form.full_name | as_crispy_field  }}

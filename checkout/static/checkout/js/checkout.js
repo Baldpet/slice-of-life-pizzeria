@@ -1,3 +1,5 @@
+// Stripe required JS
+
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
@@ -59,8 +61,34 @@ form.addEventListener('submit', function(ev) {
   });
 });
 
+// end of Stripe JS
+
+// making sure that the delivery info is filled out correctly before moving on to the payment section.
+
 $('.btn-payment').click(function(){
-    $('.personal-info').removeClass('d-none');
-    $('.delivery').addClass('d-none');
+    var valid = true
+    $('.fieldset-delivery').find('select, input').each(function(){
+        if ($(this).prop('required')){
+            if ($(this).val() !== ''){
+                valid = true
+            } else {
+                valid = false
+                return
+            }
+        }
+    })
+    if(valid){
+            $('.personal-info').removeClass('d-none');
+            $('.delivery').addClass('d-none');
+        }
+})
+
+$('.collection-select').click(function(event){
+    event.preventDefault();
+    location.reload();
+})
+$('.delivery-select').click(function(){
+    event.preventDefault();
+    location.reload();
 })
 
