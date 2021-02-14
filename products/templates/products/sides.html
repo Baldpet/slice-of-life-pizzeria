@@ -18,9 +18,9 @@
             {% include 'includes/horizontal-rule.html' %}
             {% for product in sides %}
                 {% if forloop.counter0|divisibleby:6 %}
-                    <div class="row pizza-row">
+                    <div class="row pizza-row g-1 g-sm-3">
                 {% elif forloop.counter0 == 0 %}
-                    <div class="row pizza-row">
+                    <div class="row pizza-row g-1 g-sm-3">
                 {% endif%}
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
                         <div class="card pizza-card">
