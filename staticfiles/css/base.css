@@ -1,0 +1,324 @@
+/*      Throughout site        */
+
+body {
+    background: url('/media/hero.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: calc(100vh - 216px);
+}
+
+.overlay-white {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: -1;
+    background: white;
+}
+
+.content-container {
+    margin-top: 216px;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #008c45;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(8 103 136 / 25%);
+}
+
+/*      Header        */
+
+.header-height-full {
+    height: 164px;
+    max-height: 164px;
+    background-color: #f4f5f0;
+}
+
+.header-height-half {
+    height: 82px;
+    max-height: 82px;
+    background-color: #f4f5f0;
+}
+
+.nav-link {
+    font-size: 1.5rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+}
+
+.navbar-light .navbar-toggler {
+    color: rgba(0,0,0,.55);
+    border-color: black;
+}
+
+.nav-index {
+    z-index: 1000;
+    background-color: #f4f5f0;
+}
+
+.dropdown-menu{
+    background-color: #f4f5f0;
+}
+
+.checkout-btn {
+    position: relative;
+    width: 7rem;
+}
+
+.checkout-text {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+}
+
+.btn .checkout-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1rem;
+}
+
+.dropdown-item:active,
+.dropdown-item:hover {
+    background-color: #008c45;
+    color: white;
+}
+
+/*      Buttons         */
+
+.btn-primary {
+    background-color: #008c45;
+    border-color: #008c45;
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-secondary:active {
+    background-color: #006734;
+    border-color: #006734;
+}
+
+.btn-primary:focus {
+        box-shadow: 0 0 0 0.25rem rgb(0 140 69 / 50%);
+}
+
+/*      Messages        */
+
+.message-container {
+    position: fixed;
+    top: 200px;
+    right: 15px;
+    z-index: 99999999999;
+}
+
+.toast-header-success {
+    background-color: #008c45;
+    color: white;
+}
+
+.toast-header-error {
+    background-color: #cd212a;
+    color: white;
+}
+
+
+
+/*      Index Page        */
+
+.sales {
+    background-color: #cd212a;
+    color: white;
+    margin-top: 164px;
+    z-index: 999;
+    font-size: 1.5rem;
+}
+
+/*      Order Button on main page         */
+
+.order-positioning {
+    margin-right: 7rem;
+    margin-top: 14rem;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.background-opacity-order {
+    opacity: .85;
+    background-color: #2b2d42; 
+    border-radius: 25px;
+}
+
+#order-div h2 {
+    color: white;
+}
+
+/*      Card styling    */
+
+.card {
+    border: 0;
+}
+
+.card-header {
+    background-color: #2b2d42;
+    color: white;
+}
+
+.card-body {
+    background-color: #f4f5f0;
+}
+
+.card-footer {
+    border: 0;
+    background-color: #f4f5f0;
+}
+
+.pizza-card form {
+    background-color: #f4f5f0;
+}
+
+.card-footer-area {
+    height: 55px;
+}
+
+.card-footer-position {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+
+/*      Footer        */
+
+footer {
+    width: 100%;
+}
+
+.footer-break {
+    height: 1rem;
+    background-color: #2b2d42;
+}
+
+.footer-color {
+    background-color: #f4f5f0;
+    height: 5rem;
+    padding-top: 1rem;
+}
+
+/*      All Auth        */
+
+.allauth-container {
+    min-height: calc(100vh - 342px);
+    margin-bottom: 30px;
+}
+
+.allauth-container h1 {
+    text-align: center;
+}
+
+/*     Horizontal Rule     */
+.horizontal-rule-div{
+    position: relative;  
+    height: 1px; 
+}
+
+.horizontal-rule {
+    opacity: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+hr:not([size]){
+    height: 2px;
+}
+
+.horizontal-rule-div .fa-pizza-slice {
+    position: absolute;
+    top: -8px;
+    right: 50%;
+    opacity: 1;
+    background-color: white;
+    width: 20px;
+}
+
+.fa-pizza-slice::before{
+    margin-left: 2.5px;
+}
+
+/*      Media Queries        */
+@media (max-width:991px) {
+    body {
+        background: url('/media/hero.jpg') no-repeat center center fixed;
+        background-size: cover;
+        height: calc(100vh - 168px);
+    }
+    .sales {
+        margin-top: 116px;
+        z-index: 999;
+        font-size: 1.2rem;
+    }
+    .content-container {
+        margin-top: 168px;
+    }   
+    .allauth-container {
+        min-height: calc(100vh - 294px);
+        margin-bottom: 30px;
+    }
+    .desktop-only {
+        display: none !important;
+    }
+    .header-height-full {
+        height: 116px;
+        max-height: 116px;
+    }
+    .header-height-half {
+        height: 116px;
+        max-height: 116px;
+    }
+    .order-positioning {
+        margin-right: 0;
+        margin-top: 0;
+    }
+    #order-div {
+        position: relative !important;
+        margin-top: 50vh;
+        width: 100%;
+    }
+    #order-div h2,
+    .background-opacity-order {
+        display: none;
+    }
+    .checkout-text {
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+    font-size: 1rem;
+    }
+    .nav-link {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width:370px) {
+    .nav-link {
+        font-size: .9rem;
+    }
+    .navbar-toggler {
+        font-size: 1rem;
+    }
+    .toast {
+        width: 300px;
+    }
+}

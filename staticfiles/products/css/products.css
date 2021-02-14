@@ -1,0 +1,41 @@
+/*   Product cards    */
+.pizza-card {
+    height: 100%;
+}
+
+.pizza-image {
+    max-height: 100px;
+}
+
+.decrement-qty,
+.increment-qty {
+    background-color: #2b2d42;
+    color: white;
+}
+
+.decrement-qty:hover,
+.increment-qty:hover {
+    background-color: #52567e;
+    color: white;
+}
+
+/* add product CSS */
+
+table .beige {
+    background-color: #f4f5f0;
+}
+
+/*   Media Queries    */
+@media (max-width:576px){
+   .form-group.w-75 {
+        width: 100% !important;
+    }
+    
+}
+
+@media (max-width:370px){
+   .form-control {
+        font-size: .9rem;
+    }
+    
+}
