@@ -5,8 +5,8 @@
 
 .selected-offer {
     border: 3px solid;
-    border-color: #086788;
-    box-shadow: 0 0 0 0.25rem rgb(8 103 136 / 50%);
+    border-color: #008c45;
+    box-shadow: 0 0 0 0.25rem rgb(0 140 69 / 50%);
     border-radius: 6px;
 }
 
