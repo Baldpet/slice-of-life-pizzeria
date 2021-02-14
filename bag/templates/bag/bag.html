@@ -4,6 +4,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'bag/css/bag.css'%}">
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css'%}">
 {% endblock %}
 
 {% block content %}
@@ -15,11 +16,31 @@
         </div>
         {% include 'includes/horizontal-rule-white.html' %}
     </div>
+    <div class="row progress-row">
+        <div class="col-10 col-sm-8 col-md-6 col-xl-4 offset-1 offset-sm-2 offset-md-3 offset-xl-4">
+            <div class="progress" style="height: 50px;">
+                <div class="progress-bar progress-background-transparent" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <div class="row g-0">  
+                        <div class="col-4 progress-bar-border-right">
+                            <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
+                        </div>
+                        <div class="col-4 progress-bar-border-right">
+                            <a class="progress-link" href=""><h4>Delivery</h4></a>
+                        </div>
+                        <div class="col-4">
+                            <a class="progress-link" href=""><h4>Payment</h4></a>
+                        </div>
+                    </div> 
+                </div>
+                <div class="progress-bar progress-overlay" role="progressbar" style="width: 33.3333333333%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>  
+        </div>
+    </div>
     <div class="row">
         {% if bag_items %}
             <div class="col-12 col-lg-10 offset-lg-1">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table d-none d-sm-inline-block">
                         <thead>
                             <tr>
                                 <th scope="col">Item</th>
@@ -131,10 +152,98 @@
                                 <tr>
                                     <td colspan="5" class="p-3 text-end">
                                         <a href="{% url 'clear_bag' %}" class="btn btn-secondary">Clear Bag</a>
-                                        <a href="#" class="btn btn-primary">Secure Checkout</a>
+                                        <a href="{% url 'checkout' %}" class="btn btn-primary">Continue to Checkout</a>
                                     </td>
                                 </tr>
                         </tbody>
+                    </table>
+                    <table class="table d-sm-none">
+                        <tr>
+                            <th>Product</th>
+                            <th></th>
+                            <th>Size</th>
+                            <th>Quantity</th>
+                            <th>Sub Total</th>
+                        </tr>
+                        {% for item in bag_items %}
+                            <tr>
+                                <td class="bottom-border-0"><h4>{{ item.product.name }}</h4></td>
+                                <td class="bottom-border-0"></td>
+                                {% if item.size %}
+                                    <td class="bottom-border-0">{{ item.size }}</td>
+                                {% else %}
+                                    <td class="bottom-border-0"> - </td>
+                                {% endif %}
+                                <td class="bottom-border-0">{{ item.quantity }}</td>
+                                <td class="text-end bottom-border-0">£{{ item.price | calc_subtotal:item.quantity }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <a class="btn btn-danger btn-sm remove-item" id="remove_{{ item.product.id }}" data-product_size="{{ item.size }}" data-dough="{{ item.dough }}">Delete</a>
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_mobile_{{ item.product.id }}{{ item.size }}">Amend</button>
+                                    <div class="modal fade" tabindex="-1" id="modal_mobile_{{ item.product.id }}{{ item.size }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{ item.product.name }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{% url 'amend_bag' item.product.id %}" method="POST" class="update-form">
+                                                        {% csrf_token %}
+                                                        {% if item.size %}
+                                                            <input type="hidden" name="dough" id="id_dough" value="{{ item.dough }}">
+                                                            <input type="hidden" name="original_size" id="id_original_size" value="{{ item.size }}">
+                                                            <div>
+                                                                <p class="text-start"><strong>Size: </strong></p>
+                                                                <div class="w-50">
+                                                                    <select class="form-control" name="product_size" id="id_product_size">
+                                                                        {% if item.product.is_premium %}
+                                                                            {% for price in price_premium %}
+                                                                            <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
+                                                                            {% endfor %}
+                                                                        {% else %}
+                                                                            {% for price in price %}
+                                                                            <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
+                                                                            {% endfor %}
+                                                                        {% endif %} 
+                                                                    </select>
+                                                                </div> 
+                                                            </div>   
+                                                        {% endif %}
+                                                        <div>
+                                                            <p class="text-start"><strong>Quantity: </strong></p>
+                                                            <div class="w-50">
+                                                                <input type="number" class="form-control qty-input" value="1" min="1" max="99" name="quantity" data-item-id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                                            </div>        
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary update-link">Save changes</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                            <tr>
+                                <td colspan="5" class="p-3 text-end">
+                                    <p><strong>Order Total: </strong>£{{ total }}</p>
+                                    <p class="text-danger"><strong>Offer Discounts: </strong>£{{ discount }}</p>
+                                    <p class="text-danger"><strong>Loyalty Discounts: </strong>£0</p>
+                                    <h5><strong>Grand Total: </strong>£{{ grand_total }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="p-3 text-end">
+                                    <a href="{% url 'clear_bag' %}" class="btn btn-secondary btn-sm">Clear Bag</a>
+                                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-sm">Continue to Checkout</a>
+                                </td>
+                            </tr>
                     </table>
                 </div>
                 <div class="row">

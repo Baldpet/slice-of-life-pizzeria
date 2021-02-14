@@ -1,3 +1,13 @@
 .bag-image {
     max-height: 15rem;
 }
+
+td.bottom-border-0 {
+    border-bottom-width: 0px;
+}
+
+@media (max-width:576px) {
+    h4 {
+        font-size: 1rem;
+    }
+}

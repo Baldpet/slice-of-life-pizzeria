@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css'%}">
+{% endblock %}
+
+{% block content %}
+    <div class="overlay-white"></div>
+    <main class="container content-container allauth-container">
+        <div class="row m-3">
+            <div class="col text-center mt-4">
+                <h1>Pizza Tracker</h1>
+            </div>
+            {% include 'includes/horizontal-rule-white.html' %}
+        </div>
+        {% if not order.order_status == 'D' %}
+            <div class="row">
+                <div class="col-12 col-md-4 text-center" >
+                    <h2>Preparing</h2>
+                    <div class="tracker-div">
+                        <img class="tracker-image" src="{{MEDIA_URL}}/preparing-pizza.jpg" alt="preparing pizza">
+                        <div class="inside">
+                            <div class="frame" id="preparing-frame">
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 text-center" >
+                    <h2>Cooking</h2>
+                    <div class="tracker-div">
+                        <img class="tracker-image" src="{{MEDIA_URL}}/cooking-pizza.jpg" alt="preparing pizza">
+                        <div class="inside">
+                            <div class="frame d-none" id="cooking-frame">
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                    <h2>Delivering</h2>
+                    <div class="tracker-div">
+                        <img class="tracker-image" src="{{MEDIA_URL}}/delivery-pizza.jpg" alt="preparing pizza">
+                        <div class="inside">
+                            <div class="frame d-none" id="delivering-frame">
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="">Order Complete</p>
+        {% endif %}
+        
+    </main>
+{% endblock %}

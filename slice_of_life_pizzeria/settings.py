@@ -91,7 +91,9 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 # All Auth required
                 'django.template.context_processors.request',
+                # Bespoke
                 'bag.context.bag_contents',
+                'checkout.context.delivery_choice',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -175,6 +177,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Stripe Info
+
+STRIPE_CURRENCY = 'gbp'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 # Email Info
 

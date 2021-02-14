@@ -17,6 +17,7 @@
 {% endblock %}
 
 {% block postloadjs %}
+    {{ block.super }}
     <script type="text/javascript">
         let height = $("#order-div").css("height");
         let width = $("#order-div").css("width");
