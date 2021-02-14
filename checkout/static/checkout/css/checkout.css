@@ -9,7 +9,7 @@
 }
 
 .progress-bar {
-    background-color: #086788;
+    background-color: #2b2d42;
 }
 
 .progress-overlay {
@@ -39,7 +39,7 @@
 }
 
 .progress-link:hover {
-    color: #086788;
+    color: #2b2d42;
 }
 
 .progress-link.progress-active:hover {

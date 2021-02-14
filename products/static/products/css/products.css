@@ -9,14 +9,20 @@
 
 .decrement-qty,
 .increment-qty {
-    background-color: #086788;
+    background-color: #2b2d42;
+    color: white;
+}
+
+.decrement-qty:hover,
+.increment-qty:hover {
+    background-color: #52567e;
     color: white;
 }
 
 /* add product CSS */
 
 table .beige {
-    background-color: #e8c8a0;
+    background-color: #f4f5f0;
 }
 
 /*   Media Queries    */

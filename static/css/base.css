@@ -6,7 +6,6 @@ body {
     min-height: calc(100vh - 216px);
 }
 
-.overlay-gold,
 .overlay-white {
     height: 100%;
     width: 100%;
@@ -14,16 +13,7 @@ body {
     left: 0;
     position: fixed;
     z-index: -1;
-}
-
-.overlay-white {
     background: white;
-    opacity: .95;
-}
-
-.overlay-gold {
-    background: #e8c8a0;
-    opacity: .6;
 }
 
 .content-container {
@@ -33,7 +23,7 @@ body {
 .form-control:focus {
     color: #212529;
     background-color: #fff;
-    border-color: #086788;
+    border-color: #008c45;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgb(8 103 136 / 25%);
 }
@@ -43,13 +33,13 @@ body {
 .header-height-full {
     height: 164px;
     max-height: 164px;
-    background-color: #e8c8a0;
+    background-color: #f4f5f0;
 }
 
 .header-height-half {
     height: 82px;
     max-height: 82px;
-    background-color: #e8c8a0;
+    background-color: #f4f5f0;
 }
 
 .nav-link {
@@ -67,11 +57,11 @@ body {
 
 .nav-index {
     z-index: 1000;
-    background-color: #e8c8a0;
+    background-color: #f4f5f0;
 }
 
 .dropdown-menu{
-    background-color: #e8c8a0;
+    background-color: #f4f5f0;
 }
 
 .checkout-btn {
@@ -92,12 +82,30 @@ body {
     font-size: 1rem;
 }
 
+.dropdown-item:active,
+.dropdown-item:hover {
+    background-color: #008c45;
+    color: white;
+}
+
 /*      Buttons         */
 
 .btn-primary {
-    background-color: #086788;
-    border-color: #086788;
+    background-color: #008c45;
+    border-color: #008c45;
     color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-secondary:active {
+    background-color: #006734;
+    border-color: #006734;
+}
+
+.btn-primary:focus {
+        box-shadow: 0 0 0 0.25rem rgb(0 140 69 / 50%);
 }
 
 /*      Messages        */
@@ -110,12 +118,12 @@ body {
 }
 
 .toast-header-success {
-    background-color: #009B72;
+    background-color: #008c45;
     color: white;
 }
 
 .toast-header-error {
-    background-color: #D72638;
+    background-color: #cd212a;
     color: white;
 }
 
@@ -124,7 +132,7 @@ body {
 /*      Index Page        */
 
 .sales {
-    background-color: #3f292b;
+    background-color: #cd212a;
     color: white;
     margin-top: 164px;
     z-index: 999;
@@ -150,7 +158,7 @@ body {
 
 .background-opacity-order {
     opacity: .85;
-    background-color: #3f292b; 
+    background-color: #2b2d42; 
     border-radius: 25px;
 }
 
@@ -164,10 +172,22 @@ body {
     border: 0;
 }
 
-.card-header,
-.card-footer {
-    background-color: #3f292b;
+.card-header {
+    background-color: #2b2d42;
     color: white;
+}
+
+.card-body {
+    background-color: #f4f5f0;
+}
+
+.card-footer {
+    border: 0;
+    background-color: #f4f5f0;
+}
+
+.pizza-card form {
+    background-color: #f4f5f0;
 }
 
 .card-footer-area {
@@ -189,11 +209,11 @@ footer {
 
 .footer-break {
     height: 1rem;
-    background-color: #3f292b;
+    background-color: #2b2d42;
 }
 
 .footer-color {
-    background-color: #e8c8a0;
+    background-color: #f4f5f0;
     height: 5rem;
     padding-top: 1rem;
 }
@@ -230,12 +250,8 @@ hr:not([size]){
     top: -8px;
     right: 50%;
     opacity: 1;
-    background-color: #E8C8A0;
-    width: 20px;
-}
-
-.fa-pizza-slice.pizza-background-white{
     background-color: white;
+    width: 20px;
 }
 
 .fa-pizza-slice::before{
@@ -252,6 +268,7 @@ hr:not([size]){
     .sales {
         margin-top: 116px;
         z-index: 999;
+        font-size: 1.2rem;
     }
     .content-container {
         margin-top: 168px;
