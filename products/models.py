@@ -76,7 +76,7 @@ class Product(models.Model):
     extra_cheese = models.BooleanField(default=False)
     description = models.TextField()
     is_premium = models.BooleanField(default=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.name

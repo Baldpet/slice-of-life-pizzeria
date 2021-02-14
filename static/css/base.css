@@ -1,7 +1,7 @@
 /*      Throughout site        */
 
 body {
-    background: url('/media/hero.jpg') no-repeat center center fixed;
+    background: url('https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333278/hero_ydty0h.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: calc(100vh - 216px);
 }

@@ -33,9 +33,9 @@
                                     <div class="row">
                                         <div class="col-6 col-sm-4 ">
                                             {% if product.image %}
-                                                <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                                <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name }} photo">
                                             {% else %}
-                                                <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                                <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
                                             {% endif %}
                                         </div>
                                         <div class="col-6 col-sm-8">
@@ -115,9 +115,9 @@
                                     <div class="row">
                                         <div class="col-6 col-sm-4 ">
                                             {% if product.image %}
-                                                <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                                <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name }} photo">
                                             {% else %}
-                                                <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                                <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
                                             {% endif %}
                                         </div>
                                         <div class="col-6 col-sm-8">
