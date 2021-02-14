@@ -55,9 +55,9 @@
                                 <tr>
                                     <td class="p-3 w-25">
                                         {% if item.product.image %}
-                                            <img class="img-fluid bag-image" src="{{MEDIA_URL}}{{ item.product.image }}" alt="{{ item.product.name }} photo">
+                                            <img class="img-fluid bag-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }} photo">
                                         {% else %}
-                                            <img class="img-fluid bag-image" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                            <img class="img-fluid bag-image" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
                                         {% endif %}
                                     </td>
                                     <td class="p-3 w-25">
