@@ -140,6 +140,7 @@ def checkout_success(request, order_number):
     order_id = order.id
     line_items = OrderLineItem.objects.filter(order=order_id)
     save_info = request.session.get('save_info')
+    print(save_info)
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
