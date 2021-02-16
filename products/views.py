@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
-from .models import Product, Price, Dough
+from .models import Product, Price, Dough, Toppings
 from .forms import ProductForm
 
 # Create your views here.
@@ -48,6 +48,7 @@ def add_product(request):
     pizza_price = Price.objects.filter(category__name='Pizza')
     side_price = Price.objects.filter(category__name='Side')
     drink_price = Price.objects.filter(category__name='Drink')
+    toppings = Toppings.objects.all()
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -65,6 +66,7 @@ def add_product(request):
         'pizza_price': pizza_price,
         'side_price': side_price,
         'drink_price': drink_price,
+        'toppings': toppings
     }
 
     return render(request, template, context)

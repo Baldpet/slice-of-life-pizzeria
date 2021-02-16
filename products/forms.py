@@ -18,7 +18,7 @@ class ProductForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.form_action = 'add_product'
         self.helper.layout = Layout(
-            Fieldset( '',
+            Fieldset('',
                 Div('name', css_class="m-3"),
                 Div('category', css_class="m-3"),
                 Div(
@@ -36,7 +36,16 @@ class ProductForm(forms.ModelForm):
                     css_class="row m-3 text-center pizza-only"
                 ),
                 Div(
-                    Div('toppings', css_class="col-6 col-md-3"),
+                    HTML(
+                        "{% for topping in toppings %}"
+                        '<div class="col-4">'
+                        '<div class="form-check form-check-inline">'
+                            '<input class="form-check-input" type="checkbox" name="toppings" id="{{ topping.name }}" value="{{ topping.id }}">'
+                            '<label class="form-check-label" for="{{ topping.name }}">{{ topping.name }}</label>'
+                        '</div>'
+                        '</div>'
+                        "{% endfor %}"
+                    ),
                     css_class="row mt-3 m-md-3 pizza-only"
                 ),
                 Div('description', css_class="m-3"),
