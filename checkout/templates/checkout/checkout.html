@@ -71,7 +71,6 @@
                                 {{ form.town_or_city | as_crispy_field  }}
                                 {{ form.county | as_crispy_field  }}
                                 {{ form.postcode | as_crispy_field  }}
-                                {{ form.country | as_crispy_field  }}
                                 <div class="form-check form-check-inline float-right mr-0">
                                     {% if user.is_authenticated %}
                                         <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
@@ -92,7 +91,6 @@
                                 <input type="hidden" name="postcode" value="collection">
                                 <input type="hidden" name="town_or_city" value="collection">
                                 <input type="hidden" name="county" value="collection">
-                                <input type="hidden" name="country" value="GB">
                                 <p>You have currently selected Collection.</p>
                             </fieldset>
                         {% endif %}

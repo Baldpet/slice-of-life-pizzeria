@@ -16,26 +16,28 @@
         </div>
         {% include 'includes/horizontal-rule-white.html' %}
     </div>
-    <div class="row progress-row">
-        <div class="col-10 col-sm-8 col-md-6 col-xl-4 offset-1 offset-sm-2 offset-md-3 offset-xl-4">
-            <div class="progress" style="height: 50px;">
-                <div class="progress-bar progress-background-transparent" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                    <div class="row g-0">  
-                        <div class="col-4 progress-bar-border-right">
-                            <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
-                        </div>
-                        <div class="col-4 progress-bar-border-right">
-                            <a class="progress-link" href="{% url 'checkout' %}"><h4>Delivery</h4></a>
-                        </div>
-                        <div class="col-4">
-                            <a class="progress-link" href="{% url 'checkout' %}"><h4>Payment</h4></a>
-                        </div>
-                    </div> 
-                </div>
-                <div class="progress-bar progress-overlay" role="progressbar" style="width: 33.3333333333%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>  
+    {% if bag_items %}
+        <div class="row progress-row">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4 offset-1 offset-sm-2 offset-md-3 offset-xl-4">
+                <div class="progress" style="height: 50px;">
+                    <div class="progress-bar progress-background-transparent" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="row g-0">  
+                            <div class="col-4 progress-bar-border-right">
+                                <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
+                            </div>
+                            <div class="col-4 progress-bar-border-right">
+                                <a class="progress-link" href="{% url 'checkout' %}"><h4>Delivery</h4></a>
+                            </div>
+                            <div class="col-4">
+                                <a class="progress-link" href="{% url 'checkout' %}"><h4>Payment</h4></a>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="progress-bar progress-overlay" role="progressbar" style="width: 33.3333333333%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>  
+            </div>
         </div>
-    </div>
+    {% endif %}
     <div class="row">
         {% if bag_items %}
             <div class="col-12 col-lg-10 offset-lg-1">

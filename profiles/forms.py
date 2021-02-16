@@ -17,7 +17,6 @@ class UserForm(forms.ModelForm):
             'default_town_or_city': 'Town or City',
             'default_county': 'County',
             'default_postcode': 'Postcode',
-            'default_country': 'Country',
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True

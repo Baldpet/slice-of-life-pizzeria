@@ -158,14 +158,14 @@
                                 <div class="row">
                                     <div class="col-4  col-md-4 ">
                                         {% if pizza.image %}
-                                            <img class="card-img" src="{{MEDIA_URL}}{{ pizza.image }}" alt="{{ pizza.name }} photo">
+                                            <img class="card-img" src="{{ pizza.image.url }}" alt="{{ pizza.name }} photo">
                                         {% else %}
-                                            <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ pizza.name }} photo">
+                                            <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ pizza.name }} photo">
                                         {% endif %}
                                     </div>
                                     <div class="col-8">
                                         <p class="card-text">{{ pizza.description }}</p>
-                                        <p class="card-text"><small class="text-muted">Ingredients   </small>
+                                        <p class="card-text"><small class="text-muted">Toppings   </small>
                                             <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
                                             data-bs-content="{{ pizza.cheese| capfirst }}, {{ pizza.sauce| capfirst }}{% if pizza.chicken %}, Chicken{% endif %}{% if pizza.pepperoni %}, Pepperoni{% endif %}{% if pizza.bacon %}, Bacon{% endif %}{% if pizza.sausage %}, Sausage{% endif %}{% if pizza.ham %}, Ham{% endif %}{% if pizza.meatball %}, Meatball{% endif %}{% if pizza.chorizo %}, Chorizo{% endif %}{% if pizza.mushroom %}, Mushroom{% endif %}{% if pizza.pepper %}, Pepper{% endif %}{% if pizza.onion %}, Onion{% endif %}{% if pizza.chilli %}, Chilli{% endif %}{% if pizza.pineapple %}, Pineapple{% endif %}{% if pizza.key_lime %}, Key Lime{% endif %}.">
                                                 <i class="fas fa-info-circle"></i>
@@ -175,7 +175,7 @@
                                 </div>                                 
                             </div>
                             <div class="card-footer text-center">
-                                <button class="btn btn-primary item-selector" id="{{ pizza.id }}" data-item-name="{{ pizza.name }}" data-item-image="{% if pizza.image %}{{MEDIA_URL}}{{ pizza.image }}{% else %}{{MEDIA_URL}}/no-image.jpg{% endif %}">Add to Offer</button>
+                                <button class="btn btn-primary item-selector" id="{{ pizza.id }}" data-item-name="{{ pizza.name }}" data-item-image="{% if pizza.image %}{{ pizza.image.url }}{% else %}https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg{% endif %}">Add to Offer</button>
                             </div>
                         </div>
                     </div> 
@@ -206,9 +206,9 @@
                                 <div class="row">
                                     <div class="col-4">
                                         {% if product.image %}
-                                            <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                            <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name }} photo">
                                         {% else %}
-                                            <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                            <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
                                         {% endif %}
                                     </div>
                                     <div class="col-8">
@@ -217,7 +217,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <button class="btn btn-primary item-selector" id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-image="{% if product.image %}{{MEDIA_URL}}{{ product.image }}{% else %}{{MEDIA_URL}}/no-image.jpg{% endif %}">Add to Offer</button>
+                                <button class="btn btn-primary item-selector" id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-image="{% if product.image %}{{ product.image.url }}{% else %}https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg{% endif %}">Add to Offer</button>
                             </div>
                         </div>
                     </div> 
@@ -246,9 +246,9 @@
                                 <div class="row">
                                     <div class="col-4">
                                         {% if product.image %}
-                                            <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }} photo">
+                                            <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name }} photo">
                                         {% else %}
-                                            <img class="img-fluid" src="{{MEDIA_URL}}/no-image.jpg" alt="{{ product.name }} photo">
+                                            <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
                                         {% endif %}
                                     </div>
                                     <div class="col-8">
@@ -257,7 +257,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <button class="btn btn-primary item-selector" id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-image="{% if product.image %}{{MEDIA_URL}}{{ product.image }}{% else %}{{MEDIA_URL}}/no-image.jpg{% endif %}">Add to Offer</button>
+                                <button class="btn btn-primary item-selector" id="{{ product.id }}" data-item-name="{{ product.name }}" data-item-image="{% if product.image %}{{ product.image.url }}{% else %}https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg{% endif %}">Add to Offer</button>
                             </div>
                         </div>
                     </div> 
