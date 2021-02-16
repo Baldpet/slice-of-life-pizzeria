@@ -139,6 +139,14 @@ body {
     font-size: 1.5rem;
 }
 
+.offers-sales-link {
+    color: white;
+}
+
+.offers-sales-link:hover {
+    color: #ffb649;
+}
+
 /*      Order Button on main page         */
 
 .order-positioning {
