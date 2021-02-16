@@ -3,7 +3,7 @@ from django.contrib import messages
 
 from .models import Offer
 from .forms import OfferForm
-from products.models import Product, Price
+from products.models import Product, Price, Dough
 
 from decimal import Decimal
 
@@ -24,10 +24,7 @@ def offers_detail(request, offerId):
     pizzas = Product.objects.all().filter(category__name='Pizza')
     sides = Product.objects.all().filter(category__name='Side')
     drinks = Product.objects.all().filter(category__name='Drink')
-    dough_choices = Product.dough_choices
-    dough_choices_items = []
-    for dough in dough_choices:
-        dough_choices_items.append(dough[0])
+    dough_choices = Dough.objects.all()
 
     template = 'offers/offers_detail.html'
     context = {
@@ -35,7 +32,7 @@ def offers_detail(request, offerId):
         'pizzas': pizzas,
         'sides': sides,
         'drinks': drinks,
-        'dough_choices': dough_choices_items,
+        'dough_choices': dough_choices,
     }
     return render(request, template, context)
 
@@ -66,7 +63,7 @@ def add_offer_to_bag(request, offerId):
     product1 = get_object_or_404(Product, pk=item1_id)
     if product1.category.has_sizes:
         item1_size = request.POST.get('item1_size')
-        item1_dough = request.POST.get('item1_dough')
+        item1_dough = request.POST.get('item1_dough').lower()
     if 'item2' in request.POST:
         item2_id = request.POST.get('item2')
         item2_quantity = 1
@@ -74,7 +71,7 @@ def add_offer_to_bag(request, offerId):
         item2Exists = True
         if product2.category.has_sizes:
             item2_size = request.POST.get('item2_size')
-            item2_dough = request.POST.get('item2_dough')
+            item2_dough = request.POST.get('item2_dough').lower()
     else:
         item2Exists = False
         item2_id = ""
@@ -85,7 +82,7 @@ def add_offer_to_bag(request, offerId):
         product3 = get_object_or_404(Product, pk=item3_id)
         if product3.category.has_sizes:
             item3_size = request.POST.get('item3_size')
-            item3_dough = request.POST.get('item3_dough')
+            item3_dough = request.POST.get('item3_dough').lower()
     else:
         item3Exists = False
         item3_id = ""
