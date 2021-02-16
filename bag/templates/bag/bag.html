@@ -68,20 +68,7 @@
                                             <p><strong>Size: </strong> {{ item.size }}</p>
                                             <p><strong>Dough: </strong> {{ item.dough| capfirst }}</p>
                                             <p><strong>Sauce: </strong>{{ item.product.sauce| capfirst }}</p>
-                                            <p><strong>Toppings: </strong>{{ item.product.cheese| capfirst }}{% if item.product.chicken %},
-                                                Chicken{% endif %}{% if item.product.pepperoni %},
-                                                Pepperoni{% endif %} {% if item.product.bacon %},
-                                                Bacon{% endif %}{% if item.product.sausage %},
-                                                Sausage{% endif %}{% if item.product.ham %},
-                                                Ham{% endif %}{% if item.product.meatball %},
-                                                Meatball{% endif %}{% if item.product.chorizo %},
-                                                Chorizo{% endif %}{% if item.product.mushroom %},
-                                                Mushroom{% endif %}{% if item.product.pepper %},
-                                                Pepper{% endif %}{% if item.product.onion %},
-                                                Onion{% endif %}{% if item.product.chilli %},                 
-                                                Chilli{% endif %}{% if item.product.pineapple %},
-                                                Pineapple{% endif %}{% if item.product.key_lime %},
-                                                Key Lime{% endif %}</p>
+                                            <p><strong>Toppings: </strong>{% if not item.product.toppings.all %}None{% else %}{% for topping in item.product.toppings.all %}{{ topping.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}{% endif %}.</p>
                                         {% endif %}
                                     </td>
                                     <td class="text-end mt-5">

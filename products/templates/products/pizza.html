@@ -103,7 +103,7 @@
                                             <p class="card-text">{{ product.description }}</p>
                                             <p class="card-text"><small class="text-muted">Toppings   </small>
                                                 <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Toppings" 
-                                                data-bs-content="{% if not product.toppings.all %}None{% else %}{% for topping in product.toppings.all %}{{ topping.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}{% endif %}.">
+                                                data-bs-content="{{ product.sauce }}, {{ product.cheese }}{% if not product.toppings.all %}{% else %}, {% for topping in product.toppings.all %}{{ topping.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}{% endif %}.">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
                                             </p>
