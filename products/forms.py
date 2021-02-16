@@ -5,14 +5,6 @@ from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Fieldset, Div, HTML, ButtonHolder, Submit
 
 
-class MiniForm(forms.Form):
-    dough_choices = Product.dough_choices
-    dough = forms.ChoiceField(choices=dough_choices)
-
-    dough.widget.attrs['class'] = 'form-control pizza-mini-form'
-    dough.label = False
-
-
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -44,30 +36,8 @@ class ProductForm(forms.ModelForm):
                     css_class="row m-3 text-center pizza-only"
                 ),
                 Div(
-                    Div('chicken', css_class="col-6 col-md-3"),
-                    Div('pepperoni', css_class="col-6 col-md-3"),
-                    Div('bacon', css_class="col-6 col-md-3"),
-                    Div('sausage', css_class="col-6 col-md-3"),
+                    Div('toppings', css_class="col-6 col-md-3"),
                     css_class="row mt-3 m-md-3 pizza-only"
-                ),
-                Div(
-                    Div('ham', css_class="col-6 col-md-3"),
-                    Div('meatball', css_class="col-6 col-md-3"),
-                    Div('chorizo', css_class="col-6 col-md-3"),
-                    Div('mushroom', css_class="col-6 col-md-3"),
-                    css_class="row m-md-3 pizza-only"
-                ),
-                Div(
-                    Div('pepper', css_class="col-6 col-md-3"),
-                    Div('onion', css_class="col-6 col-md-3"),
-                    Div('chilli', css_class="col-6 col-md-3"),
-                    Div('pineapple', css_class="col-6 col-md-3"),
-                    css_class="row m-md-3 pizza-only"
-                ),
-                Div(
-                    Div('key_lime', css_class="col-6 col-md-3"),
-                    Div('extra_cheese', css_class="col-6 col-md-3"),
-                    css_class="row mb-3 m-md-3 pizza-only"
                 ),
                 Div('description', css_class="m-3"),
                 Div(

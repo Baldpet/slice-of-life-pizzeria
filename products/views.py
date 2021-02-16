@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
-from .models import Product, Price
-from .forms import MiniForm, ProductForm
+from .models import Product, Price, Dough
+from .forms import ProductForm
 
 # Create your views here.
 
@@ -11,13 +11,13 @@ def pizza(request):
     price = Price.objects.filter(is_premium=False, category__name='Pizza')
     price_premium = Price.objects.filter(is_premium=True,
                                          category__name='Pizza')
-    form = MiniForm
+    dough = Dough.objects.all()
     template = 'products/pizza.html'
     context = {
         'products': products,
         'price': price,
         'price_premium': price_premium,
-        'form': form,
+        'dough': dough,
     }
     return render(request, template, context)
 
