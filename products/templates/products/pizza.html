@@ -16,10 +16,40 @@
         {% include 'includes/horizontal-rule.html' %}
         <div class="row align-items-center">
             {% for product in products %}
-                {% if forloop.counter0|divisibleby:2 %}
+                {% if forloop.counter0 == 0 %}
                     <div class="row pizza-row g-1 g-sm-3">
-                {% elif forloop.counter0 == 0 %}
+                        <div class="col-12 col-lg-6 mb-3">
+                            <div class="card pizza-card">
+                                <div class="card-header text-center">
+                                    <h5 class="card-title">Create Your Own</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-4 ">
+                                            <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
+                                        </div>
+                                        <div class="col-6 col-sm-8">
+                                            <div class="col-12">
+                                                <h6>Can't find a Pizza that you really fancy?</h6>
+                                                <p>Then take avantage of our create your own Pizza service.</p>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <div class="col">
+                                            <p>Pick your Size, Dough, Sauce, Cheese and Toppings starting from as little as £6.00 and get that Pizza you're craving!</p>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="card-footer-area"></div>
+                                <div class="card-footer card-footer-position text-center">
+                                    <a href="{% url 'create_a_pizza' %}" class="btn btn-primary">Create your Pizza</a>
+                                </div>    
+                            </div>
+                        </div>
+                {% elif forloop.counter|divisibleby:2 %}
                     <div class="row pizza-row g-1 g-sm-3">
+                            
                 {% endif%}
                     <div class="col-12 col-lg-6 mb-3">
                         <div class="card pizza-card">
@@ -120,7 +150,9 @@
                     </div> 
                 {% if forloop.last %}
                 </div>
-                {% elif forloop.counter|divisibleby:2 %}
+                {% elif forloop.counter0 == 0 %}
+                </div>
+                {% elif forloop.counter0|divisibleby:2 %}
                 </div>
                 {% endif %}          
             {% endfor %}
