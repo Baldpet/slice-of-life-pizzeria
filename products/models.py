@@ -78,6 +78,7 @@ class Product(models.Model):
     description = models.TextField()
     is_premium = models.BooleanField(default=True)
     is_original = models.BooleanField(default=True)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):

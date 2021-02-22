@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/products.css'%}">
+{% endblock %}
+
+{% block content %}
+    <div class="overlay-white"></div>
+    <main class="container content-container allauth-container">
+        <div class="row m-3">
+            <div class="col text-center">
+                <h1>Create Your Own Pizza</h1>
+            </div>
+            {% include 'includes/horizontal-rule-white.html' %}
+        </div>
+        <div class="row">
+            <div class="col col-lg-8 offset-lg-2">
+                
+                <form id="create-pizza-form" method="POST" action="{% url 'create_a_pizza' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <label for="size" class="form-label">Size</label>
+                            <select name="size" id="size" class="form-select">
+                                {% for price in size %}
+                                    <option data-cost="{{ price.price }}" value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <label for="dough" class="form-label">Dough</label>
+                            <select name="dough" id="dough" class="form-select">
+                                {% for option in dough %}
+                                    <option value="{{ option.id }}">{{ option.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <label for="sauce" class="form-label">Sauce</label>
+                            <select name="sauce" id="sauce" class="form-select">
+                                {% for option in sauce %}
+                                    <option value="{{ option.id }}">{{ option.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <label for="cheese" class="form-label">Cheese Option</label>
+                            <select name="cheese" id="cheese" class="form-select">
+                                {% for option in cheese %}
+                                    <option value="{{ option.id }}">{{ option.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <label for="toppings" class="form-label">Toppings</label>
+                        {% for topping in toppings %}
+                        <div class="col-4">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="toppings" id="{{ topping.name }}" value="{{ topping.id }}">
+                                <label class="form-check-label" for="{{ topping.name }}">{{ topping.name }} <small>+£{{ topping.price }}</small></label>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Details</th>
+                                        <th class="text-end">Additional Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Size:</td>
+                                        <td class="pizza-size">S</td>
+                                        <td class="text-end">£6.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dough:</td>
+                                        <td class="pizza-dough">Classic</td>
+                                        <td class="text-end">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sauce:</td>
+                                        <td class="pizza-sauce">Tomato</td>
+                                        <td class="text-end">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cheese:</td>
+                                        <td class="pizza-cheese">Mozzarella</td>
+                                        <td class="text-end">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Additional Toppings:</td>
+                                        <td class="pizza-toppings">0</td>
+                                        <td class="text-end">£0</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-end"><strong>Total:</strong></td>
+                                        <td class="text-end" id="total-cost"><strong>£</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Add to Order</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block postloadjs %}
+    <script type="text/javascript" src="{% static 'products/js/create_a_pizza.js' %}"></script>
+{% endblock %}
