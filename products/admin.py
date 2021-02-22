@@ -12,6 +12,8 @@ class ProductAdmin(admin.ModelAdmin):
         'image',
     )
 
+    list_filter = ('is_original', )
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (

@@ -96,7 +96,6 @@ class OrderLineItem(models.Model):
                 topping_price = len(self.product.toppings.all()) * 0.5
                 total_price = price + Decimal(topping_price)
                 self.lineitem_total = total_price * self.quantity
-                print(topping_price)
 
         else:
             price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category).values('price')
