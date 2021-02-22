@@ -14,7 +14,7 @@ $('#create-pizza-form select').change(function(){
     let count = $('.form-check-inline :checked').length;
     cost = (count * 0.50).toFixed(2)
     let totalCost = (parseFloat(baseCost) + parseFloat(cost)).toFixed(2)
-    $('#total-cost').html('£' + totalCost)
+    $('#total-cost').html(`<strong>£${totalCost}</strong>`)
 })
 
 // Adds the toppings totals for the multiselect options to the table summary
@@ -27,7 +27,7 @@ $('.form-check-inline').change(function(){
     $('.pizza-toppings').next().html('£' + cost);
     baseCost = parseFloat($('.pizza-size').next().html().slice(1))
     let totalCost = (baseCost + parseFloat(cost)).toFixed(2)
-    $('#total-cost').html('£' + totalCost)
+    $('#total-cost').html(`<strong>£${totalCost}</strong>`)
 })
 
 
