@@ -41,15 +41,27 @@ def bag_contents(request):
         else:
             product = get_object_or_404(Product, pk=item_id)
             pizza = get_object_or_404(Category, name='Pizza')
+            custom = get_object_or_404(Category, name='Custom')
             for dough in item_data.items():
                 for size in dough[1]:
                     if dough[1][size] > 0:
-                        if product.is_premium:
-                            price_object = get_object_or_404(Price, is_premium=True, category=pizza.id, size=size)
-                            price = price_object.price
+                        if not product.is_original:
+                            if product.is_premium:
+                                price_object = get_object_or_404(Price, is_premium=True, category=custom, size=size)
+                                toppings = product.toppings.all()
+                                topping_count = 0
+                                for topping in toppings:
+                                    topping_count += 1
+                                topping_price = Decimal(topping_count * 0.5)
+                                price = price_object.price + topping_price
                         else:
-                            price_object = get_object_or_404(Price, is_premium=False, category=pizza.id, size=size)
-                            price = price_object.price
+                            if product.is_premium:
+                                price_object = get_object_or_404(Price, is_premium=True, category=pizza.id, size=size)
+                                price = price_object.price
+                            else:
+                                price_object = get_object_or_404(Price, is_premium=False, category=pizza.id, size=size)
+                                price = price_object.price
+
                         quantity = dough[1][size]
                         total += quantity * price
                         product_count += quantity
