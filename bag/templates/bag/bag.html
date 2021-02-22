@@ -91,7 +91,7 @@
                                                     <div class="modal-body">
                                                         <form action="{% url 'amend_bag' item.product.id %}" method="POST" class="update-form">
                                                             {% csrf_token %}
-                                                            {% if item.size %}
+                                                            {% if item.size and item.product.is_original %}
                                                                 <input type="hidden" name="dough" id="id_dough" value="{{ item.dough }}">
                                                                 <input type="hidden" name="original_size" id="id_original_size" value="{{ item.size }}">
                                                                 <div>
