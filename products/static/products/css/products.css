@@ -7,13 +7,21 @@
     max-height: 100px;
 }
 
-.decrement-qty,
+.decrement-qty {
+    background-color: #CD212A;
+    color: #fff;
+}
+
+.decrement-qty:hover {
+    background-color: #e35158;
+    color: white;
+}
+
 .increment-qty {
     background-color: #2b2d42;
     color: white;
 }
 
-.decrement-qty:hover,
 .increment-qty:hover {
     background-color: #52567e;
     color: white;
