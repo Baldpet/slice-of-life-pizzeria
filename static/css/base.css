@@ -244,6 +244,8 @@ footer {
 }
 
 .horizontal-rule {
+    height: 1px;
+    border: 1px solid black;
     opacity: 1;
     margin-top: 0;
     margin-bottom: 0;
