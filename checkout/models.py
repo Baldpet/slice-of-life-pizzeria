@@ -78,13 +78,25 @@ class OrderLineItem(models.Model):
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        product_category = self.product.category.name
+        if self.product.is_original:
+            product_category = self.product.category.name
+        else:
+            product_category = 'Custom'
         product_premium = self.product.is_premium
         if self.product.category.has_sizes:
-            price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category, size=self.product_size).values('price')
-            for e in price_object:
-                price = e['price']
-            self.lineitem_total = price * self.quantity
+            if self.product.is_original:
+                price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category, size=self.product_size).values('price')
+                for e in price_object:
+                    price = e['price']
+                self.lineitem_total = price * self.quantity
+            else:
+                price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category, size=self.product_size).values('price')
+                for e in price_object:
+                    price = e['price']
+                topping_price = len(self.product.toppings.all()) * 0.5
+                total_price = price + Decimal(topping_price)
+                self.lineitem_total = total_price * self.quantity
+
         else:
             price_object = Price.objects.filter(is_premium=product_premium, category__name=product_category).values('price')
             for e in price_object:

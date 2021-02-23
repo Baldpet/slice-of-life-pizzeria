@@ -16,10 +16,40 @@
         {% include 'includes/horizontal-rule.html' %}
         <div class="row align-items-center">
             {% for product in products %}
-                {% if forloop.counter0|divisibleby:2 %}
+                {% if forloop.counter0 == 0 %}
                     <div class="row pizza-row g-1 g-sm-3">
-                {% elif forloop.counter0 == 0 %}
+                        <div class="col-12 col-lg-6 mb-3">
+                            <div class="card pizza-card">
+                                <div class="card-header text-center">
+                                    <h5 class="card-title">Create Your Own</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-4 ">
+                                            <img class="img-fluid" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333292/no-image_y2craj.jpg" alt="{{ product.name }} photo">
+                                        </div>
+                                        <div class="col-6 col-sm-8">
+                                            <div class="col-12">
+                                                <h6>Can't find a Pizza that you really fancy?</h6>
+                                                <p>Then take avantage of our create your own Pizza service.</p>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <div class="col">
+                                            <p>Pick your Size, Dough, Sauce, Cheese and Toppings starting from as little as £6.00 and get that Pizza you're craving!</p>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="card-footer-area"></div>
+                                <div class="card-footer card-footer-position text-center">
+                                    <a href="{% url 'create_a_pizza' %}" class="btn btn-primary">Create your Pizza</a>
+                                </div>    
+                            </div>
+                        </div>
+                {% elif forloop.counter|divisibleby:2 %}
                     <div class="row pizza-row g-1 g-sm-3">
+                            
                 {% endif%}
                     <div class="col-12 col-lg-6 mb-3">
                         <div class="card pizza-card">
@@ -40,11 +70,15 @@
                                         <div class="col-6 col-sm-8">
                                             <div class="col-12">
                                                 <label for="id_dough"><strong>Dough:</strong></label>
-                                                {{ form }}
+                                                <select class="form-select" name="dough" id="id_dough">
+                                                    {% for dough_choice in dough %}
+                                                        <option value="{{ dough_choice.name}}">{{ dough_choice.name }}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                             <div class="col-12 display-inline">
                                                 <label for="id_product_size"><strong>Size:</strong></label>
-                                                <select class="form-control pizza-mini-form" name="product_size" id="id_product_size">
+                                                <select class="form-select pizza-mini-form" name="product_size" id="id_product_size">
                                                     {% if product.is_premium %}
                                                         {% for price in price_premium %}
                                                         <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>
@@ -98,8 +132,8 @@
                                         <div class="col">
                                             <p class="card-text">{{ product.description }}</p>
                                             <p class="card-text"><small class="text-muted">Toppings   </small>
-                                                <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
-                                                data-bs-content="{{ product.cheese| capfirst }}, {{ product.sauce| capfirst }}{% if product.chicken %}, Chicken{% endif %}{% if product.pepperoni %}, Pepperoni{% endif %}{% if product.bacon %}, Bacon{% endif %}{% if product.sausage %}, Sausage{% endif %}{% if product.ham %}, Ham{% endif %}{% if product.meatball %}, Meatball{% endif %}{% if product.chorizo %}, Chorizo{% endif %}{% if product.mushroom %}, Mushroom{% endif %}{% if product.pepper %}, Pepper{% endif %}{% if product.onion %}, Onion{% endif %}{% if product.chilli %}, Chilli{% endif %}{% if product.pineapple %}, Pineapple{% endif %}{% if product.key_lime %}, Key Lime{% endif %}.">
+                                                <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Toppings" 
+                                                data-bs-content="{{ product.sauce }}, {{ product.cheese }}{% if not product.toppings.all %}{% else %}, {% for topping in product.toppings.all %}{{ topping.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}{% endif %}.">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
                                             </p>
@@ -116,7 +150,9 @@
                     </div> 
                 {% if forloop.last %}
                 </div>
-                {% elif forloop.counter|divisibleby:2 %}
+                {% elif forloop.counter0 == 0 %}
+                </div>
+                {% elif forloop.counter0|divisibleby:2 %}
                 </div>
                 {% endif %}          
             {% endfor %}

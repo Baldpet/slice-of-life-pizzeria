@@ -98,7 +98,7 @@ def add_pizza_to_bag(request, item_id):
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
     size = request.POST.get('product_size')
-    dough_base = request.POST.get('dough')
+    dough_base = request.POST.get('dough').lower()
     bag = request.session.get('bag', {})
 
     try:

@@ -166,8 +166,8 @@
                                     <div class="col-8">
                                         <p class="card-text">{{ pizza.description }}</p>
                                         <p class="card-text"><small class="text-muted">Toppings   </small>
-                                            <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Ingredients" 
-                                            data-bs-content="{{ pizza.cheese| capfirst }}, {{ pizza.sauce| capfirst }}{% if pizza.chicken %}, Chicken{% endif %}{% if pizza.pepperoni %}, Pepperoni{% endif %}{% if pizza.bacon %}, Bacon{% endif %}{% if pizza.sausage %}, Sausage{% endif %}{% if pizza.ham %}, Ham{% endif %}{% if pizza.meatball %}, Meatball{% endif %}{% if pizza.chorizo %}, Chorizo{% endif %}{% if pizza.mushroom %}, Mushroom{% endif %}{% if pizza.pepper %}, Pepper{% endif %}{% if pizza.onion %}, Onion{% endif %}{% if pizza.chilli %}, Chilli{% endif %}{% if pizza.pineapple %}, Pineapple{% endif %}{% if pizza.key_lime %}, Key Lime{% endif %}.">
+                                            <a tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Toppings" 
+                                            data-bs-content="{{ pizza.sauce }}, {{ pizza.cheese }}{% if not pizza.toppings.all %}{% else %}, {% for topping in pizza.toppings.all %}{{ topping.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}{% endif %}.">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
                                         </p>
