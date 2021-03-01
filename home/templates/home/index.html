@@ -15,14 +15,3 @@
     </div>
 </main>
 {% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-        let height = $("#order-div").css("height");
-        let width = $("#order-div").css("width");
-        $("#order-div-overlay").css("height", height);
-        $("#order-div-overlay").css("width", width);
-
-    </script>
-{% endblock %}
