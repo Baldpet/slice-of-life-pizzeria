@@ -23,7 +23,7 @@
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' %}" class="dropdown-item">Your Account</a></li>
                     {% if request.user.is_staff %}
-                    <li><a href="#" class="dropdown-item ">Order Tracker</a></li>
+                    <li><a href="{% url 'ordertracker' %}" class="dropdown-item ">Order Tracker</a></li>
                     {% endif %}
                     {% if request.user.is_superuser %}
                     <li><a href="{% url 'product_management' %}" class="dropdown-item ">Product Management</a></li>

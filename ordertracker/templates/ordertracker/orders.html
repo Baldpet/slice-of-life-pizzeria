@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/products.css'%}">
+{% endblock %}
+
+{% block content %}
+    <div class="overlay-white"></div>
+    <main class="container content-container allauth-container">
+        <div class="row m-3">
+            <div class="col text-center mt-4">
+                <h1>Current Orders</h1>
+            </div>
+        </div>
+        {% include 'includes/horizontal-rule.html' %}
+        
+    </main>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }} 
+{% endblock %}
