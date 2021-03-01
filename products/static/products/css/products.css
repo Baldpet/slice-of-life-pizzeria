@@ -1,6 +1,8 @@
 /*   Product cards    */
 .pizza-card {
     height: 100%;
+    border: 3px solid #2b2d42;
+    border-radius: 6px;
 }
 
 .pizza-image {

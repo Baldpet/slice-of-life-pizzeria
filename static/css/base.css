@@ -177,7 +177,8 @@ body {
 /*      Card styling    */
 
 .card {
-    border: 0;
+    border: 3px solid #2b2d42;
+    border-radius: 6px;
 }
 
 .card-header {
