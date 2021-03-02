@@ -16,3 +16,26 @@ $(document).ready(function(){
 
 setTimeout("location.reload();", 60000)
 
+// Update the order status and refresh the page
+
+$('.btn-stage').click(function(){
+    let buttonId = $(this).attr('id')
+    let arrayButtonId = buttonId.split("-")
+    let status = arrayButtonId[0]
+    let orderId = arrayButtonId[1]
+    let request = new Request(
+        `order_status?status=${status}&orderId=${orderId}`,
+        {headers: {'X-CSRFToken': csrftoken}}
+    );
+    
+    fetch(request, {
+            method: 'POST',
+            mode: 'same-origin'  // Do not send CSRF token to another domain.
+        }).then(function(response) {
+            location.reload()
+        });
+    
+});
+
+
+

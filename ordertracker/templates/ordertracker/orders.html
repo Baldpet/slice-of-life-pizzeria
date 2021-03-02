@@ -36,9 +36,23 @@
                             <td></td>
                             <td class="time" data-order="{{ order }}" data-time="{{ order.date | calc_order_time }}">{{ order.date | calc_order_time }} Mins</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary">Preparing</button>
-                                <button class="btn btn-sm btn-secondary">Cooking</button>
-                                <button class="btn btn-sm btn-secondary">Complete</button>
+                                {% if order.order_status == "PR" %}
+                                    <button id="PR-{{ order.id }}" class="btn btn-sm btn-primary btn-stage">Preparing</button>
+                                    <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Cooking</button>
+                                    <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Complete</button>
+                                {% elif order.order_status == "C" %}
+                                    <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Preparing</button>
+                                    <button id="C-{{ order.id }}" class="btn btn-sm btn-primary btn-stage">Cooking</button>
+                                    <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Complete</button>
+                                {% elif order.order_status == "OD" %}
+                                    <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Preparing</button>
+                                    <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Cooking</button>
+                                    <button id="OD-{{ order.id }}" class="btn btn-sm btn-primary btn-stage">Complete</button>
+                                {% else %}
+                                    <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Preparing</button>
+                                    <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Cooking</button>
+                                    <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage">Complete</button>
+                                {% endif %}
                             </td>
                         </tr>
                             {% for lineitem in order.lineitems.all %}
