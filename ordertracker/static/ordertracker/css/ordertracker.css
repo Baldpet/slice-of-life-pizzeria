@@ -1,0 +1,15 @@
+.border-div {
+    border-bottom: double;
+}
+
+table p {
+    margin: 0;
+}
+
+.background-orange {
+    background-color: rgba(235,149,50,.5);
+}
+
+.background-red {
+    background-color: rgba(255,0,0,0.4);
+}

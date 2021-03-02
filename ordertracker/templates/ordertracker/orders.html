@@ -1,23 +1,92 @@
 {% extends "base.html" %}
 {% load static %}
+{% load time_of_order %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'products/css/products.css'%}">
+    <link rel="stylesheet" href="{% static 'ordertracker/css/ordertracker.css'%}">
 {% endblock %}
 
 {% block content %}
     <div class="overlay-white"></div>
-    <main class="container content-container allauth-container">
+    <main class="container-fluid content-container allauth-container">
         <div class="row m-3">
             <div class="col text-center mt-4">
                 <h1>Current Orders</h1>
             </div>
         </div>
         {% include 'includes/horizontal-rule.html' %}
-        
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order Info</th>
+                            <th class="w-25">Qty</th>
+                            <th>Time Since Order</th>
+                            <th class="w-25">Stage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr class="{{ order }}">
+                            <td>
+                                <h6>{{ order.full_name }} - {{ order }}</h6>
+                                
+                            </td>
+                            <td></td>
+                            <td class="time" data-order="{{ order }}" data-time="{{ order.date | calc_order_time }}">{{ order.date | calc_order_time }} Mins</td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary">Preparing</button>
+                                <button class="btn btn-sm btn-secondary">Cooking</button>
+                                <button class="btn btn-sm btn-secondary">Complete</button>
+                            </td>
+                        </tr>
+                            {% for lineitem in order.lineitems.all %}
+                                <tr class="{{ order }} {% if forloop.last %}border-div{% endif %}" >
+                                    <td>
+                                        <p class="mb-1"><strong>Item: </strong>{{ lineitem.product.name }}{% if lineitem.product.category.name == "Pizza" %} - {{ lineitem.product_size }}{% endif %}</p>
+                                        {% if lineitem.product.category.name == "Pizza" %}
+                                            <p class="small">
+                                                <strong>Dough: </strong>
+                                                    {{ lineitem.product.dough.name }}
+                                            </p>
+                                            <p class="small">
+                                                <strong>Sauce: </strong>
+                                                    {{ lineitem.product.sauce.name }}
+                                            </p>
+                                            <p class="small">
+                                                <strong>Cheese: </strong>
+                                                    {{ lineitem.product.cheese.name }}
+                                            </p>
+                                            <p class="small">
+                                                <strong>Toppings: </strong>
+                                                {% for topping in lineitem.product.toppings.all %}
+                                                    {{ topping.name }}{% if forloop.last %}.{% else %}, {% endif %}
+                                                {% endfor %}
+                                            </p>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <p>{{ lineitem.quantity }}</p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                </tr>
+                            {% endfor %}
+                            
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
     </main>
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }} 
+    {{ block.super }}
+    <script src="{% static 'ordertracker/js/ordertracker.js' %}"></script>
 {% endblock %}
