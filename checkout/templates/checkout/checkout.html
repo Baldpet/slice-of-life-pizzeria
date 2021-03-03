@@ -40,7 +40,7 @@
                                     <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
                                 </div>
                                 <div class="col-3 progress-bar-border-right">
-                                    <a class="progress-link progress-active" href=""><h4>Account</h4></a>
+                                    <a class="progress-link progress-active" href="{% url 'account' %}"><h4>Account</h4></a>
                                 </div>
                                 <div class="col-3 progress-bar-border-right">
                                     <a class="progress-link progress-active" href=""><h4>Delivery</h4></a>
@@ -61,7 +61,7 @@
         </div>
         <!--  Payment Progress Bar  -->
         <div class="row progress-row personal-info d-none">
-            <div class="col-10 col-sm-8 col-md-6 col-xl-4 offset-1 offset-sm-2 offset-md-3 offset-xl-4">
+            <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
                 <div class="progress" style="height: 50px;">
                     <div class="progress-bar progress-background-transparent" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                         {% if request.user.is_authenticated %}
@@ -82,7 +82,7 @@
                                     <a class="progress-link progress-active" href="{% url 'view_bag' %}"><h4>Order</h4></a>
                                 </div>
                                 <div class="col-3 progress-bar-border-right">
-                                    <a class="progress-link progress-active" href=""><h4>Delivery</h4></a>
+                                    <a class="progress-link progress-active" href="{% url 'account' %}"><h4>Account</h4></a>
                                 </div>
                                 <div class="col-3 progress-bar-border-right">
                                     <a class="progress-link progress-active" href=""><h4>Delivery</h4></a>
@@ -117,16 +117,11 @@
                                     {% if user.is_authenticated %}
                                         <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
                                         <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                                    {% else %}
-                                        <label class="form-check-label" for="id-save-info">
-                                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                                        </label>
                                     {% endif %}
                                 </div>
                             </fieldset>
                         {% else %}
-                            <fieldset class="rounded px-3 mt-3 mb-5" >
+                            <fieldset class="rounded px-3 mt-3 mb-5 text-center" >
                                 <legend class="fieldset-label text-center text-black px-2 w-auto">Delivery</legend> 
                                 <input type="hidden" name="street_address1" value="collection">
                                 <input type="hidden" name="street_address2" value="collection">

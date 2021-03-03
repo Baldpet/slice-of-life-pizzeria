@@ -184,6 +184,14 @@ def pizza_tracker(request, order_number):
     return render(request, template, context)
 
 
+def account(request):
+    template = 'checkout/account.html'
+    context = {
+
+    }
+    return render(request, template, context)
+
+
 def update_delivery_or_collection(request):
     if request.method == 'POST':
         delivery_or_collection = request.GET.get('delivery')
