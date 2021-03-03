@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.http import JsonResponse
 
 from checkout.models import Order, OrderLineItem
 
@@ -21,3 +22,10 @@ def order_status(request):
         order.order_status = status
         order.save()
         return HttpResponse(status=200)
+    elif request.method == 'GET':
+        order_id = request.GET.get('orderId')
+        order = get_object_or_404(Order, id=order_id)
+        data = {
+            'status': order.order_status
+        }
+        return JsonResponse(data)
