@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% load static %}
+{% load time_of_order %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'ordertracker/css/ordertracker.css'%}">
+{% endblock %}
+
+{% block content %}
+    <div class="overlay-white"></div>
+    <main class="container-fluid content-container allauth-container">
+        <div class="row m-3">
+            <div class="col text-center mt-4">
+                <h1>Current Orders</h1>
+            </div>
+        </div>
+        {% include 'includes/horizontal-rule.html' %}
+        <!--        Desktop/Tablet View                    -->
+        <div class="row d-none d-sm-block">
+            <div class="col">
+                {% if orders %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order Info</th>
+                                <th class="w-25">Qty</th>
+                                <th>Time Since Order</th>
+                                <th class="w-25">Stage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for order in orders %}
+                            <tr class="{{ order }}">
+                                <td>
+                                    <h6>{{ order.full_name }} - {{ order }}</h6>
+                                    
+                                </td>
+                                <td></td>
+                                <td class="time" data-order="{{ order }}" data-time="{{ order.date | calc_order_time }}">{{ order.date | calc_order_time }} Mins</td>
+                                <td>
+                                    {% if order.order_status == "PR" %}
+                                        <button id="PR-{{ order.id }}" class="btn btn-sm btn-primary btn-stage mb-1">Preparing</button>
+                                        <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Cooking</button>
+                                        <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Delivery</button>
+                                        <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                    {% elif order.order_status == "C" %}
+                                        <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Preparing</button>
+                                        <button id="C-{{ order.id }}" class="btn btn-sm btn-primary btn-stage mb-1">Cooking</button>
+                                        <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Delivery</button>
+                                        <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                    {% elif order.order_status == "OD" %}
+                                        <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Preparing</button>
+                                        <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Cooking</button>
+                                        <button id="OD-{{ order.id }}" class="btn btn-sm btn-primary btn-stage mb-1">Delivery</button>
+                                        <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                    {% else %}
+                                        <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Preparing</button>
+                                        <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Cooking</button>
+                                        <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Delivery</button>
+                                        <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                                {% for lineitem in order.lineitems.all %}
+                                    <tr class="{{ order }} {% if forloop.last %}border-div{% endif %}" >
+                                        <td>
+                                            <p class="mb-1"><strong>Item: </strong>{{ lineitem.product.name }}{% if lineitem.product.category.name == "Pizza" %} - {{ lineitem.product_size }}{% endif %}</p>
+                                            {% if lineitem.product.category.name == "Pizza" %}
+                                                <p class="small">
+                                                    <strong>Dough: </strong>
+                                                        {{ lineitem.product.dough.name }}
+                                                </p>
+                                                <p class="small">
+                                                    <strong>Sauce: </strong>
+                                                        {{ lineitem.product.sauce.name }}
+                                                </p>
+                                                <p class="small">
+                                                    <strong>Cheese: </strong>
+                                                        {{ lineitem.product.cheese.name }}
+                                                </p>
+                                                <p class="small">
+                                                    <strong>Toppings: </strong>
+                                                    {% for topping in lineitem.product.toppings.all %}
+                                                        {{ topping.name }}{% if forloop.last %}.{% else %}, {% endif %}
+                                                    {% endfor %}
+                                                </p>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <p>{{ lineitem.quantity }}</p>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                {% endfor %}
+                                
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="row">
+                        <div class="col text-center">
+                            <p>There are currently no orders in progress.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+        </div>
+        <!--        Mobile View                    -->
+        <div class="row d-sm-none">
+            <div class="col">
+                {% if orders %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order Info</th>
+                                <th>Time/Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr class="{{ order }}">
+                                <td>
+                                    <h6>{{ order.full_name }} - <span><a type="button" class="" data-bs-toggle="popover" title="Order Number" data-bs-content="{{ order }}"><i class="fas fa-info-circle"></i></a></span></h6>
+                                    
+                                </td>
+                                <td class="time" data-order="{{ order }}" data-time="{{ order.date | calc_order_time }}">{{ order.date | calc_order_time }} Mins</td>
+                            </tr>
+                                {% for lineitem in order.lineitems.all %}
+                                    <tr class="{{ order }}" >
+                                        <td>
+                                            <p class="mb-1"><strong>Item: </strong>{{ lineitem.product.name }}{% if lineitem.product.category.name == "Pizza" %} - {{ lineitem.product_size }}{% endif %}</p>
+                                            {% if lineitem.product.category.name == "Pizza" %}
+                                                <p class="small">
+                                                    <strong>Dough: </strong>
+                                                        {{ lineitem.product.dough.name }}
+                                                </p>
+                                                <p class="small">
+                                                    <strong>Sauce: </strong>
+                                                        {{ lineitem.product.sauce.name }}
+                                                </p>
+                                                <p class="small">
+                                                    <strong>Cheese: </strong>
+                                                        {{ lineitem.product.cheese.name }}
+                                                </p>
+                                                <p class="small">
+                                                    <strong>Toppings: </strong>
+                                                    {% for topping in lineitem.product.toppings.all %}
+                                                        {{ topping.name }}{% if forloop.last %}.{% else %}, {% endif %}
+                                                    {% endfor %}
+                                                </p>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <p>{{ lineitem.quantity }}</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr class="{{ order }} border-div">
+                                    <td colspan="2" class="text-center">
+                                        {% if order.order_status == "PR" %}
+                                            <button id="PR-{{ order.id }}" class="btn btn-sm btn-primary btn-stage mb-1">Preparing</button>
+                                            <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Cooking</button>
+                                            <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Delivery</button>
+                                            <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                        {% elif order.order_status == "C" %}
+                                            <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Preparing</button>
+                                            <button id="C-{{ order.id }}" class="btn btn-sm btn-primary btn-stage mb-1">Cooking</button>
+                                            <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Delivery</button>
+                                            <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                        {% elif order.order_status == "OD" %}
+                                            <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Preparing</button>
+                                            <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Cooking</button>
+                                            <button id="OD-{{ order.id }}" class="btn btn-sm btn-primary btn-stage mb-1">Delivery</button>
+                                            <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                        {% else %}
+                                            <button id="PR-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Preparing</button>
+                                            <button id="C-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Cooking</button>
+                                            <button id="OD-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Delivery</button>
+                                            <button id="D-{{ order.id }}" class="btn btn-sm btn-secondary btn-stage mb-1">Complete</button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="row">
+                        <div class="col text-center">
+                            <p>There are currently no orders in progress.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'ordertracker/js/ordertracker.js' %}"></script>
+{% endblock %}

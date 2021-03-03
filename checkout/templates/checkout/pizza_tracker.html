@@ -10,7 +10,7 @@
     <main class="container content-container allauth-container">
         <div class="row m-3">
             <div class="col text-center mt-4">
-                <h1>Pizza Tracker</h1>
+                <h1 id="title" data-orderid="{{ order.id }}">Pizza Tracker</h1>
             </div>
             {% include 'includes/horizontal-rule-white.html' %}
         </div>
@@ -21,7 +21,7 @@
                     <div class="tracker-div">
                         <img class="tracker-image" src="https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333300/preparing-pizza_blun3p.jpg" alt="preparing pizza">
                         <div class="inside">
-                            <div class="frame" id="preparing-frame">
+                            <div class="frame d-none" id="preparing-frame">
                                 <div class="clr"></div>
                             </div>
                         </div>
@@ -51,8 +51,19 @@
                 </div>
             </div>
         {% else %}
-            <p class="">Order Complete</p>
+            <div class="row">
+                <div class="col text-center">
+                    <p class="">Order complete, we hope you enjoyed your little Slice of Life.</p>
+                    <p>See you again soon!</p>
+                </div>
+            </div>
+            
         {% endif %}
         
     </main>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'checkout/js/pizzatracker.js' %}"></script>
 {% endblock %}
