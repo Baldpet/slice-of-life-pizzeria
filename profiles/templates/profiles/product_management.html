@@ -6,20 +6,120 @@
 
 {% block content %}
     <div class="overlay-white"></div>
-    <main class="container content-container allauth-container">
+    <main class="container-fluid content-container allauth-container">
         <div class="row m-3">
             <div class="col text-center">
                 <h1 class="mt-4">Product Management</h1>
             </div>
             {% include 'includes/horizontal-rule-white.html' %}
         </div>
-        <div class="row">
-            <div class="col-6">
-                <a href="{% url 'add_offer' %}" class="btn btn-primary">Add an Offer</a> 
+        <div class="row text-center d-none d-md-flex">
+            <div class="col-6 ">
+                <h4> Offers </h4>
+                <a href="{% url 'add_offer' %}" class="btn btn-primary m-2">Add an Offer</a> 
             </div>
-            <div class="col-6">
-                <a href="{% url 'add_product' %}" class="btn btn-primary">Add a Product</a> 
+            <div class="col-6 text-center">
+                <h4> Products </h4>
+                <a href="{% url 'add_product' %}" class="btn btn-primary m-2">Add a Product</a> 
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="text-center d-md-none">
+                    <h4> Offers </h4>
+                    <a href="{% url 'add_offer' %}" class="btn btn-primary m-2">Add an Offer</a> 
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="w-50"></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for offer in offers %}
+                            <tr class="h-100 w-100">
+                                <td class="">
+                                    {{ offer.name }}
+                                    <div class="row">
+                                        <div class="col-4">
+                                            {% if offer.item1.name == 'Pizza' %}
+                                                <i class="fas fa-pizza-slice"></i>
+                                            {% elif offer.item1.name == 'Side' %}
+                                                <i class="fas fa-drumstick-bite"></i>
+                                            {% else %}
+                                                <i class="fas fa-wine-bottle"></i>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-4">
+                                            {% if offer.item2 is not None %}
+                                                {% if offer.item2.name == 'Pizza' %}
+                                                    <i class="fas fa-pizza-slice"></i>
+                                                {% elif offer.item2.name == 'Side' %}
+                                                    <i class="fas fa-drumstick-bite"></i>
+                                                {% else %}
+                                                    <i class="fas fa-wine-bottle"></i>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-4">
+                                            {% if offer.item3 is not None %}
+                                                {% if offer.item3.name == 'Pizza' %}
+                                                    <i class="fas fa-pizza-slice"></i>
+                                                {% elif offer.item3.name == 'Side' %}
+                                                    <i class="fas fa-drumstick-bite"></i>
+                                                {% else %}
+                                                    <i class="fas fa-wine-bottle"></i>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="h-100 text-end">
+                                    <a href="{% url 'delete_offer' offer.id %}" class="btn btn-danger mb-1">Delete</a>
+                                    <a href="{% url 'amend_offer' offer.id %}" class="btn btn-secondary mb-1">Amend</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="text-center d-md-none">
+                    <h4> Products </h4>
+                    <a href="{% url 'add_product' %}" class="btn btn-primary m-2">Add a Product</a> 
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr >
+                                <td>
+                                   {% if product.category.name == 'Pizza' %}
+                                        <i class="fas fa-pizza-slice"></i>
+                                    {% elif product.category.name == 'Side' %}
+                                        <i class="fas fa-drumstick-bite"></i>
+                                    {% else %}
+                                        <i class="fas fa-wine-bottle"></i>
+                                    {% endif %} 
+                                </td>
+                                <td class="">{{ product.name }}</td>
+                                <td class="text-end">
+                                    <a href="{% url 'delete_product' product.id %}" class="btn btn-danger mb-1">Delete</a>
+                                    <a href="{% url 'amend_product' product.id %}" class="btn btn-secondary mb-1">Amend</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </main>
 {% endblock %}
