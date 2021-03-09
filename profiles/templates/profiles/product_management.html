@@ -99,22 +99,24 @@
                     </thead>
                     <tbody>
                         {% for product in products %}
-                            <tr >
-                                <td>
-                                   {% if product.category.name == 'Pizza' %}
-                                        <i class="fas fa-pizza-slice"></i>
-                                    {% elif product.category.name == 'Side' %}
-                                        <i class="fas fa-drumstick-bite"></i>
-                                    {% else %}
-                                        <i class="fas fa-wine-bottle"></i>
-                                    {% endif %} 
-                                </td>
-                                <td class="">{{ product.name }}</td>
-                                <td class="text-end">
-                                    <a href="{% url 'delete_product' product.id %}" class="btn btn-danger mb-1">Delete</a>
-                                    <a href="{% url 'amend_product' product.id %}" class="btn btn-secondary mb-1">Amend</a>
-                                </td>
-                            </tr>
+                            {% if not product.category == 'Custom' %}
+                                <tr >
+                                    <td>
+                                    {% if product.category.name == 'Pizza' %}
+                                            <i class="fas fa-pizza-slice"></i>
+                                        {% elif product.category.name == 'Side' %}
+                                            <i class="fas fa-drumstick-bite"></i>
+                                        {% else %}
+                                            <i class="fas fa-wine-bottle"></i>
+                                        {% endif %} 
+                                    </td>
+                                    <td class="">{{ product.name }}</td>
+                                    <td class="text-end">
+                                        <a href="{% url 'delete_product' product.id %}" class="btn btn-danger mb-1">Delete</a>
+                                        <a href="{% url 'amend_product' product.id %}" class="btn btn-secondary mb-1">Amend</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>

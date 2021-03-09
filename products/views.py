@@ -71,10 +71,8 @@ def add_product(request):
             messages.success(request, 'Successfully added the product')
             return redirect(reverse('product_management'))
         else:
-            print('error')
             messages.error(request, 'Failed to add the offer.')
     else:
-        print('test')
         form = ProductForm
 
     pizza_price = Price.objects.filter(category__name='Pizza')
