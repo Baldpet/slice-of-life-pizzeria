@@ -5,7 +5,7 @@ from .models import UserProfile
 
 from offers.models import Offer
 from offers.forms import OfferForm
-from products.models import Product
+from products.models import Product, Price, Toppings
 from products.forms import ProductForm
 
 # Create your views here.
@@ -47,11 +47,30 @@ def product_management(request):
 
 def amend_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    form = ProductForm(instance=product)
+    if request.method == "POST":
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product successfully updated.')
+            return redirect('product_management')
+        else:
+            messages.success(request, 'Product failed to update.')
+    else:
+        form = ProductForm(instance=product)
+
+    pizza_price = Price.objects.filter(category__name='Pizza')
+    side_price = Price.objects.filter(category__name='Side')
+    drink_price = Price.objects.filter(category__name='Drink')
+    toppings = Toppings.objects.all()
 
     template = 'profiles/amend_product.html'
     context = {
         'form': form,
+        'pizza_price': pizza_price,
+        'side_price': side_price,
+        'drink_price': drink_price,
+        'toppings': toppings,
+        'product': product,
     }
 
     return render(request, template, context)

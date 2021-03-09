@@ -3,6 +3,8 @@ from django.contrib import messages
 from .models import Product, Price, Dough, Toppings, Cheese, Sauce
 from .forms import ProductForm
 
+from decimal import Decimal
+
 # Create your views here.
 
 
@@ -47,8 +49,6 @@ def sides_drinks(request):
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
-        form.price = 0
-        form.is_original = True
         if form.is_valid():
             product = form.save()
             messages.success(request, 'Successfully added the product')
@@ -63,7 +63,6 @@ def add_product(request):
     pizza_price = Price.objects.filter(category__name='Pizza')
     side_price = Price.objects.filter(category__name='Side')
     drink_price = Price.objects.filter(category__name='Drink')
-    toppings = Toppings.objects.all()
 
     template = 'products/add_product.html'
     context = {
@@ -71,7 +70,6 @@ def add_product(request):
         'pizza_price': pizza_price,
         'side_price': side_price,
         'drink_price': drink_price,
-        'toppings': toppings
     }
 
     return render(request, template, context)

@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% crispy example_form example_form.helper %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'products/css/products.css'%}">
@@ -18,12 +16,169 @@
         </div>
         <div class="row">
             <div class="col col-lg-8 offset-lg-2">
-                {% crispy form %}
+                <form id="product" method="POST" action="{% url 'add_product' %}">
+                    {% csrf_token %}
+                    <div class="m-3">
+                        {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="m-3">
+                        {{ form.category|as_crispy_field }}
+                    </div>
+                    <div class="row m-3 text-center pizza-only">
+                        <h4>Base Options</h4>
+                    </div>
+                    <div class="m-3 pizza-only">
+                        {{ form.dough|as_crispy_field }}
+                    </div>
+                    <div class="pizza_error_div_dough"></div>
+                    <div class="m-3 pizza-only">
+                        {{ form.sauce|as_crispy_field }}
+                    </div>
+                    <div class="pizza_error_div_sauce"></div>
+                    <div class="m-3 pizza-only">
+                        {{ form.cheese|as_crispy_field }}
+                    </div>
+                    <div class="pizza_error_div_cheese"></div>
+                    <div class="row m-3 text-center pizza-only">
+                        <h4>Toppings</h4>
+                    </div>
+                    <div class="row m-3 pizza-only">
+                        {% for checkbox in form.toppings %}
+                            <div class="col-4">
+                                {{ checkbox }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="m-3">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="row m-3 text-center">
+                        <h4>Price</h4>
+                        {{ form.is_premium|as_crispy_field }}
+                    </div>
+                    <!--       Pizza Price Table          -->
+                    <div class="pizza_price">
+                        <p>Pizza Prices:</p>
+                         <table class="table">
+                            <tr>
+                                <th>Size</th>
+                                <th class="non-premium">Non Premium</th>
+                                <th class="premium">Premium</th>
+                            </tr>
+                            <tr>
+                                <td>Small</td>
+                                {% for pizza in pizza_price %}
+                                    {% if pizza.size == 'S' %}
+                                        {% if not pizza.is_premium %}
+                                            <td class="non-premium">£{{ pizza.price }}</td>
+                                        {% else %}
+                                            <td class="premium">£{{ pizza.price }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Medium</td>
+                                {% for pizza in pizza_price %}
+                                    {% if pizza.size == 'M' %}
+                                        {% if not pizza.is_premium %}
+                                            <td class="non-premium">£{{ pizza.price }}</td>
+                                        {% else %}
+                                            <td class="premium">£{{ pizza.price }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Large</td>
+                                {% for pizza in pizza_price %}
+                                    {% if pizza.size == 'L' %}
+                                        {% if not pizza.is_premium %}
+                                            <td class="non-premium">£{{ pizza.price }}</td>
+                                        {% else %}
+                                            <td class="premium">£{{ pizza.price }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Extra-Large</td>
+                                {% for pizza in pizza_price %}
+                                    {% if pizza.size == 'XL' %}
+                                        {% if not pizza.is_premium %}
+                                            <td class="non-premium">£{{ pizza.price }}</td>
+                                        {% else %}
+                                            <td class="premium">£{{ pizza.price }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <td></td>
+                            </tr>
+                         </table>
+                    </div>
+                    <!--       Side Price Table          -->
+                    <div class="side_price">
+                        <p>Side Prices:</p>
+                        <table class="table">
+                            <tr>
+                                <th class="non-premium">Non Premium</th>
+                                <th class="premium">Premium</th>
+                            </tr>
+                            <tr>
+                                {% for side in side_price %}
+                                    {% if not side.is_premium %}
+                                        <td class="non-premium">£{{ side.price }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for side in side_price %}
+                                    {% if side.is_premium %}
+                                        <td class="premium">£{{ side.price }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+                    <!--       Drink Price Table          -->
+                    <div class="drink_price">
+                        <p>Drink Prices:</p>
+                        <table class="table">
+                            <tr>
+                                <th class="non-premium">Non Premium</th>
+                                <th class="premium">Premium</th>
+                            </tr>
+                            <tr>
+                                {% for drink in drink_price %}
+                                    {% if not drink.is_premium %}
+                                        <td class="non-premium">£{{ drink.price }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for drink in drink_price %}
+                                    {% if drink.is_premium %}
+                                        <td class="premium">£{{ drink.price }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="m3">
+                        {{ form.image|as_crispy_field }}
+                    </div>
+                    <input type="hidden" name="price" value="0">
+                    <div class="m-3 text-center">
+                        <a class="btn btn-secondary" href="{% url 'product_management' %}">Return</a>
+                        <button class="btn btn-primary" type="submit">Add Product</button>
+                    </div>
+                    
+                </form>
             </div>
         </div>
     </main>
 {% endblock %}
 
 {% block postloadjs %}
+    {{ block.super }}
     <script type="text/javascript" src="{% static 'products/js/add_product_script.js' %}"></script>
 {% endblock %}
