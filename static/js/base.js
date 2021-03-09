@@ -1,3 +1,11 @@
+// add the form select for Bootstrap 5 which crispy forms does not handle
+
+$(document).ready(function(){
+    $('select').addClass('form-select')
+})
+
+// Bootstap 5 own code to activate the toast messages
+
 var toastElList = [].slice.call(document.querySelectorAll('.toast'))
 var toastList = toastElList.map(function (toastEl) {
   return new bootstrap.Toast(toastEl)
