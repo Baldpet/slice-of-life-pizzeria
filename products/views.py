@@ -1,15 +1,21 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+
 from .models import Product, Price, Dough, Toppings, Cheese, Sauce
 from .forms import ProductForm
 
-from decimal import Decimal
 
 # Create your views here.
 
 
 def pizza(request):
-    products = Product.objects.all().filter(category__name='Pizza', is_original=True)
+    """
+    Renders the pizza page, showing all avaible pizzas to buy
+    """
+    products = Product.objects.all().filter(category__name='Pizza',
+                                            is_original=True)
     price = Price.objects.filter(is_premium=False, category__name='Pizza')
     price_premium = Price.objects.filter(is_premium=True,
                                          category__name='Pizza')
@@ -25,6 +31,9 @@ def pizza(request):
 
 
 def sides_drinks(request):
+    """
+    Renders the sides/drinks page, showing all avaible pizzas to buy
+    """
     sides = Product.objects.filter(category__name='Side')
     drinks = Product.objects.filter(category__name='Drink')
     price = Price.objects.filter(is_premium=False, category__name='Side')
@@ -46,7 +55,15 @@ def sides_drinks(request):
     return render(request, template, context)
 
 
+@login_required
 def add_product(request):
+    """
+    Adds a product to the database
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -76,6 +93,12 @@ def add_product(request):
 
 
 def create_a_pizza(request):
+    """
+    Allows the user to create their own pizza
+    Creates the pizza in the products model and uses this for checkout
+    The product created has 'is_original' as false
+    so that it does not appear elsewhere in the site.
+    """
     custom_size = Price.objects.filter(category__name='Custom')
     dough = Dough.objects.all()
     cheese = Cheese.objects.all()
@@ -103,7 +126,8 @@ def create_a_pizza(request):
         dough_queryset = Dough.objects.filter(id=dough_id)
         dough = str(dough_queryset[0]).lower()
         if item_id in list(bag.keys()):
-            messages.success(request, f'Added ({product.name} - {dough.capitalize()} - {size}) to your order.')
+            messages.success(request,
+                             f'Added ({product.name} - {dough.capitalize()} - {size}) to your order.')
             bag[item_id][dough][size] += quantity
         else:
             bag[item_id] = {'classic': {'S': 0,
@@ -112,17 +136,18 @@ def create_a_pizza(request):
                                         'XL': 0,
                                         },
                             'thin': {'S': 0,
-                                    'M': 0,
-                                    'L': 0,
-                                    'XL': 0,
-                                    },
+                                     'M': 0,
+                                     'L': 0,
+                                     'XL': 0,
+                                     },
                             'stuffed': {'S': 0,
                                         'M': 0,
                                         'L': 0,
                                         'XL': 0,
                                         },
                             }
-            messages.success(request, f'Added ({product.name} - {dough.capitalize()} - {size}) to your order.')
+            messages.success(request,
+                             f'Added ({product.name} - {dough.capitalize()} - {size}) to your order.')
             bag[item_id][dough][size] = quantity
 
         request.session['bag'] = bag

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import Offer
 from .forms import OfferForm
@@ -11,6 +12,9 @@ from decimal import Decimal
 
 
 def offers(request):
+    """
+    Renders the offers main page
+    """
     offers = Offer.objects.all()
     template = 'offers/offers.html'
     context = {
@@ -20,6 +24,9 @@ def offers(request):
 
 
 def offers_detail(request, offerId):
+    """
+    Renders the offers detail page for the selected offer
+    """
     offer = get_object_or_404(Offer, pk=offerId)
     pizzas = Product.objects.all().filter(category__name='Pizza')
     sides = Product.objects.all().filter(category__name='Side')
@@ -37,7 +44,15 @@ def offers_detail(request, offerId):
     return render(request, template, context)
 
 
+@login_required
 def add_offer(request):
+    """
+    Adds an Offer to the database
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         form = OfferForm(request.POST)
         if form.is_valid():
@@ -57,6 +72,11 @@ def add_offer(request):
 
 
 def add_offer_to_bag(request, offerId):
+    """
+    Adds an offer to the bag
+    Adds each product in the offer seperately and then applies the discount
+    'Discount' and 'Bag' django session variables are updated
+    """
     offer = get_object_or_404(Offer, pk=offerId)
     item1_id = request.POST.get('item1')
     item1_quantity = 1
@@ -171,6 +191,9 @@ def add_offer_to_bag(request, offerId):
 
 
 def add_offer_pizza(bag, item_id, dough_base, size, quantity):
+    """
+    Adds offer pizza product to the session variable 'bag'
+    """
     if item_id in list(bag.keys()):
         bag[item_id][dough_base][size] += quantity
     else:
@@ -196,6 +219,9 @@ def add_offer_pizza(bag, item_id, dough_base, size, quantity):
 
 
 def add_offer_other(bag, item_id, quantity):
+    """
+    Adds offer drinks/sides product to the session variable 'bag'
+    """
     if item_id in list(bag.keys()):
         bag[item_id] += quantity
     else:

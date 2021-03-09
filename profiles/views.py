@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from .models import UserProfile
 
@@ -12,6 +13,9 @@ from products.forms import ProductForm
 
 
 def profile(request):
+    """
+    Renders the user profile page.
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
@@ -20,7 +24,8 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
+            messages.error(request,
+                           'Update failed. Please ensure the form is valid.')
     else:
         form = UserForm(instance=profile)
 
@@ -33,6 +38,9 @@ def profile(request):
 
 
 def product_management(request):
+    """
+    Renders the product management page
+    """
     offers = Offer.objects.all()
     products = Product.objects.all().order_by('category')
 
@@ -45,7 +53,18 @@ def product_management(request):
     return render(request, template, context)
 
 
+@login_required
 def amend_product(request, product_id):
+    """
+    Renders the amend product form with the relevant product info already input
+    On POST of the form it will update the same product and redirect
+    to product management page
+    """
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     if request.method == "POST":
         form = ProductForm(request.POST, instance=product)
@@ -76,7 +95,18 @@ def amend_product(request, product_id):
     return render(request, template, context)
 
 
+@login_required
 def amend_offer(request, offer_id):
+    """
+    Renders the amend offer form with the inputs already updated
+    for the relevant offer
+    On POST will update the offer and save with the new info and
+    redirect to product management
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
     offer = get_object_or_404(Offer, pk=offer_id)
     if request.method == "POST":
         form = OfferForm(request.POST, instance=offer)
@@ -97,14 +127,30 @@ def amend_offer(request, offer_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_product(request, product_id):
+    """
+    Deletes the selected product from the database
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product successfully deleted.')
     return redirect('product_management')
 
 
+@login_required
 def delete_offer(request, offer_id):
+    """
+    Deletes the selected offer from the database
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
     offer = get_object_or_404(Offer, pk=offer_id)
     offer.delete()
     messages.success(request, 'Offer successfully deleted.')
