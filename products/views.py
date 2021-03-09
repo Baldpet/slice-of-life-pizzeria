@@ -45,20 +45,25 @@ def sides_drinks(request):
 
 
 def add_product(request):
-    pizza_price = Price.objects.filter(category__name='Pizza')
-    side_price = Price.objects.filter(category__name='Side')
-    drink_price = Price.objects.filter(category__name='Drink')
-    toppings = Toppings.objects.all()
     if request.method == 'POST':
         form = ProductForm(request.POST)
+        form.price = 0
+        form.is_original = True
         if form.is_valid():
             product = form.save()
             messages.success(request, 'Successfully added the product')
             return redirect(reverse('product_management'))
         else:
+            print('error')
             messages.error(request, 'Failed to add the offer.')
     else:
+        print('test')
         form = ProductForm
+
+    pizza_price = Price.objects.filter(category__name='Pizza')
+    side_price = Price.objects.filter(category__name='Side')
+    drink_price = Price.objects.filter(category__name='Drink')
+    toppings = Toppings.objects.all()
 
     template = 'products/add_product.html'
     context = {

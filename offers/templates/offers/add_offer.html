@@ -17,12 +17,49 @@
         </div>
         <div class="row">
             <div class="col col-lg-8 offset-lg-2">
-                {% crispy form %}
+                <form id="offer" method="POST" action="{% url 'add_offer' %}">
+                    {% csrf_token %}
+                    <fieldset>
+                        <div class="m-3">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="m-3">
+                            {{ form.description|as_crispy_field }}
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 m-3 item-selector">{{ form.item1|as_crispy_field }}</div>
+                            <div class="col-12 col-md-4 m-3 item-size">{{ form.item1_size|as_crispy_field }}</div>  
+                        </div>
+                        <div class="item1-error"></div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 m-3 item-selector">{{ form.item2|as_crispy_field }}</div>
+                            <div class="col-12 col-md-4 m-3 item-size">{{ form.item2_size|as_crispy_field }}</div>  
+                        </div>
+                        <div class="item2-error"></div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 m-3 item-selector">{{ form.item3|as_crispy_field }}</div>
+                            <div class="col-12 col-md-4 m-3 item-size">{{ form.item3_size|as_crispy_field }}</div>  
+                        </div>
+                        <div class="item3-error"></div>
+                        <div class="m-3">
+                            {{ form.deal_price|as_crispy_field }}
+                        </div>
+                        <div class="m-3">
+                            {{ form.image|as_crispy_field }}
+                        </div>
+                    </fieldset>
+                    <div class="text-center mb-3">
+                        <a class="btn btn-secondary" href="{% url 'product_management' %}">Return</a>
+                        <button class="btn btn-primary" type="submit">Add Offer</button>
+                    </div>
+                    
+                </form>
             </div>
         </div>
     </main>
 {% endblock %}
 
 {% block postloadjs %}
+    {{ block.super }}
     <script type="text/javascript" src="{% static 'offers/js/add_offer.js' %}"></script>
 {% endblock %}

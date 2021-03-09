@@ -24,10 +24,12 @@ function activateSize(itemId){
 }
 
 //On submit checks to see that a size has been selected if the item is a Pizza.
+// if not will stop the submission and target the relevant error
 
-var form = $('#add_offer_form')
+let form = $('#offer')
 
 form.submit(function(e){
+    
     $('.item1-error').html("")
     $('.item2-error').html("")
     $('.item3-error').html("")
@@ -36,28 +38,36 @@ form.submit(function(e){
     let category2 = $('#id_item2').val();
     let category3 = $('#id_item3').val();
     let size1 = $('#id_item1_size').val();
+    
     let size2 = $('#id_item2_size').val();
     let size3 = $('#id_item3_size').val();
     let errorDiv1 = $('.item1-error');
     let errorDiv2 = $('.item2-error');
     let errorDiv3 = $('.item3-error');
+    
+    check1 = errorCheck(category1,size1, errorDiv1);
+    check2 = errorCheck( category2, size2, errorDiv2);
+    check3 = errorCheck( category3, size3, errorDiv3);
 
-    errorCheck(size1, category1, errorDiv1);
-    errorCheck(size2, category2, errorDiv2);
-    errorCheck(size3, category3, errorDiv3);
- 
+    if (check1 == false | check2 == false | check3 == false) {
+       e.preventDefault()
+       return
+    }
 })
+
+// function to check for size error on Pizza selections
 
 function errorCheck(category, size, errorDiv) {
     if(category === '1' ){
         if (size == "" | size == "NA"){
-            e.preventDefault();
             let html = `<p class="text-danger">You must select a size for the Pizza Offer Item.</p>`
             $(errorDiv).html(html);
             $('html, body').animate({
                 scrollTop: ($('#id_item3').offset().top) - 250
             }, 500);
-            return
+            return false
         }
-    } 
+    } else {
+        return true
+    }
 }

@@ -59,10 +59,20 @@ def amend_product(request, product_id):
 
 def amend_offer(request, offer_id):
     offer = get_object_or_404(Offer, pk=offer_id)
-    form = OfferForm(instance=offer)
+    if request.method == "POST":
+        form = OfferForm(request.POST, instance=offer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Offer successfully updated.')
+            return redirect('product_management')
+        else:
+            messages.success(request, 'Offer failed to update.')
+    else:
+        form = OfferForm(instance=offer)
     template = 'profiles/amend_offer.html'
     context = {
         'form': form,
+        'offer': offer,
     }
 
     return render(request, template, context)
