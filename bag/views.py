@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from products.models import Product, Price
 from django.contrib import messages
 
+from profiles.models import UserProfile
+
 # Create your views here.
 
 
@@ -10,9 +12,15 @@ def view_bag(request):
     price = Price.objects.filter(is_premium=False, category__name='Pizza')
     price_premium = Price.objects.filter(is_premium=True,
                                          category__name='Pizza')
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user=request.user)
+    else:
+        profile = False
+
     context = {
         'price': price,
-        'price_premium': price_premium
+        'price_premium': price_premium,
+        'profile': profile,
     }
     return render(request, 'bag/bag.html', context)
 

@@ -152,7 +152,16 @@
                                 </tr>
                             {% endfor %}
                                 <tr>
-                                    <td colspan="5" class="p-3 text-end">
+                                    <td>
+                                        {% if profile.loyalty_points > 4 %}
+                                            <div class="text-center">
+                                                <p><strong>You have loyalty points available</strong></p>
+                                                <h5 class="text-danger">{{ profile.loyalty_points }}</h5>
+                                                <button class="btn btn-sm btn-primary">Apply Discount</button>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                    <td colspan="4" class="p-3 text-end">
                                         <p><strong>Order Total: </strong>£{{ total }}</p>
                                         <p class="text-danger"><strong>Offer Discounts: </strong>£{{ discount }}</p>
                                         <p class="text-danger"><strong>Loyalty Discounts: </strong>£0</p>
@@ -245,7 +254,16 @@
                             </tr>
                         {% endfor %}
                             <tr>
-                                <td colspan="5" class="p-3 text-end">
+                                <td>
+                                    {% if profile.loyalty_points > 4 %}
+                                        <div class="text-center">
+                                            <p><strong>You have loyalty points available</strong></p>
+                                            <h5 class="text-danger">{{ profile.loyalty_points }}</h5>
+                                            <button class="btn btn-sm btn-primary">Apply Discount</button>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td colspan="4" class="p-3 text-end">
                                     <p><strong>Order Total: </strong>£{{ total }}</p>
                                     <p class="text-danger"><strong>Offer Discounts: </strong>£{{ discount }}</p>
                                     <p class="text-danger"><strong>Loyalty Discounts: </strong>£0</p>
