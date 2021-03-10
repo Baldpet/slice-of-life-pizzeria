@@ -29,7 +29,7 @@ def cache_checkout_data(request):
             'save_info': request.POST.get('save-info'),
             'bag': json.dumps(request.session.get('bag', {})),
             'discount': discount,
-            'loyalty_points': 0,
+            'loyalty_points': round(int(current_bag['grand_total'] / 4)),
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -65,7 +65,11 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.deal_discount = current_bag['discount']
-            order.loyalty_points = 0
+            if request.user.is_authenticated:
+                loyalty_points = round(int(current_bag['grand_total'] / 4))
+                order.loyalty_points = loyalty_points
+            else:
+                order.loyalty_points = 0
             order.save()
             for item_id, item_data in bag.items():
                 try:
@@ -140,11 +144,12 @@ def checkout_success(request, order_number):
     order_id = order.id
     line_items = OrderLineItem.objects.filter(order=order_id)
     save_info = request.session.get('save_info')
-    print(save_info)
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         order.user_profile = profile
+        profile.loyalty_points += order.loyalty_points
+        profile.save()
         order.save()
 
         if save_info:

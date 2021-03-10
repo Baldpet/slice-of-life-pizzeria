@@ -75,6 +75,7 @@ class StripeWH_Handler:
                 profile.default_street_address1 = shipping_details.address.line1
                 profile.default_street_address2 = shipping_details.address.line2
                 profile.default_county = shipping_details.address.state
+                profile.loyalty_points += loyalty_points
                 profile.save()
 
         order_exists = False
