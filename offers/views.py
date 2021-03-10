@@ -114,11 +114,11 @@ def add_offer_to_bag(request, offerId):
         if product1.category.name == 'Pizza':
             add_offer_pizza(bag, item1_id, item1_dough, item1_size, item1_quantity)
             if product1.is_premium:
-                price_object = get_object_or_404(Price, is_premium=True, size=item1_size)
+                price_object = get_object_or_404(Price, category__name='Pizza', is_premium=True, size=item1_size)
                 price = price_object.price
                 total_cost += price
             else:
-                price_object = get_object_or_404(Price, is_premium=False, size=item1_size)
+                price_object = get_object_or_404(Price, category__name='Pizza', is_premium=False, size=item1_size)
                 price = price_object.price
                 total_cost += price
         else:
