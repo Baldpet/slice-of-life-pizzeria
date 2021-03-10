@@ -11,6 +11,8 @@ from profiles.forms import UserForm
 
 from bag.context import bag_contents
 
+from decimal import Decimal
+
 import stripe
 import json
 
@@ -21,7 +23,7 @@ import json
 def cache_checkout_data(request):
     try:
         current_bag = bag_contents(request)
-        discount = current_bag['discount']
+        discount = current_bag['offer_discount']
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
@@ -29,7 +31,7 @@ def cache_checkout_data(request):
             'save_info': request.POST.get('save-info'),
             'bag': json.dumps(request.session.get('bag', {})),
             'discount': discount,
-            'loyalty_points': round(int(current_bag['grand_total'] / 4)),
+            'loyalty_points': 0,
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -64,9 +66,15 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
-            order.deal_discount = current_bag['discount']
+            order.deal_discount = current_bag['offer_discount']
+            loyalty = current_bag['loyalty_discount']
+            if not loyalty:
+                l_discount = Decimal(0)
+            else:
+                l_discount = Decimal(loyalty)
+            order.loyalty_discount = l_discount
             if request.user.is_authenticated:
-                loyalty_points = round(int(current_bag['grand_total'] / 4))
+                loyalty_points = round(int(current_bag['grand_total'] / 4)) - round(l_discount)
                 order.loyalty_points = loyalty_points
             else:
                 order.loyalty_points = 0
@@ -169,6 +177,8 @@ def checkout_success(request, order_number):
         del request.session['bag']
     if 'discount' in request.session:
         del request.session['discount']
+    if 'loyalty' in request.session:
+        del request.session['loyalty']
 
     template = 'checkout/checkout_success.html'
     context = {
