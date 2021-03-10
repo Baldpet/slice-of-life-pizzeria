@@ -67,7 +67,7 @@ def amend_product(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     if request.method == "POST":
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             messages.success(request, 'Product successfully updated.')
@@ -109,7 +109,7 @@ def amend_offer(request, offer_id):
 
     offer = get_object_or_404(Offer, pk=offer_id)
     if request.method == "POST":
-        form = OfferForm(request.POST, instance=offer)
+        form = OfferForm(request.POST, request.FILES, instance=offer)
         if form.is_valid():
             form.save()
             messages.success(request, 'Offer successfully updated.')
