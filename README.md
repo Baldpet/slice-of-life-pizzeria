@@ -1,6 +1,4 @@
-<div align="center">
 [![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)](#)
-</div>
 
 
 ## __Contents__
