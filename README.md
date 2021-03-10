@@ -1,6 +1,7 @@
+<div align="center">
 [![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)](#)
+</div>
 
-# __Slice of Life Pizzeria__
 
 ## __Contents__
 
@@ -41,13 +42,41 @@ Check out the live site here: #
 There were a number of users that I looked at which each had unique user stories for each of them:  
 
 * Shopper
-* Site User
 * Store Owner
 * Store Worker
 
 Based on these users I looked at specific user stories that each of them would have, the list of stories is below:
 
-![User Stories](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/user-stories-1.png)
+| User Story ID | As a User | I want to be able to...                                                      | So that I can...                                             |
+|---------------|-----------|------------------------------------------------------------------------------|--------------------------------------------------------------|
+| 1             | Shopper   | View pizzas and Sides                                                        | Select some to purchase                                      |
+| 2             | Shopper   | View ingredients                                                             | Determine any alergies                                       |
+| 3             | Shopper   | Clearly view the offers                                                      | Decide if the offers are worth it or not                     |
+| 4             | Shopper   | View the total of the order at any time                                      | not spend too much and to decide if the order is complete    |
+| 5             | Shopper   | Easily register for an account                                               | Have an account and view my profile                          |
+| 6             | Shopper   | Easily login and out                                                         | Access my account                                            |
+| 7             | Shopper   | Recover my password                                                          | Recover my account if the password was lost                  |
+| 8             | Shopper   | Receive an email to confirm registration                                     | Verify my account for security                               |
+| 9             | Shopper   | Have a personalised user profile                                             | Save my personal info                                        |
+| 10            | Shopper   | Keep a track of my loyalty points                                            | View loyalty points available to me                          |
+| 11            | Shopper   | Easily select Pizzas and Sides for the order                                 | Endure I select the correct Pizza/Offer                      |
+| 12            | Shopper   | View items in the order to be purchased                                      | Make sure I do not order the incorrect item                  |
+| 13            | Shopper   | Able to edit the items in the order                                          | To adjust the order easily if something is not right         |
+| 14            | Shopper   | Easily enter my payment details                                              | To get my order quicker and easily                           |
+| 15            | Shopper   | View order after checkout                                                    | Confirm what info I have entered is correct                  |
+| 16            | Shopper   | Have a tracker to track where my order is                                    | So I can see how long the food is away                       |
+| 17            | Shopper   | Receive an email confirmation on checkout                                    | For reciept of payment                                       |
+| 18            | Shopper   | Have my address info already available when entering checkout - if logged in | For ease of checkout                                         |
+| 19            | Shopper   | Be able to use loyalty points for discount on checkout                       | To make sure of the loyalty points that I have earnt         |
+| 20            | Owner     | Add a Product to the store                                                   | To easily add a new item to the store                        |
+| 21            | Owner     | Edit/Update a product in the store                                           | In case there is a change or an error with the product       |
+| 22            | Owner     | Delete a product from the store                                              | If a product is no longer needed in the store                |
+| 23            | Owner     | Add an Offer to the store                                                    | To easily add a new offer to the store                       |
+| 24            | Owner     | Edit/Update an Offer in the store                                            | In case there is a change or an error with one of the offers |
+| 25            | Owner     | Delete an Offer from the store                                               | If the offer is no longer required                           |
+| 26            | Worker    | View a submitted order                                                       | So that they can start to cook it                            |
+| 27            | Worker    | Update the status of an order                                                | So that the order is updated on the pizza tracker ID: 16     |
+| 28            | Worker    | Complete an order                                                            | Complete the order so that it removes it from their system   |
 
 ### __Database Plan__
 
@@ -142,38 +171,25 @@ I have listed the following languages and technology used to produce this projec
 
 #### __Languages__
 
-* HTML
-    * For the base information and structure of the webpages.
-* CSS
-    * For the styling and beauty of the webpages.
-* Javascript
-    * For dynamic inputs onto the html and for initialisation of some interactive elements.
-* Python
-    * For the backend structure of the website.
-* SQL
-    * For the databases which hold the information required for the site.
-* Markdown
-    * For the ReadMe file.
+* [HTML](https://html.spec.whatwg.org/)
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+* [Javascript](https://www.javascript.com/)
+* [Python](https://www.python.org/)
+* [Markdown](https://www.markdownguide.org/)
 
 #### __Frameworks and Libraries__
 
-* Django Framework
-    * Used for the entire structure of the website from the backend to the rendering and information for the frontend.
-* Bootstrap
-    * Used as a CSS framework to help structure the frontend.
-* Jquery
-    * For easier targetting and functionality within Javascript.
-* Postgres Database
-    * This was where the database is stored and accessed. 
-* Font Awesome
-    * Used as a source of icons used throughout the site.
-* Crispy Forms
-    * Used as a tool to help structure the Django base forms within a Bootstrap styling.
+* [Django](https://www.djangoproject.com/)
+* [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+* [Jquery](https://jquery.com/)
+* [Postgres Database](https://www.postgresql.org/)
+* [Font Awesome](https://fontawesome.com/)
+* [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
 
 #### __Other Tools__
 
-* Stripe
-    * Used as the payment tool for the ecommerce side of the site.
+* [Stripe](https://stripe.com/gb?utm_campaign=paid_brand-UK_en_Search_Brand_Stripe-2032860449&utm_medium=cpc&utm_source=google&ad_content=355351450259&utm_term=stripe&utm_matchtype=e&utm_adposition=&utm_device=c&gclid=Cj0KCQiA-aGCBhCwARIsAHDl5x9bC1zJqEtjVlXgZgEanVR3iH2jRjnBEaj3uqbSqRWFn_4lothNbpsaAkcJEALw_wcB)
+* [Cloudinary](https://cloudinary.com/?utm_source=google&utm_medium=cpc&utm_campaign=Rbrand&utm_content=483362991544&utm_term=cloudinary&gclid=Cj0KCQiA-aGCBhCwARIsAHDl5x8rPcxjogBlR7KLraEHzRwEN3-0rsYfKn9hfQKK-Tt9ZMas5ijQ-L8aAk03EALw_wcB)
 
 ## __Testing__
 
@@ -221,21 +237,80 @@ In general there were no major issues or failures, however it was a good chance 
 
 ## __Deployment__
 
-There were a number of steps taken to deploy the website onto Heroku.
+I created the Slice of Life Pizzeria project using Github, from there I used [Gitpod](https://gitpod.io/) to write my code. 
+Then I used commits to git followed by "git push" to my GitHub repository. 
+I've deployed this project to Heroku and used "git push heroku master" to make sure my pushes to GitHub were also made to Heroku. 
 
-1. The code was written on an online IDE - Gitpod, the major changes were written via branches.
-2. The branches were then merged together with the master using Git.
-3. The code was then pushed to GitHub where it is stored on a public repository.
-4. An app was registered on Heroku Apps and then set as a remote git.
-5. A Procfile and a requirement.txt file was created so that Heroku can process the git push.
-6. The app was then pushed to Heroku
-7. The Heroku environment variables were then entered to allow the app to run.
-8. The app is then uploaded and live.
-9. This would be the deployed version, any changes would be saved on the development version which would be on a branch in github.
+This project can be ran locally by following the following steps based on the Gitpod IDE:
 
-The code can be run locally through clone or download on github.  
-By opening the repository and and being in the main 'code' section there is a button 'clone or download'.  
-This button will provide a link that you can use on your desktop or download as a ZIP file.
+You will need to adjust them depending on your IDE. You can find more information about installing packages using pip and virtual environments [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
+To clone the project: 
+
+1. From the application's repository, click the "code" button and download the zip of the repository.
+    Alternatively, you can clone the repository using the following line in your terminal:
+
+    ``` 
+    git clone https://github.com/Baldpet/slice-of-life-pizzeria.git
+    ``` 
+
+1. Access the folder in your terminal window and install the application's [required modules](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/requirements.txt) using the following command:
+
+    ```
+    pip3 install -r requirements.txt
+    ```
+
+1. In the development environment Django will install SQLite, you will need to run the following on your terminal:
+
+    ```
+    1. python3 manage.py makemigrations
+    2. python3 manage.py migrate
+    ```
+
+    This will create the required databases in your SQLite.
+    You can of course use your preferred database provider, you may need to seek their installation instructions.
+
+1. In your IDE you will need to make some environment variables, which will be the following:
+    ```
+    DEVELOPMENT = True
+    SECRET_KEY = Your key
+    STRIPE_PUBLIC_KEY = Your key
+    STRIPE_SECRET_KEY = Your key
+    STRIPE_WH_SECRET = your key 
+    ```
+
+1. The application can now be run locally. In your terminal, type the following command 
+    ```
+    python3 manage.py runserver. 
+    ```
+    
+### To deploy your project on Heroku, use the following steps: 
+
+1. Login to your Heroku account and create a new app. Choose your region. 
+1. Ensure the Procfile and requirements.txt files exist are present and up-to-date in your local repository.  
+    Requirements:
+    ```
+    pip3 freeze --local > requirements.txt
+    ```
+    Procfile:
+    ```
+    echo web: python app.py > Procfile
+    ```
+1. The Procfile should contain the following line:
+    ```
+    web: gunicorn slice_of_life_pizzeria.wsgi:application
+    ```
+1. You will need to run the collectstatic command as follows:
+    ```
+    python3 manage.py collectstatic
+    ```
+1. Scroll down to "deployment method"-section. Choose "Github" for automatic deployment.
+1. From the inputs below, make sure your github user is selected, and then enter the name for your repo. Click "search". When it finds the repo, click the "connect" button.
+1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your env.py (SECRET_KEY, STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY, STRIPE_WH_SECRET, DISABLE_COLLECTSTATIC):
+1. Scroll back up and click "Deploy". Scroll down and click "Enable automatic deployment".
+1. Just beneath, click "Deploy branch". Heroku will now start building the app. When the build is complete, click "view app" to open it.
+1. In order to commit your changes to the branch, use git push to push your changes. 
+
 
 ## __Credits__
 
@@ -246,12 +321,10 @@ There were a number of sources used throughout the project which I would like to
 
 There was also some code utilised which is highlighted in comments within the code.
 
-
-
 ## __Acknoledgements__
 
-I was lucky enough to have two mentors throughout the project and would like to acknoledge my mentor Anthony Ngene who helped me to set up the initial idea and get started. 
-I would then like to acknoledge the help Simen Daehlin gave in allowing me to fulfill the true potential of the project.
+I was lucky enough to have two mentors throughout the project and would like to acknoledge my mentor [Anthony Ngene](https://github.com/tonymontaro) who helped me to set up the initial idea and get started. 
+I would then like to acknoledge the help [Simen Daehlin](https://github.com/Eventyret) gave in allowing me to fulfill the true potential of the project.
 
 Lastly I would like to acknoledge my fiancee, family and friends who have helped with their feedback and suggestions on the structure and the testing of the project.
 
