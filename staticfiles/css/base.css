@@ -139,6 +139,14 @@ body {
     font-size: 1.5rem;
 }
 
+.offers-sales-link {
+    color: white;
+}
+
+.offers-sales-link:hover {
+    color: #ffb649;
+}
+
 /*      Order Button on main page         */
 
 .order-positioning {
@@ -166,10 +174,17 @@ body {
     color: white;
 }
 
+#order-div,
+#order-div-overlay {
+    height: 150px;
+    width: 500px;
+}
+
 /*      Card styling    */
 
 .card {
-    border: 0;
+    border: 3px solid #2b2d42;
+    border-radius: 6px;
 }
 
 .card-header {
@@ -236,6 +251,8 @@ footer {
 }
 
 .horizontal-rule {
+    height: 1px;
+    border: 1px solid black;
     opacity: 1;
     margin-top: 0;
     margin-bottom: 0;

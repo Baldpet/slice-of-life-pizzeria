@@ -76,6 +76,8 @@ fieldset legend {
 
 /*   Order Tracker    */
 
+/* Code taken from code pen - adjusted slightly for my needs */
+
 .frame{
 	display: block;
 	position: relative;
@@ -215,6 +217,8 @@ fieldset legend {
 	transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
 	}
 }
+
+/* end of code taken from code pen */
 
 .inside{
     position: absolute;
