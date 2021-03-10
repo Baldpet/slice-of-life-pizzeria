@@ -195,36 +195,102 @@ I have listed the following languages and technology used to produce this projec
 
 Testing was conducted throughout the project, each new feature that was added was checked and tested through using the development browser and via the chrome development tools.
 
-### Validation
+### View current order and amend (User Story 13)
 
-HTML, CSS, Javascript and Python code has been checked by online validators and any suggestions adjusted.
- 
+* Plan  
+    
+    * The user should be able to view their current order, detailing which items they are currently in line to purchase.
+    
+    * From this view they should then be able to amend the order if a mistake has been made, either via deletion of an item or via adjustment of the quanitity ordered.
 
-### Screen Sizes
+* Implementation  
 
- 
+    To do this I created a 'bag' page which can view the entire order easily in one place.
+    I then added buttons to each item of 'delete' and 'amend'.  
+    The delete removes the item from the order entirely.  
+    The amend button interacts with the product itself, if it is a side or a drink it gives the option to change the quantity.
+    However if it is a Pizza then it gives an additional option to adjust the size of the product ordered.
 
-### Site Links
 
-I have fully tested all the links on the site to make sure that they go through to the correct page.  
-  
+* Test
 
-### Deployment Test
+    On testing when the delete button is pressed, it removes the product from the order and updates he page so that the user can now see the item is removed.  
+    When the Amend button is pressed it brings up a modal detailing the options for amendment on the checkout page. This was correctly showing as different for the Pizza and the other products.
 
-The website was tested on deployment through the app hosting site Heroku, no bugs or problems were detected upon deployment.  
+* Result
 
-### Multiple Browsers
+    The Delete and the Amend functionality works as planned. 
 
-I have undertaken some tests on other popular browsers to see if there are any bugs that I have picked up.  
-The website has loaded on all browsers and devices tested which are shown:  
- 
-    * Microsoft Edge
-    * Firefox
-    * Chrome
-    * Samsung Mobile (Android)
-    * Safari Mobile
+* Verdict
 
-No visual or other bugs were detected on any of the browsers mentioned.
+    The test has passed all the criteria and works as planned.
+
+### Add an offer to the store (User Story 23)
+
+* Plan  
+    
+    * The store owner should be able to easily add a new offer to the store.
+
+    * This offer should be able to consist of any different product and the amount be adjustable.
+
+* Implementation  
+
+    I created a general area that the store owner can use to manage all the products and offers, within this area I created a page which consists of a form to create a new offer.  
+    I implemented the option to have between 1-3 products in an offer, which can be any products within the store currently. The value of the deal can then be set at any amount that the owner likes.  
+    On submission the form will create a new offer in the offers database, this will then automatically appear within the 'offers' menu on the site. 
+
+
+* Test
+
+    The page renders correctly and displays the form to be completed easily. The form validates if there are missing items on submission and if a Pizza is selected it validates if no size is selected.  
+    Clicking the 'Add Offer' button submits the form (if all the validation clears) which then adds the offer to the database.
+    
+
+* Result
+
+    On nearly all of the submissions this worked correctly, however there was a category 'Custom' which if selected woudl create an error.
+
+* Verdict
+
+    On fixing the error mentioned in the result, the offer form now completes correctly and passes the criteria set out.
+    
+
+### Update the status of an Order (User Story 27)
+
+* Plan  
+    
+    * The user should be able to view all orders currently in progress and then update the order to its current status
+
+* Implementation  
+
+    To do this I created a page whcih displays all the orders which are currently open, this will allow the staff to see what needs to be cooked for which order.  
+    I then created some buttons for these orders (Preparing, Cooking, Delivering and Complete). These buttons when clicked update the order status within the database holding the order.
+    This status is then used to update the pizza tracker for the client (User story 16).
+
+    This process is handled through Javascript using 'fetch()'
+
+    The Preparing, Cooking and Delivering will then highlight on the staff page to also show the status of the order.
+
+    The Complete button will remove the order from this page as the order is now complete.
+
+    As this should only be accessible to staff members I have limited this to only staff members via Django.
+
+* Test
+
+    On testing the order viewing page rendered correctly showing the order contents as well as rendering the buttons for each order.  
+    In addition when pressing each button the staff are able to update the status of the order which then refreshes the page and updates the relevant status.  
+    When the Complete button is pressed it successfully updated the order to complete which then removes it from the order tracker page for the staff.
+    
+
+* Result
+
+    The order tracker page worked functionally and and all the buttons performed their assigned tasks.
+
+* Verdict
+
+    The test has passed all the criteria and works as planned.
+
+
 
 ### Feedback
 
