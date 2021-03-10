@@ -81,9 +81,17 @@ def bag_contents(request):
         discount_amount = Decimal(offer_item['discount'])
         total_discount += discount_amount
 
+    loyalty = request.session.get('loyalty', False)
+    loyalty_discount = loyalty
+
+    if not loyalty_discount:
+        total_loyalty_discount = 0
+    else:
+        total_loyalty_discount = Decimal(loyalty)
+
     delivery = 0
 
-    grand_total = delivery + total - total_discount
+    grand_total = delivery + total - total_discount - total_loyalty_discount
 
     context = {
         'bag_items': bag_items,
@@ -91,7 +99,8 @@ def bag_contents(request):
         'product_count': product_count,
         'delivery': delivery,
         'grand_total': grand_total,
-        'discount': total_discount,
+        'offer_discount': total_discount,
+        'loyalty_discount': loyalty_discount,
         }
 
     return context

@@ -4,6 +4,8 @@ from django.contrib import messages
 
 from profiles.models import UserProfile
 
+from decimal import Decimal
+
 # Create your views here.
 
 
@@ -165,3 +167,21 @@ def add_side_to_bag(request, item_id):
     except Exception as e:
         messages.error(request, f'Error adding item: {e}.')
         return HttpResponse(status=500)
+
+
+def add_loyalty_discount(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+    try:
+        request.session['loyalty'] = '5.00'
+        messages.success(request, 'Successfully applied your loyalty discount')
+        profile.loyalty_points -= 5
+        return redirect('view_bag')
+    except:
+        messages.error(request, 'Loyalty discount failed to apply to your order')
+        return HttpResponse(status=500)
+
+
+
+def remove_loyalty_discount(request):
+    del request.session['loyalty']
+    return redirect('view_bag')

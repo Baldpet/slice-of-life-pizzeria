@@ -153,18 +153,22 @@
                             {% endfor %}
                                 <tr>
                                     <td>
-                                        {% if profile.loyalty_points > 4 %}
-                                            <div class="text-center">
-                                                <p><strong>You have loyalty points available</strong></p>
-                                                <h5 class="text-danger">{{ profile.loyalty_points }}</h5>
-                                                <button class="btn btn-sm btn-primary">Apply Discount</button>
-                                            </div>
+                                        {% if not loyalty_discount %}
+                                            {% if profile.loyalty_points > 4 %}
+                                                <div class="text-center">
+                                                    <p><strong>You have loyalty points available</strong></p>
+                                                    <h5 class="text-danger">{{ profile.loyalty_points }}</h5>
+                                                    <button id="loyalty-btn" class="btn btn-sm btn-primary">Apply Discount</button>
+                                                </div>
+                                            {% endif %}
+                                        {% else %}
+                                            <button id="loyalty-stop-btn" class="btn btn-sm btn-primary">Remove Discount</button>
                                         {% endif %}
                                     </td>
                                     <td colspan="4" class="p-3 text-end">
                                         <p><strong>Order Total: </strong>£{{ total }}</p>
-                                        <p class="text-danger"><strong>Offer Discounts: </strong>£{{ discount }}</p>
-                                        <p class="text-danger"><strong>Loyalty Discounts: </strong>£0</p>
+                                        <p class="text-danger"><strong>Offer Discounts: </strong>£{{ offer_discount }}</p>
+                                        <p class="text-danger"><strong>Loyalty Discounts: </strong>{% if not loyalty_discount %}£0{% else %}£{{ loyalty_discount }}{% endif %}</p>
                                         <h5><strong>Grand Total: </strong>£{{ grand_total }}</h5>
                                     </td>
                                 </tr>
@@ -255,12 +259,16 @@
                         {% endfor %}
                             <tr>
                                 <td>
-                                    {% if profile.loyalty_points > 4 %}
-                                        <div class="text-center">
-                                            <p><strong>You have loyalty points available</strong></p>
-                                            <h5 class="text-danger">{{ profile.loyalty_points }}</h5>
-                                            <button class="btn btn-sm btn-primary">Apply Discount</button>
-                                        </div>
+                                    {% if not loyalty_discount %}
+                                        {% if profile.loyalty_points > 4 %}
+                                            <div class="text-center">
+                                                <p><strong>You have loyalty points available</strong></p>
+                                                <h5 class="text-danger">{{ profile.loyalty_points }}</h5>
+                                                <button id="loyalty-btn" class="btn btn-sm btn-primary">Apply Discount</button>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        <button id="loyalty-stop-btn" class="btn btn-sm btn-primary">Remove Discount</button>
                                     {% endif %}
                                 </td>
                                 <td colspan="4" class="p-3 text-end">
@@ -303,26 +311,5 @@
 
 {% block postloadjs %}
 {{ block.super }}
-    <script type="text/javascript">
-        // Update quantity on click
-        $('.update-link').click(function(e){
-            var form = $(this).prev('.update-form');
-            form.submit();
-        })
-
-        // Remove item and reload on click
-        $('.remove-item').click(function(e){
-            var csrfToken = "{{ csrf_token }}";
-            var itemId = $(this).attr('id').split('remove_')[1];
-            var size = $(this).data('product_size');
-            var dough = $(this).data('dough');
-            var url = `/bag/remove_item/${itemId}/`;
-            var data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size, 'dough': dough };
-
-            $.post(url, data)
-                .done(function(){
-                    location.reload();
-                });
-        })
-    </script>
+    <script src="{% static 'bag/js/bag.js' %}" type="text/javascript"></script>
 {% endblock %}
