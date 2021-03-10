@@ -4,8 +4,6 @@ from django.contrib import messages
 
 from profiles.models import UserProfile
 
-from decimal import Decimal
-
 # Create your views here.
 
 
@@ -98,6 +96,8 @@ def clear_bag(request):
     del request.session['bag']
     if 'discount' in request.session:
         del request.session['discount']
+    if 'loyalty' in request.session:
+        del request.session['loyalty']
     messages.success(request, 'Removed all items from your order.')
     return render(request, 'bag/bag.html')
 
