@@ -167,6 +167,7 @@
                         {{ form.image|as_crispy_field }}
                     </div>
                     <input type="hidden" name="price" value="0">
+                    <input type="hidden" name="is_original" value="True">
                     <div class="m-3 text-center">
                         <a class="btn btn-secondary" href="{% url 'product_management' %}">Return</a>
                         <button class="btn btn-primary" type="submit">Add Product</button>
