@@ -1,9 +1,5 @@
 from django import forms
-from .models import Product, Toppings
-
-
-from crispy_forms.helper import FormHelper, Layout
-from crispy_forms.layout import Fieldset, Div, HTML, ButtonHolder, Submit
+from .models import Product, Toppings, Category
 
 
 class ProductForm(forms.ModelForm):
@@ -11,6 +7,8 @@ class ProductForm(forms.ModelForm):
             queryset=Toppings.objects.all(),
             required=False,
             widget=forms.CheckboxSelectMultiple)
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.exclude(name='Custom'))
 
     class Meta:
         model = Product
