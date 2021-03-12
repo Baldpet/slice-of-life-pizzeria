@@ -29,15 +29,18 @@ class DoughAdmin(admin.ModelAdmin):
         'price'
     )
 
+
 class SauceAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
 
+
 class CheeseAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
+
 
 class ToppingsAdmin(admin.ModelAdmin):
     list_display = (

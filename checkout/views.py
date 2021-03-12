@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import reverse, HttpResponse
 from django.views.decorators.http import require_POST
 from django.conf import settings
 from django.contrib import messages
@@ -21,6 +22,10 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Caches the data from the order and then add the extra info needed
+    for recreating the order through the web hook into the Stripe metadata
+    """
     try:
         current_bag = bag_contents(request)
         discount = current_bag['offer_discount']
@@ -41,6 +46,16 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    On GET request:
+    Renders the checkout page
+
+    On POST:
+    Handles the checkout logic through Stripe
+    Checks the form validation of checkout
+    Adds the relevant loyalty points for the order is logged in
+    Saves the client information if requested
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     current_bag = bag_contents(request)
@@ -190,6 +205,7 @@ def checkout_success(request, order_number):
 
 
 def pizza_tracker(request, order_number):
+    """ Renders the pizza tracker view """
     order = get_object_or_404(Order, order_number=order_number)
     template = 'checkout/pizza_tracker.html'
     context = {
@@ -200,6 +216,7 @@ def pizza_tracker(request, order_number):
 
 
 def account(request):
+    """ Renders the checkout account page """
     template = 'checkout/account.html'
     context = {
 
@@ -208,6 +225,7 @@ def account(request):
 
 
 def update_delivery_or_collection(request):
+    """ API to update the delivery or collection option for the customer """
     if request.method == 'POST':
         delivery_or_collection = request.GET.get('delivery')
         request.session['delivery'] = delivery_or_collection

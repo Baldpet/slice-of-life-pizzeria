@@ -14,4 +14,5 @@ class OfferAdmin(admin.ModelAdmin):
         'deal_price',
     )
 
+
 admin.site.register(Offer, OfferAdmin)

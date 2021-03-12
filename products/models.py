@@ -69,11 +69,11 @@ class Product(models.Model):
     category = models.ForeignKey('Category', null=False,
                                  blank=False, on_delete=models.CASCADE)
     dough = models.ForeignKey('Dough', null=True,
-                                 blank=True, on_delete=models.SET_NULL)
+                              blank=True, on_delete=models.SET_NULL)
     sauce = models.ForeignKey('Sauce', null=True,
-                                 blank=True, on_delete=models.SET_NULL)
+                              blank=True, on_delete=models.SET_NULL)
     cheese = models.ForeignKey('Cheese', null=True,
-                                 blank=True, on_delete=models.SET_NULL)
+                               blank=True, on_delete=models.SET_NULL)
     toppings = models.ManyToManyField('Toppings', blank=True)
     description = models.TextField()
     is_premium = models.BooleanField(default=True)

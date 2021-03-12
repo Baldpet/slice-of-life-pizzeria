@@ -1,7 +1,5 @@
 from django.db import models
 from products.models import Category, Price
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from decimal import Decimal
 
 # Create your models here.
@@ -18,21 +16,26 @@ class Offer(models.Model):
 
     name = models.CharField(max_length=254, null=False, blank=False)
     description = models.TextField()
-    item1 = models.ForeignKey(Category, related_name='Category_item1', null=False,
+    item1 = models.ForeignKey(Category, related_name='Category_item1',
+                              null=False,
                               blank=False, on_delete=models.CASCADE)
     item1_size = models.CharField(max_length=2, choices=size_choices,
                                   null=True, blank=True, default='NA')
-    item2 = models.ForeignKey(Category, related_name='Category_item2', null=True,
+    item2 = models.ForeignKey(Category, related_name='Category_item2',
+                              null=True,
                               blank=True, on_delete=models.SET_NULL)
     item2_size = models.CharField(max_length=2, choices=size_choices,
                                   null=True, blank=True, default='NA')
-    item3 = models.ForeignKey(Category, related_name='Category_item3', null=True,
+    item3 = models.ForeignKey(Category, related_name='Category_item3',
+                              null=True,
                               blank=True, on_delete=models.SET_NULL)
     item3_size = models.CharField(max_length=2, choices=size_choices,
                                   null=True, blank=True, default='NA')
-    original_price = models.DecimalField(max_digits=6, decimal_places=2, default=Decimal(0))
+    original_price = models.DecimalField(max_digits=6, decimal_places=2,
+                                         default=Decimal(0))
     deal_price = models.DecimalField(max_digits=6, decimal_places=2)
-    saving = models.DecimalField(max_digits=6, decimal_places=2, default=Decimal(0))
+    saving = models.DecimalField(max_digits=6, decimal_places=2,
+                                 default=Decimal(0))
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):

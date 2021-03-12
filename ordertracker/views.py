@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.http import JsonResponse
 
-from checkout.models import Order, OrderLineItem
+from checkout.models import Order
 
 
 def order_tracker(request):
-    orders = Order.objects.all().exclude( order_status='D')
+    """ Renders the ordertracker view """
+    orders = Order.objects.all().exclude(order_status='D')
 
     template = 'ordertracker/orders.html'
     context = {
@@ -15,6 +16,13 @@ def order_tracker(request):
 
 
 def order_status(request):
+    """
+    API for the order tracker to check or update the status
+    On GET request:
+    Supplies the current status of the order
+    On POST request:
+    Updates the database with the new order status
+    """
     if request.method == 'POST':
         order_id = request.GET.get('orderId')
         status = request.GET.get('status')

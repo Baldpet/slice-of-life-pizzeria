@@ -53,7 +53,7 @@ def amend_bag(request, item_id):
         else:
             messages.success(request, f'Amended your order of {product.name} to a quantity of {quantity}.')
             bag[item_id] = quantity
-        
+
         discount = request.session.get('discount', {})
         product_str = str(product.id)
 
@@ -188,6 +188,10 @@ def add_side_to_bag(request, item_id):
 
 
 def add_loyalty_discount(request):
+    """
+        Adds the loyalty discount to the session variable
+        and applies the discount to the total
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
     try:
         request.session['loyalty'] = '5.00'
@@ -199,7 +203,10 @@ def add_loyalty_discount(request):
         return HttpResponse(status=500)
 
 
-
 def remove_loyalty_discount(request):
+    """
+    Removes the loyalty discount from the session variable
+    and thus removes the discount from the total
+    """
     del request.session['loyalty']
     return redirect('view_bag')

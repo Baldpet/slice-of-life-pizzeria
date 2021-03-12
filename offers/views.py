@@ -1,12 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, reverse
+from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, HttpResponse, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Offer
 from .forms import OfferForm
 from products.models import Product, Price, Dough
-
-from decimal import Decimal
 
 # Create your views here.
 
@@ -114,63 +113,89 @@ def add_offer_to_bag(request, offerId):
         if product1.category.name == 'Pizza':
             add_offer_pizza(bag, item1_id, item1_dough, item1_size, item1_quantity)
             if product1.is_premium:
-                price_object = get_object_or_404(Price, category__name='Pizza', is_premium=True, size=item1_size)
+                price_object = get_object_or_404(Price,
+                                                 category__name='Pizza',
+                                                 is_premium=True,
+                                                 size=item1_size)
                 price = price_object.price
                 total_cost += price
             else:
-                price_object = get_object_or_404(Price, category__name='Pizza', is_premium=False, size=item1_size)
+                price_object = get_object_or_404(Price,
+                                                 category__name='Pizza',
+                                                 is_premium=False,
+                                                 size=item1_size)
                 price = price_object.price
                 total_cost += price
         else:
             add_offer_other(bag, item1_id, item1_quantity)
             if product1.is_premium:
-                price_object = get_object_or_404(Price, category__name=product1.category.name, is_premium=True)
+                price_object = get_object_or_404(Price,
+                                                 category__name=product1.category.name,
+                                                 is_premium=True)
                 price = price_object.price
                 total_cost += price
             else:
-                price_object = get_object_or_404(Price, category__name=product1.category.name, is_premium=False)
+                price_object = get_object_or_404(Price,
+                                                 category__name=product1.category.name,
+                                                 is_premium=False)
                 price = price_object.price
                 total_cost += price
         if item2Exists:
             if product2.category.name == 'Pizza':
                 add_offer_pizza(bag, item2_id, item2_dough, item2_size, item2_quantity)
                 if product2.is_premium:
-                    price_object = get_object_or_404(Price, is_premium=True, size=item2_size)
+                    price_object = get_object_or_404(Price,
+                                                     is_premium=True,
+                                                     size=item2_size)
                     price = price_object.price
                     total_cost += price
                 else:
-                    price_object = get_object_or_404(Price, is_premium=False, size=item2_size)
+                    price_object = get_object_or_404(Price,
+                                                     is_premium=False,
+                                                     size=item2_size)
                     price = price_object.price
                     total_cost += price
             else:
                 add_offer_other(bag, item2_id, item2_quantity)
                 if product2.is_premium:
-                    price_object = get_object_or_404(Price, category__name=product2.category.name, is_premium=True)
+                    price_object = get_object_or_404(Price,
+                                                     category__name=product2.category.name,
+                                                     is_premium=True)
                     price = price_object.price
                     total_cost += price
                 else:
-                    price_object = get_object_or_404(Price, category__name=product2.category.name, is_premium=False)
+                    price_object = get_object_or_404(Price,
+                                                     category__name=product2.category.name,
+                                                     is_premium=False)
                     price = price_object.price
                     total_cost += price
         if item3Exists:
             if product3.category.name == 'Pizza':
                 add_offer_pizza(bag, item3_id, item3_dough, item3_size, item3_quantity)
                 if product3.is_premium:
-                    price_object = get_object_or_404(Price, is_premium=True, size=item3_size)
+                    price_object = get_object_or_404(Price,
+                                                     is_premium=True,
+                                                     size=item3_size)
                     price = price_object.price
                     total_cost += price
                 else:
-                    price_object = get_object_or_404(Price, is_premium=False, size=item3_size)
+                    price_object = get_object_or_404(Price,
+                                                     is_premium=False,
+                                                     size=item3_size)
                     price = price_object.price
                     total_cost += price
             else:
                 add_offer_other(bag, item3_id, item3_quantity)
                 if product3.is_premium:
-                    price_object = get_object_or_404(Price, category__name=product3.category.name, is_premium=True)
+                    price_object = get_object_or_404(Price,
+                                                     category__name=product3.category.name,
+                                                     is_premium=True)
                     price = price_object.price
                     total_cost += price
                 else:
-                    price_object = get_object_or_404(Price, category__name=product3.category.name, is_premium=False)
+                    price_object = get_object_or_404(Price,
+                                                     category__name=product3.category.name,
+                                                     is_premium=False)
                     price = price_object.price
                     total_cost += price
         messages.success(request, f'Added {offer.name} to your order.')
