@@ -21,7 +21,7 @@ for (var i=0; i < allQtyInputs.length; i++){
 $('.qty-input').change(function(){
     var itemId = $(this).data('item_id');
     handleEnableDisable(itemId);
-})
+});
 
 //  Increment quantity
 $('.increment-qty').click(function(e) {
