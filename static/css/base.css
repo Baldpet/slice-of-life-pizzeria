@@ -172,12 +172,13 @@ body {
 
 #order-div h2 {
     color: white;
+    padding: .5rem;
 }
 
 #order-div,
 #order-div-overlay {
-    height: 150px;
-    width: 500px;
+    height: 20vh;
+    width: 35vw;
 }
 
 /*      Card styling    */
@@ -276,6 +277,14 @@ hr:not([size]){
 }
 
 /*      Media Queries        */
+@media (max-width:1130px) {
+    #order-div,
+    #order-div-overlay {
+        height: 25vh;
+        width: 35vw;
+    }
+}
+
 @media (max-width:991px) {
     body {
         background: url('https://res.cloudinary.com/hlot2pfsb/image/upload/v1613333278/hero_ydty0h.jpg') no-repeat center center fixed;
