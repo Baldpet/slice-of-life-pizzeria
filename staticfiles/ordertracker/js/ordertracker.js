@@ -9,20 +9,20 @@ $(document).ready(function(){
         } else if (time > 10) {
             $('.' + orderNumber).addClass('background-orange');
         }  
-    })
-})
+    });
+});
 
 // refreshes the page automatically every minute to allow staff to keep track of orders
 
-setTimeout("location.reload();", 60000)
+setTimeout("location.reload();", 60000);
 
 // Update the order status and refresh the page
 
 $('.btn-stage').click(function(){
-    let buttonId = $(this).attr('id')
-    let arrayButtonId = buttonId.split("-")
-    let status = arrayButtonId[0]
-    let orderId = arrayButtonId[1]
+    let buttonId = $(this).data('id');
+    let arrayButtonId = buttonId.split("-");
+    let status = arrayButtonId[0];
+    let orderId = arrayButtonId[1];
     let request = new Request(
         `order_status?status=${status}&orderId=${orderId}`,
         {headers: {'X-CSRFToken': csrftoken}}
@@ -31,18 +31,16 @@ $('.btn-stage').click(function(){
     fetch(request, {
             method: 'POST',
             mode: 'same-origin'  // Do not send CSRF token to another domain.
-        }).then(function(response) {
-            location.reload()
-        });
-    
+        }).then(function() {
+            location.reload();
+        }).catch(function(err){
+            console.log(err);
+        });  
 });
 
 // enable popovers
 
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
-})
-
-
-
+  return new bootstrap.Popover(popoverTriggerEl);
+});

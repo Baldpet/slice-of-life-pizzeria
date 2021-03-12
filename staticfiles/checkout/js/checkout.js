@@ -1,54 +1,53 @@
 // making sure that the delivery info is filled out correctly before moving on to the payment section.
 
 $('.btn-payment').click(function(){
-    var valid = true
+    var valid = true;
     $('.fieldset-delivery').find('select, input').each(function(){
         if ($(this).prop('required')){
             if ($(this).val() !== ''){
-                valid = true
+                valid = true;
             } else {
-                valid = false
-                $(this).focus()
-                return false
+                valid = false;
+                $(this).focus();
+                return false;
             }
         }
-    })
-    console.log(valid)
+    });
     if(valid){
             $('.personal-info').removeClass('d-none');
             $('.delivery').addClass('d-none');
         }
-})
+});
 
 $('.collection-select').click(function(event){
     event.preventDefault();
     location.reload();
-})
+});
 $('.delivery-select').click(function(){
     event.preventDefault();
     location.reload();
-})
+});
 
 // Adjusting the address on the payment view of the checkout form
 
 // Update if the user is signed up and address automatically input
 $('.fieldset-delivery').find('select, input').each(function(){
-    updateAddress(this)
-})
+    updateAddress(this);
+});
 
 // update for any changes
 $('.fieldset-delivery').find('select, input').change(function(){
-    updateAddress(this)
-})
+    updateAddress(this);
+});
 
 function updateAddress(item){
-    var name = $(item).attr('name')
-    var value = $(item).val()
-    $('.' + name).html(value)
+    var name = $(item).attr('name');
+    var value = $(item).val();
+    $('.' + name).html(value);
     if (name === 'street_address2' && value == ""){
-        $('.' + name).parent().addClass('d-none')
+        $('.' + name).parent().addClass('d-none');
     } else {
-        $('.' + name).parent().removeClass('d-none')
+        $('.' + name).parent().removeClass('d-none');
     }
 
 }
@@ -102,7 +101,7 @@ form.addEventListener('submit', function(ev) {
         'csrfmiddlewaretoken': csrftoken,
         'client_secret': clientSecret,
         'save-info': saveInfo,
-    }
+    };
     var url= 'cache_checkout_data/';
 
     $.post(url, postData).done(function(){
@@ -156,15 +155,10 @@ form.addEventListener('submit', function(ev) {
                     // post-payment actions.
                 }
             }
-        })
+        });
     }).fail(function(){
         location.reload();
-    })
+    });
 });
 
 // end of Stripe JS
-
-
-
-
-

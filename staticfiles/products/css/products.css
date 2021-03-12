@@ -35,6 +35,10 @@ table .beige {
     background-color: #f4f5f0;
 }
 
+#id_is_premium {
+    float: none;
+}
+
 /*   Media Queries    */
 @media (max-width:576px){
    .form-group.w-75 {

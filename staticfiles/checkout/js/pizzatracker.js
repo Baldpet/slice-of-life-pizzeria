@@ -1,13 +1,13 @@
 // Fetches the current status of the order and updates the webpage to show the user the relevent stage.
 
-let orderId = $('#title').data('orderid')
-let url = `../../ordertracker/order_status?orderId=${orderId}`
+let orderId = $('#title').data('orderid');
+let url = `../../ordertracker/order_status?orderId=${orderId}`;
     
 fetch(url).then(response => {
-        return response.json()
+        return response.json();
     })
     .then(data => {
-        status = data['status']
+        status = data.status;
         if ( status == 'PR' ) {
             $('#preparing-frame').removeClass('d-none');
         } else if ( status == 'C' ) {
@@ -17,11 +17,10 @@ fetch(url).then(response => {
         } else {
             $('#preparing-frame').removeClass('d-none');
         }
-        console.log(status)
-    })
+    }).catch(function(err){
+        console.log(err);
+    });
 
 // refreshes the page every 2 mins to keep the status up to date.
 
-setTimeout("location.reload();", 120000)
-    
-    
+setTimeout("location.reload();", 120000);

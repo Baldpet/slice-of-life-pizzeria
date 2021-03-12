@@ -17,7 +17,7 @@ $(document).ready(function(){
     categoryCheck(category);
     let isPremium = $('#div_id_is_premium').children('input')[0].checked;
     premiumCheck(isPremium);
-})
+});
 
 // If Pizza is selected in the Category, Adds the Pizza only options to the form rendering.
 $('#id_category').change(function(){
@@ -27,19 +27,19 @@ $('#id_category').change(function(){
     } else {
         $('.pizza-only').addClass('d-none');
     }
-})
+});
 
 // Adds the relevant price table when a certain category is selected
 $('#id_category').change(function(){
     let category = $(this).val();
-    categoryCheck(category)
+    categoryCheck(category);
     
-})
+});
 
 $('#id_is_premium').click(function(){
-    isPremium = this.checked
-    premiumCheck(isPremium)
-})
+    let isPremium = this.checked;
+    premiumCheck(isPremium);
+});
 
 // Functions foe checking the category and the premium price
 
@@ -64,13 +64,12 @@ function categoryCheck(category) {
 }
 
 function premiumCheck(isPremium){
-    console.log(isPremium)
     if(isPremium){
-        $('.non-premium').removeClass('beige')
-        $('.premium').addClass('beige')
+        $('.non-premium').removeClass('beige');
+        $('.premium').addClass('beige');
     } else {
-        $('.premium').removeClass('beige')
-        $('.non-premium').addClass('beige')
+        $('.premium').removeClass('beige');
+        $('.non-premium').addClass('beige');
     }
 }
 
@@ -84,39 +83,38 @@ form.submit(function(e){
     let dough = $('#id_dough').val();
     let sauce = $('#id_sauce').val();
     let cheese = $('#id_cheese').val();
-    console.log(`${category}, ${dough}, ${sauce}, ${cheese},`)
+    console.log(`${category}, ${dough}, ${sauce}, ${cheese},`);
 
     if (category === '1') {
         if (dough == ""){
             e.preventDefault();
             let errorDiv = $('.pizza_error_div_dough');
-            let html = `<p class="text-danger">You must select a Dough Type for a Pizza Product.</p>`
+            let html = `<p class="text-danger">You must select a Dough Type for a Pizza Product.</p>`;
             $(errorDiv).html(html);
             $('html, body').animate({
                 scrollTop: ($('#id_dough').offset().top) - 250
             }, 500);
-            return
+            return;
         } 
         if (sauce == ""){
             e.preventDefault();
             let errorDiv = $('.pizza_error_div_sauce');
-            let html = `<p class="text-danger">You must select a Base Sauce for a Pizza Product.</p>`
+            let html = `<p class="text-danger">You must select a Base Sauce for a Pizza Product.</p>`;
             $(errorDiv).html(html);
             $('html, body').animate({
                 scrollTop: ($('#id_sauce').offset().top) - 250
             }, 500);
-            return
+            return;
         }
         if (cheese == ""){
             e.preventDefault();
             let errorDiv = $('.pizza_error_div_cheese');
-            let html = `<p class="text-danger">You must select a Base Cheese for a Pizza Product.</p>`
+            let html = `<p class="text-danger">You must select a Base Cheese for a Pizza Product.</p>`;
             $(errorDiv).html(html);
             $('html, body').animate({
                 scrollTop: ($('#id_cheese').offset().top) - 250
             }, 500);
-            return
+            return;
         }
     } 
-})
-  
+});

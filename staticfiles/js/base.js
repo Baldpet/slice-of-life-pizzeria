@@ -1,15 +1,15 @@
 // add the form select for Bootstrap 5 which crispy forms does not handle
 
 $(document).ready(function(){
-    $('select').addClass('form-select')
-})
+    $('select').addClass('form-select');
+});
 
 // Bootstap 5 own code to activate the toast messages
 
-var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+var toastElList = [].slice.call(document.querySelectorAll('.toast'));
 var toastList = toastElList.map(function (toastEl) {
-  return new bootstrap.Toast(toastEl)
-})
+  return new bootstrap.Toast(toastEl);
+});
 toastList.forEach(toast => toast.show());
 
 // Django's own code for getting the CSRF Token
@@ -42,13 +42,13 @@ $('.collection-select').click(function(){
     fetch(request, {
             method: 'POST',
             mode: 'same-origin'  // Do not send CSRF token to another domain.
-        }).then(function(response) {
+        }).then(function() {
             $('.delivery-select').removeClass('btn-primary');
             $('.delivery-select').addClass('btn-secondary');
             $('.collection-select').removeClass('btn-secondary');
             $('.collection-select').addClass('btn-primary');
         });
-})
+});
 
 $('.delivery-select').click(function(){
     let request = new Request(
@@ -58,10 +58,10 @@ $('.delivery-select').click(function(){
     fetch(request, {
             method: 'POST',
             mode: 'same-origin'  // Do not send CSRF token to another domain.
-        }).then(function(response) {
+        }).then(function() {
             $('.collection-select').removeClass('btn-primary');
             $('.collection-select').addClass('btn-secondary');
             $('.delivery-select').removeClass('btn-secondary');
             $('.delivery-select').addClass('btn-primary');
         });
-})
+});
