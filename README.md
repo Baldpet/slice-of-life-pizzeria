@@ -1,4 +1,4 @@
-<div align="center">![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)</div>
+<div align="center"><img src="https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png"></div>
 
 Welcome to the Slice of Life Pizzeria. Where you can get your hungry fed!
 
