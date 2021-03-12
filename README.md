@@ -1,24 +1,19 @@
-[![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)](#)
+<div align="center">[![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)](#)</div>
+
 
 
 ## __Contents__
 
 - [Aim of The Site](#aim-of-the-site)
 - [UX](#ux)
-    - [Client Stories](#client-stories)
-    - [Database Plan](#database-plan)
+    - [User Stories](#user-stories)
     - [Wireframes](#wireframes)
     - [Colours](#colours)
+    - [Database Plan](#database-plan)
 - [Features](#features)
 - [Future Goals](#future-goals)
 - [Technology Used](#technology-used)
 - [Testing](#testing)
-    - [Validation](#validation)
-    - [Screen Sizes](#screen-sizes)
-    - [Site Links](#site-links)
-    - [Deployment Test](#deployment-test)
-    - [Multiple Browsers](#multiple-browsers)
-    - [Feedback](#feedback)
 - [Deployment](#deployment)
 - [Credits](#credits)
 - [Acknowledgements](#acknoledgements)
@@ -32,10 +27,11 @@ Welcome to the Slice of Life Pizzeria.
 The aim of the site is to provide an ecommerce store to provide take away services for hungry people.
 The site is also a platform for the staff to use to co-ordinate orders and update the order status which can be tracked by the user. 
 
-Check out the live site here: #
+Check out the live site here: https://baldpet-slice-of-life.herokuapp.com/
+
 ## __UX__
 
-### __Client Stories__
+### __User Stories__
 
 There were a number of users that I looked at which each had unique user stories for each of them:  
 
@@ -76,23 +72,6 @@ Based on these users I looked at specific user stories that each of them would h
 | 27            | Worker    | Update the status of an order                                                | So that the order is updated on the pizza tracker ID: 16     |
 | 28            | Worker    | Complete an order                                                            | Complete the order so that it removes it from their system   |
 
-### __Database Plan__
-
-Using Django as the framework for the site it uses SQL as it's default database structure.  
-After taking in to account the pros and cons of using an SQL database, I decided to keep to the Django default.
-
-I then planned out the models and format that I required to fulfill the user stories mentioned.
-
-The resulting database plan is included below:
-
-![Database Design](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/database-plan.png)
-
-During the development process and through discussion with my mentor I realised that to have more flexibilty and the ability to extend in the future
-I would need to add models to the database for 'dough type', 'sauce', 'cheese' and 'toppings'.  
-Additionally to implement the customisable pizza I would need to include an 'is_original' within the products model.
-
-These adjustments were then implemented to the Database.
-
 ### __Wireframes__
 
 I created wireframes for desktop, tablet and mobile devices.
@@ -124,14 +103,31 @@ The wireframes are detailed below:
 
 ### __Colours__
 
-Working through the design process I did some market research and spoke with my mentor to decide on colouring for the site.  
+Working through the design process I did some market research to decide on colouring for the site.  
 
 Generally sites looking to sell items to the public need to be free from other distraction other than the item you are selling, therefore the background needed to be white.
 As Pizzerias are generally associated with the country that they originated I have included Green and Red in my colour design tied in to Italy's flag.  
 
-I used www.coolors.co to create my colour template which is shown below:
+I used ![Coolors](www.coolors.co) to create my colour template which is shown below:
 
 ![Colour Palettes](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/colors.png)  
+
+### __Database Plan__
+
+Using Django as the framework for the site it uses SQL as it's default database structure.  
+After taking in to account the pros and cons of using an SQL database, I decided to keep to the Django default.
+
+I then planned out the models and format that I required to fulfill the user stories mentioned.
+
+The resulting database plan is included below:
+
+![Database Design](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/database-plan.png)
+
+During the development process I realised that to have more flexibilty and the ability to extend in the future
+I would need to add models to the database for 'dough type', 'sauce', 'cheese' and 'toppings'.  
+Additionally to implement the customisable pizza I would need to include an 'is_original' within the products model so the custom pizzas were not rendered in places they were not needed.
+
+These adjustments were then implemented to the Databases.
 
 ## __Features__
 
@@ -163,6 +159,8 @@ The current list of features that the web site offers is the following:
 There are a number of areas that the site can improve or expand after going live:
 
 
+
+
 ## __Technology Used__
 
 I have listed the following languages and technology used to produce this project below:
@@ -180,7 +178,6 @@ I have listed the following languages and technology used to produce this projec
 * [Django](https://www.djangoproject.com/)
 * [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 * [Jquery](https://jquery.com/)
-* [Postgres Database](https://www.postgresql.org/)
 * [Font Awesome](https://fontawesome.com/)
 * [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
 
@@ -188,6 +185,8 @@ I have listed the following languages and technology used to produce this projec
 
 * [Stripe](https://stripe.com/gb?utm_campaign=paid_brand-UK_en_Search_Brand_Stripe-2032860449&utm_medium=cpc&utm_source=google&ad_content=355351450259&utm_term=stripe&utm_matchtype=e&utm_adposition=&utm_device=c&gclid=Cj0KCQiA-aGCBhCwARIsAHDl5x9bC1zJqEtjVlXgZgEanVR3iH2jRjnBEaj3uqbSqRWFn_4lothNbpsaAkcJEALw_wcB)
 * [Cloudinary](https://cloudinary.com/?utm_source=google&utm_medium=cpc&utm_campaign=Rbrand&utm_content=483362991544&utm_term=cloudinary&gclid=Cj0KCQiA-aGCBhCwARIsAHDl5x8rPcxjogBlR7KLraEHzRwEN3-0rsYfKn9hfQKK-Tt9ZMas5ijQ-L8aAk03EALw_wcB)
+* [Postgres](https://www.postgresql.org/)
+* [Heroku](https://www.heroku.com/home)
 
 ## __Testing__
 
@@ -240,13 +239,15 @@ Testing was conducted throughout the project, each new feature that was added wa
 
 * Test
 
-    The page renders correctly and displays the form to be completed easily. The form validates if there are missing items on submission and if a Pizza is selected it validates if no size is selected.  
-    Clicking the 'Add Offer' button submits the form (if all the validation clears) which then adds the offer to the database.
+    ~~On testing the form did fail due to the options within the categories for item1, item2 and item3 containing the Custom Pizza option.
+    This created a status 500 error and did not process the form~~ 
+
+    Fixed: On finding the error I excluded the Custom Pizza option from the categories selection via forms.py. 
     
 
 * Result
 
-    On nearly all of the submissions this worked correctly, however there was a category 'Custom' which if selected woudl create an error.
+    With the resulting fix the form now validates correctly and posts to the offers database.
 
 * Verdict
 
@@ -298,6 +299,22 @@ In general there were no major issues or failures, however it was a good chance 
 
 ## __Known Issues & Resolutions__
 
+There are a few known issues which will need to be address in a future update:
+
+* The file upload when adding a new offer or product allows you to attach a file, however when the form is submitted
+it does not actually attach the image file to the product. Therefore the product or offer is added without the image.  
+
+    The image can be added through the Django admin section manually but needs to be fixed for the store manager forms.
+
+* There is an issue with the discount logic in the bag. Originally the discount was added seperately to the products
+which meant that if a discount was added and then the customer adjusted the products it would not remove the discount.
+This caused issues of negative sales or significant abuse of this.  
+
+    To alleviate this issue I made the delete and amend buttons run through logic testing if this item was currently in a discount offer,
+if the item was included then it would remove the discount.
+
+    Although this makes sure that there is not any abuse of the discount system it creates some user functionality issues that they may change something
+    which deletes the discount that they wanted to keep.
 
 ## __Deployment__
 
@@ -350,27 +367,21 @@ To clone the project:
     
 ### To deploy your project on Heroku, use the following steps: 
 
-1. Login to your Heroku account and create a new app. Choose your region. 
-1. Ensure the Procfile and requirements.txt files exist are present and up-to-date in your local repository.  
-    Requirements:
-    ```
-    pip3 freeze --local > requirements.txt
-    ```
-    Procfile:
-    ```
-    echo web: python app.py > Procfile
-    ```
-1. The Procfile should contain the following line:
-    ```
-    web: gunicorn slice_of_life_pizzeria.wsgi:application
-    ```
-1. You will need to run the collectstatic command as follows:
+1. Firstly you will need to run the collectstatic command as follows in your IDE:
     ```
     python3 manage.py collectstatic
     ```
+1. Then login to your Heroku account and create a new app. Choose your region. 
 1. Scroll down to "deployment method"-section. Choose "Github" for automatic deployment.
 1. From the inputs below, make sure your github user is selected, and then enter the name for your repo. Click "search". When it finds the repo, click the "connect" button.
-1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your env.py (SECRET_KEY, STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY, STRIPE_WH_SECRET, DISABLE_COLLECTSTATIC):
+1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your IDE environment
+    ```
+    SECRET_KEY = Your key
+    STRIPE_PUBLIC_KEY = Your key
+    STRIPE_SECRET_KEY = Your key
+    STRIPE_WH_SECRET = Your key
+    DISABLE_COLLECTSTATIC = 1
+    ```
 1. Scroll back up and click "Deploy". Scroll down and click "Enable automatic deployment".
 1. Just beneath, click "Deploy branch". Heroku will now start building the app. When the build is complete, click "view app" to open it.
 1. In order to commit your changes to the branch, use git push to push your changes. 
@@ -381,7 +392,7 @@ To clone the project:
 There were a number of sources used throughout the project which I would like to credit:
 
 * Pictures were sourced through various places:
-    * https://pexels.com/
+    * [Pexels](https://pexels.com/)
 
 There was also some code utilised which is highlighted in comments within the code.
 
