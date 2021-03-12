@@ -1,6 +1,8 @@
-<div align="center">[![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)](#)</div>
+<div align="center">![Logo](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/logo.png)</div>
 
+Welcome to the Slice of Life Pizzeria. Where you can get your hungry fed!
 
+Check out the live site here: https://baldpet-slice-of-life.herokuapp.com/
 
 ## __Contents__
 
@@ -22,12 +24,8 @@
 
 ## __Aim of the Site__
 
-Welcome to the Slice of Life Pizzeria.
-
 The aim of the site is to provide an ecommerce store to provide take away services for hungry people.
 The site is also a platform for the staff to use to co-ordinate orders and update the order status which can be tracked by the user. 
-
-Check out the live site here: https://baldpet-slice-of-life.herokuapp.com/
 
 ## __UX__
 
