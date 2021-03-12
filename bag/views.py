@@ -53,6 +53,15 @@ def amend_bag(request, item_id):
         else:
             messages.success(request, f'Amended your order of {product.name} to a quantity of {quantity}.')
             bag[item_id] = quantity
+        
+        discount = request.session.get('discount', {})
+        product_str = str(product.id)
+
+        for offer_id, offer_info in discount.items():
+            print(offer_info)
+            if product_str in offer_info.get('items'):
+                discount.pop(offer_id)
+                break
 
         request.session['bag'] = bag
 
@@ -81,6 +90,15 @@ def remove_item_from_bag(request, item_id):
         else:
             messages.success(request, f'Removed {product.name} from your order.')
             bag.pop(item_id)
+
+        discount = request.session.get('discount', {})
+        product_str = str(product.id)
+
+        for offer_id, offer_info in discount.items():
+            print(offer_info)
+            if product_str in offer_info.get('items'):
+                discount.pop(offer_id)
+                break
 
         request.session['bag'] = bag
 
