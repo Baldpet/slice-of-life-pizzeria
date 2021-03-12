@@ -69,16 +69,16 @@
                                         </div>
                                         <div class="col-6 col-sm-8">
                                             <div class="col-12">
-                                                <label for="id_dough"><strong>Dough:</strong></label>
-                                                <select class="form-select" name="dough" id="id_dough">
+                                                <label for="id_dough_{{ product.id }}"><strong>Dough:</strong></label>
+                                                <select class="form-select" name="dough" id="id_dough_{{ product.id }}">
                                                     {% for dough_choice in dough %}
                                                         <option value="{{ dough_choice.name}}">{{ dough_choice.name }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
                                             <div class="col-12 display-inline">
-                                                <label for="id_product_size"><strong>Size:</strong></label>
-                                                <select class="form-select pizza-mini-form" name="product_size" id="id_product_size">
+                                                <label for="id_product_size_{{ product.id }}"><strong>Size:</strong></label>
+                                                <select class="form-select pizza-mini-form" name="product_size" id="id_product_size_{{ product.id }}">
                                                     {% if product.is_premium %}
                                                         {% for price in price_premium %}
                                                         <option value="{{ price.size }}">{{ price.get_size_display }} - £{{ price.price }}</option>

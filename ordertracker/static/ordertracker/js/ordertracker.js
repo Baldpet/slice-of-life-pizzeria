@@ -19,7 +19,7 @@ setTimeout("location.reload();", 60000)
 // Update the order status and refresh the page
 
 $('.btn-stage').click(function(){
-    let buttonId = $(this).attr('id')
+    let buttonId = $(this).data('id')
     let arrayButtonId = buttonId.split("-")
     let status = arrayButtonId[0]
     let orderId = arrayButtonId[1]
