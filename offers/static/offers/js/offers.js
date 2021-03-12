@@ -13,7 +13,7 @@ $('.btn-selector').click(function(event){
     $(this).parent().parent().toggleClass("selected-offer");
     let offerItem = $(this).data("offer-item").toLowerCase();
     $('.product-area').addClass("d-none");
-    $('#' + offerItem).toggleClass("d-none");
+    $('#' + offerItem).removeClass("d-none");
     $("body,html").animate(
       {
         scrollTop: $("#" + offerItem).offset().top - 168
