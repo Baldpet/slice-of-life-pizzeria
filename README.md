@@ -74,30 +74,48 @@ Based on these users I looked at specific user stories that each of them would h
 
 I created wireframes for desktop, tablet and mobile devices.
 
-The wireframes are detailed below:
+I collated the wireframes into views as per the different users of the site, the wireframes are detailed below:
 
-#### __Client Views__
+#### __Shopper Views__
 
-![Home](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/home.png)  
-![Offers](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/offers.png)  
-![Offers Form](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/offer-form.png)  
-![Pizzas](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/pizzas.png)  
-![Custom Pizza](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/customise.png)  
-![Sides and Drink](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/sides-and-drinks.png)  
-![Checkout](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/checkout-amount.png)  
-![Checkout Confirmation](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/confirmation-order.png)  
-![Pizza Tracker](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/pizza-tracker.png)  
-![Account Info](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/account-info.png)  
+The shopper views detail the story of their movement through the site from the home page through to tracking their order.
+
+The wireframes are the following:
+* Home 
+* Offers 
+* Offers Detailed 
+* Pizzas 
+* Custom Pizza 
+* Sides and Drink 
+* Checkout
+* Checkout Confirmation 
+* Pizza Tracker 
+* Account Info
+
+The shopper wireframes can be found [here](https://github.com/Baldpet/slice-of-life-pizzeria/tree/master/wireframes/client_views).
 
 #### __Staff Views__
 
-![Order Tracker](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/order-tracker.png)  
+The staff will also be able to use the site to see orders to cokk them and then update the order status to eventually complete the orders clearing them from their view. 
+
+The wireframes are the following:
+* Order Tracker
+
+The staff wireframes can be found [here](https://github.com/Baldpet/slice-of-life-pizzeria/tree/master/wireframes/staff_views). 
 
 #### __Store Manager Views__
 
-![Product Management](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/product-management.png)  
-![Add Deal Form](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/add-a-deal.png)  
-![Add Offer Form](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/add-a-product.png)  
+This area is reserved for the store manager for them to manage the offers and the products throughout the site.
+
+During development the product management page evolved to have the amend and the delete functionality here rather than on the Pizza or the Drink and Sides pages. 
+The reason for doing this was to keep all of the manager transactions in one neat area.
+
+The wireframes are the following:
+* Product Management
+* Add Deal Form
+* Add Offer Form
+
+The Manager wireframes can be found [here](https://github.com/Baldpet/slice-of-life-pizzeria/tree/master/wireframes/store_manager_views).  
 
 ### __Colours__
 
@@ -106,9 +124,9 @@ Working through the design process I did some market research to decide on colou
 Generally sites looking to sell items to the public need to be free from other distraction other than the item you are selling, therefore the background needed to be white.
 As Pizzerias are generally associated with the country that they originated I have included Green and Red in my colour design tied in to Italy's flag.  
 
-I used ![Coolors](www.coolors.co) to create my colour template which is shown below:
+I used [Coolors](www.coolors.co) to create my colour template which is shown below:
 
-![Colour Palettes](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/colors.png)  
+![Colour Palettes](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/wireframes/colors.png)  
 
 ### __Database Plan__
 
@@ -119,7 +137,7 @@ I then planned out the models and format that I required to fulfill the user sto
 
 The resulting database plan is included below:
 
-![Database Design](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/media/MS4-wireframes/database-plan.png)
+![Database Design](https://github.com/Baldpet/slice-of-life-pizzeria/blob/master/wireframes/database-plan.png)
 
 During the development process I realised that to have more flexibilty and the ability to extend in the future
 I would need to add models to the database for 'dough type', 'sauce', 'cheese' and 'toppings'.  
@@ -156,8 +174,11 @@ The current list of features that the web site offers is the following:
 
 There are a number of areas that the site can improve or expand after going live:
 
+* At the moment (as there is no actual store) there is no address. As a real store it would be important to detail where people would collect the Pizza from
+also for delivery we wouldn't want to be too far away so we would want to set a delivery distance around the address. All of this could be done with a link through Google Maps.
 
-
+* Hoping that the little slice of life manages to grow it will want to be able to open a new store. So being able to handle different store orders, location only offers and products
+and limiting staff views would be a future goal of development.
 
 ## __Technology Used__
 
@@ -192,13 +213,13 @@ Testing was conducted throughout the project, each new feature that was added wa
 
 ### View current order and amend (User Story 13)
 
-* Plan  
+* __Plan__  
     
     * The user should be able to view their current order, detailing which items they are currently in line to purchase.
     
     * From this view they should then be able to amend the order if a mistake has been made, either via deletion of an item or via adjustment of the quanitity ordered.
 
-* Implementation  
+* __Implementation__  
 
     To do this I created a 'bag' page which can view the entire order easily in one place.
     I then added buttons to each item of 'delete' and 'amend'.  
@@ -207,35 +228,35 @@ Testing was conducted throughout the project, each new feature that was added wa
     However if it is a Pizza then it gives an additional option to adjust the size of the product ordered.
 
 
-* Test
+* __Test__
 
     On testing when the delete button is pressed, it removes the product from the order and updates he page so that the user can now see the item is removed.  
     When the Amend button is pressed it brings up a modal detailing the options for amendment on the checkout page. This was correctly showing as different for the Pizza and the other products.
 
-* Result
+* __Result__
 
     The Delete and the Amend functionality works as planned. 
 
-* Verdict
+* __Verdict__
 
     The test has passed all the criteria and works as planned.
 
 ### Add an offer to the store (User Story 23)
 
-* Plan  
+* __Plan__  
     
     * The store owner should be able to easily add a new offer to the store.
 
     * This offer should be able to consist of any different product and the amount be adjustable.
 
-* Implementation  
+* __Implementation__  
 
     I created a general area that the store owner can use to manage all the products and offers, within this area I created a page which consists of a form to create a new offer.  
     I implemented the option to have between 1-3 products in an offer, which can be any products within the store currently. The value of the deal can then be set at any amount that the owner likes.  
     On submission the form will create a new offer in the offers database, this will then automatically appear within the 'offers' menu on the site. 
 
 
-* Test
+* __Test__
 
     ~~On testing the form did fail due to the options within the categories for item1, item2 and item3 containing the Custom Pizza option.
     This created a status 500 error and did not process the form~~ 
@@ -243,28 +264,31 @@ Testing was conducted throughout the project, each new feature that was added wa
     Fixed: On finding the error I excluded the Custom Pizza option from the categories selection via forms.py. 
     
 
-* Result
+* __Result__
 
     With the resulting fix the form now validates correctly and posts to the offers database.
 
-* Verdict
+* __Verdict__
 
     On fixing the error mentioned in the result, the offer form now completes correctly and passes the criteria set out.
     
 
 ### Update the status of an Order (User Story 27)
 
-* Plan  
+* __Plan__  
     
     * The user should be able to view all orders currently in progress and then update the order to its current status
 
-* Implementation  
+* __Implementation__  
 
     To do this I created a page whcih displays all the orders which are currently open, this will allow the staff to see what needs to be cooked for which order.  
     I then created some buttons for these orders (Preparing, Cooking, Delivering and Complete). These buttons when clicked update the order status within the database holding the order.
     This status is then used to update the pizza tracker for the client (User story 16).
 
-    This process is handled through Javascript using 'fetch()'
+    This process is handled through Javascript using: 
+    ```javascript
+    'fetch()'
+    ```
 
     The Preparing, Cooking and Delivering will then highlight on the staff page to also show the status of the order.
 
@@ -272,18 +296,18 @@ Testing was conducted throughout the project, each new feature that was added wa
 
     As this should only be accessible to staff members I have limited this to only staff members via Django.
 
-* Test
+* __Test__
 
     On testing the order viewing page rendered correctly showing the order contents as well as rendering the buttons for each order.  
     In addition when pressing each button the staff are able to update the status of the order which then refreshes the page and updates the relevant status.  
     When the Complete button is pressed it successfully updated the order to complete which then removes it from the order tracker page for the staff.
     
 
-* Result
+* __Result__
 
     The order tracker page worked functionally and and all the buttons performed their assigned tasks.
 
-* Verdict
+* __Verdict__
 
     The test has passed all the criteria and works as planned.
 
